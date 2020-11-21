@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "981414444913",
+    "firebase_url": "https://taki-tour.firebaseio.com",
+    "project_id": "taki-tour",
+    "storage_bucket": "taki-tour.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981414444913:android:8a4cbacabc17bae39600d0",
+        "android_client_info": {
+          "package_name": "com.aws.takitour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981414444913-gto09va4p3jfu5gt7s9teakrag62uulm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aws.takitour",
+            "certificate_hash": "385e1fe7ea720b4e24a6104f83c7a4764f0f7585"
+          }
+        },
+        {
+          "client_id": "981414444913-cevjb20speu80lbujn27qkhnc42bvqbj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB379kMUdADkuGJJG4X8q3W0MvP5FpTZZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981414444913-cevjb20speu80lbujn27qkhnc42bvqbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
