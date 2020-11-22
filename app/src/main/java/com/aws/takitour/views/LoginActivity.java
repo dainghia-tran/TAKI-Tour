@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText userPassword;
 
     private Button signIn;
-    private Button signInGoogle;
+    private SignInButton signInGoogle;
 
     private FirebaseAuth firebaseAuth;
 
@@ -129,6 +130,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void linkElements(){
         //TODO link elements on screen
+        signUp = findViewById(R.id.tv_sign_up);
+        forgotPassword = findViewById(R.id.tv_forgot_password);
+
+        userEmail = findViewById(R.id.edt_email);
+        userPassword = findViewById(R.id.edt_password);
+
+        signIn = findViewById(R.id.btn_signin);
+        signInGoogle = findViewById(R.id.btn_signin_with_google);
+
     }
 
     @Override
