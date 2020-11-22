@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">TAKI Tour</string>
-
+    <string name="Hello">Xin chào</string>
+    <string name="sign_in_to_continue">Đăng nhập để tiếp tục</string>
     <string name="forgot_password"><u>Quên mật khẩu?</u></string>
     <string name="action_sign_in_short">Đăng ký</string>
     <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="or">Hoặc</string>
     <string name="minimum_password">Mật khẩu phải tối thiểu 6 ký tự</string>
     <string name="auth_failed">Xác thực thất bạn, vui lòng kiểm tra email và mật khẩu hoặc đăng ký</string>
     <string name="change_email">Thay đổi Email</string>
@@ -16,7 +19,8 @@
     <string name="hint_password">Mật khẩu</string>
     <string name="hint_name">Họ tên</string>
     <string name="btn_login">Đăng nhập</string>
-    <string name="btn_link_to_register">Chưa có tài khoản? Đăng ký ngay</string>
+    <string name="dont_have_account">Chưa có tài khoản?</string>
+    <string name="sign_up_now">Đăng kí ngay</string>
     <string name="btn_link_to_login">Already registered. Login Me!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
     <string name="btn_forgot_password">Forgot your password?</string>
