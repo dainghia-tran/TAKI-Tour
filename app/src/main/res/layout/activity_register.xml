@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/register_activity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#206A5D"
     android:orientation="vertical">
+    <Toolbar
+        android:id="@+id/tb_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +45,7 @@
             />
 
         <EditText
-            android:id="@+id/edt_email"
+            android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fontFamily="@font/signika"
@@ -67,7 +72,7 @@
             />
 
         <EditText
-            android:id="@+id/edt_name"
+            android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fontFamily="@font/signika"

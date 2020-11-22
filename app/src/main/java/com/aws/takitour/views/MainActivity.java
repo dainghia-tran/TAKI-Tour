@@ -1,8 +1,10 @@
-package com.aws.takitour;
+package com.aws.takitour.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.aws.takitour.R;
 
 public class MainActivity extends AppCompatActivity {
 

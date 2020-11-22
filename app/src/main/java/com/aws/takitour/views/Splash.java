@@ -1,4 +1,4 @@
-package com.aws.takitour;
+package com.aws.takitour.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
