@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         signUp.setOnClickListener(v -> {
-           //TODO change activity to Register
+           startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
 
         forgotPassword.setOnClickListener(v->{
@@ -130,6 +130,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void linkElements(){
         //TODO link elements on screen
+
         signUp = findViewById(R.id.tv_sign_up);
         forgotPassword = findViewById(R.id.tv_forgot_password);
 
