@@ -1,4 +1,4 @@
-package com.aws.takitour;
+package com.aws.takitour.views;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.aws.takitour.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -106,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                                 signIn.setClickable(true);
                                 Snackbar.make(findViewById(R.id.login_activity), getString(R.string.auth_failed), Snackbar.LENGTH_LONG).show();
                             }
+                            signIn.setClickable(true);
                         } else {
                             if (!firebaseAuth.getCurrentUser().isEmailVerified()) {
                                 Snackbar.make(findViewById(R.id.login_activity), "Please verify you email before login!", Snackbar.LENGTH_SHORT).show();
@@ -154,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getBaseContext(), "Login with Google successfully", Toast.LENGTH_SHORT).show();
-                   startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
                     Snackbar.make(findViewById(R.id.login_activity), "Login with Google failed", Snackbar.LENGTH_SHORT).show();

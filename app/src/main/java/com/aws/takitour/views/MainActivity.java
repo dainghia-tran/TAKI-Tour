@@ -1,13 +1,16 @@
-package com.aws.takitour;
+package com.aws.takitour.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Splash extends AppCompatActivity {
+import com.aws.takitour.R;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
     }
 }
