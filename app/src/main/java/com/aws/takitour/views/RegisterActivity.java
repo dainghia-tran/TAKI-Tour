@@ -1,17 +1,16 @@
 package com.aws.takitour.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Patterns;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
 import com.aws.takitour.model.User;
@@ -77,7 +76,8 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
             register.setClickable(false);
-            User newUser = new User(userFullName, 0, userEmail, "");
+            String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/taki-tour.appspot.com/o/avatar.png?alt=media&token=591a850e-d704-4820-8b2d-a933fbb31b14";
+            User newUser = new User(userFullName, 0, userEmail, "", defaultProfileImage);
 
             new Thread(() -> {
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)

@@ -7,27 +7,27 @@ public class Tour implements Serializable {
     private String name;
     private String id;
     private String description;
-    private String coverImage;
+    private List<String> coverImage;
     private List<Participant> participants;
     private String tourGuide;
-    private String date;
+    private String startDate;
     private String host;
     private String price;
-    private int length;
+    private String endDate;
     private boolean isAvailable;
     private float overallRating;
     private List<UserReview> userReviewList;
 
-    public Tour(String name, String id, String description, String coverImage, String tourGuide, String date, String host, String price, int length, boolean isAvailable) {
+    public Tour(String name, String id, String description, List<String> coverImage, String tourGuide, String startDate, String host, String price, String endDate, boolean isAvailable) {
         this.name = name;
         this.id = id;
         this.description = description;
         this.coverImage = coverImage;
         this.tourGuide = tourGuide;
-        this.date = date;
+        this.startDate = startDate;
         this.host = host;
         this.price = price;
-        this.length = length;
+        this.endDate = endDate;
         this.isAvailable = isAvailable;
     }
 
@@ -63,11 +63,11 @@ public class Tour implements Serializable {
         this.description = description;
     }
 
-    public String getCoverImage() {
+    public List<String> getCoverImage() {
         return coverImage;
     }
 
-    public void setCoverImage(String coverImage) {
+    public void setCoverImage(List<String> coverImage) {
         this.coverImage = coverImage;
     }
 
@@ -87,12 +87,12 @@ public class Tour implements Serializable {
         this.tourGuide = tourGuide;
     }
 
-    public String getDate() {
-        return date;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getHost() {
@@ -111,12 +111,12 @@ public class Tour implements Serializable {
         this.price = price;
     }
 
-    public int getLength() {
-        return length;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setLength(int length) {
-        this.length = length;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public boolean isAvailable() {

@@ -9,12 +9,22 @@ public class User implements Serializable{
     private String email;
     private String telephone;
     private List<String> tourList;
+    private String profileImage;
 
-    public User(String name, int type, String email, String telephone) {
+    public User(String name, int type, String email, String telephone, String profileImage) {
         this.name = name;
         this.type = type;
         this.email = email;
         this.telephone = telephone;
+        this.profileImage = profileImage;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
     }
 
     public void addTour(String tourCode){
