@@ -77,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
             register.setClickable(false);
-            User newUser = new User(0, userEmail, "");
+            User newUser = new User(userFullName, 0, userEmail, "");
 
             new Thread(() -> {
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
