@@ -111,11 +111,11 @@ public class LoginActivity extends AppCompatActivity {
                             signIn.setClickable(true);
                         } else {
                             if (!firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                Snackbar.make(findViewById(R.id.login_activity), "Please verify you email before login!", Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(R.id.login_activity), "Vui lòng xác nhận email trước khi đăng nhập.", Snackbar.LENGTH_SHORT).show();
                                 signIn.setClickable(true);
                                 return;
                             }
-                            Toast.makeText(getBaseContext(), "Login successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Đăng nhập thành công.", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();
                         }
@@ -129,8 +129,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void linkElements(){
-        //TODO link elements on screen
-
         signUp = findViewById(R.id.tv_sign_up);
         forgotPassword = findViewById(R.id.tv_forgot_password);
 
@@ -139,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
 
         signIn = findViewById(R.id.btn_signin);
         signInGoogle = findViewById(R.id.btn_signin_with_google);
-
     }
 
     @Override

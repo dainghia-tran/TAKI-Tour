@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.aws.takitour.R;
 import com.aws.takitour.model.User;
@@ -28,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText rePassword;
     private EditText fullName;
     private Button register;
+    private Toolbar toolbarReturn;
 
     private final Handler handler = new Handler();
 
@@ -39,6 +41,12 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         linkElements();
+
+
+        toolbarReturn.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
+        toolbarReturn.setNavigationOnClickListener(v -> {
+            finish();
+        });
 
         register.setClickable(true);
 
@@ -53,23 +61,23 @@ public class RegisterActivity extends AppCompatActivity {
             final String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 
             if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
-                Snackbar.make(findViewById(R.id.register_activity), "Please provide valid email address.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.register_activity), "Vui lòng nhập email hợp lệ.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
             if (!userPassword.matches(passwordPattern)) {
-                Snackbar.make(findViewById(R.id.register_activity), "Password minimum eight characters, at least one uppercase, lowercase letter and one number.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.register_activity), "Mật khẩu tối thiểu 8 ký tự, phải bao gồm chữ hoa chữ thường và số.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
             if (!TextUtils.equals(userPassword, userRePassword)) {
-                Snackbar.make(findViewById(R.id.register_activity), "Please make sure that re-enter correct password", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.register_activity), "Xác nhận mật khẩu chưa chính xác.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
             if (TextUtils.isEmpty(userFullName)) {
-                Snackbar.make(findViewById(R.id.register_activity), "Please provide your full name", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.register_activity), "Hãy điền tên của bạn.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
             register.setClickable(false);
-            User newUser = new User("id", 0, userEmail, "");
+            User newUser = new User(0, userEmail, "");
 
             new Thread(() -> {
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
@@ -84,19 +92,19 @@ public class RegisterActivity extends AppCompatActivity {
                                         .addOnCompleteListener(task1 -> {
                                             if (task1.isSuccessful()) {
                                                 myDBReference.child("users")
-                                                        .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()))
+                                                        .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
                                                         .setValue(newUser);
                                                 handler.post(()->{
                                                     Toast.makeText(getBaseContext(), "Email xác thực đã gửi tới email của bạn, vui lòng kiểm tra email và xác thực.", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                    intent.putExtra("LOGIN_CODE", 0);
-                                                    intent.putExtra("USER_EMAIL", userEmail);
-                                                    startActivity(intent);
-                                                    finish();
                                                 });
+                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                intent.putExtra("LOGIN_CODE", 0);
+                                                intent.putExtra("USER_EMAIL", userEmail);
                                                 if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                                                     FirebaseAuth.getInstance().signOut();
                                                 }
+                                                startActivity(intent);
+                                                finish();
                                             } else {
                                                 Toast.makeText(getBaseContext(), "Không thể gửi email xác thực, vui lòng thử lại.", Toast.LENGTH_SHORT).show();
                                                 register.setClickable(true);
@@ -110,5 +118,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void linkElements() {
         //TODO link elements
+        fullName = findViewById(R.id.edt_name);
+        email = findViewById(R.id.edt_email);
+        password = findViewById(R.id.edt_password);
+        rePassword = findViewById((R.id.edt_re_password));
+        register = findViewById(R.id.btn_signup);
+        toolbarReturn = findViewById(R.id.tb_return);
     }
 }

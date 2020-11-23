@@ -1,20 +1,14 @@
 package com.aws.takitour.model;
 
 public class User {
-    private String id;
     private int type;
     private String email;
     private String telephone;
 
-    public User(String id, int type, String email, String telephone) {
-        this.id = id;
+    public User(int type, String email, String telephone) {
         this.type = type;
         this.email = email;
         this.telephone = telephone;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setType(int type) {
@@ -27,10 +21,6 @@ public class User {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public int getType() {
