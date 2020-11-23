@@ -9,6 +9,15 @@
     <string name="re_password">Xác nhận mật khẩu</string>
     <string name="name">Tên của bạn</string>
     <string name="or">Hoặc</string>
+    <string name="tour_name">Tên tour</string>
+    <string name="tour_short_description">Mô tả ngắn</string>
+    <string name="tour_price">Giá tiền (VNĐ)</string>
+    <string name="tour_duration">Độ dài tour</string>
+    <string name="tour_start">Bắt đầu</string>
+    <string name="tour_end">Kết thúc</string>
+    <string name="tour_upload_image">Tải ảnh lên</string>
+    <string name="tour_policy_quote">Bằng cách ấn vào nút tạo mới, bạn đồng ý với điều khoản quy định và chính sách của Takitou</string>
+    <string name="tour_create">Tạo mới</string>
     <string name="minimum_password">Mật khẩu phải tối thiểu 6 ký tự</string>
     <string name="auth_failed">Xác thực thất bạn, vui lòng kiểm tra email và mật khẩu hoặc đăng ký</string>
     <string name="change_email">Thay đổi Email</string>
