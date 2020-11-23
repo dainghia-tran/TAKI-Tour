@@ -1,16 +1,32 @@
 package com.aws.takitour.model;
 
-public class User {
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable{
     private String name;
     private int type;
     private String email;
     private String telephone;
+    private List<String> tourList;
 
     public User(String name, int type, String email, String telephone) {
         this.name = name;
         this.type = type;
         this.email = email;
         this.telephone = telephone;
+    }
+
+    public void addTour(String tourCode){
+        this.tourList.add(tourCode);
+    }
+
+    public List<String> getTourList() {
+        return tourList;
+    }
+
+    public void setTourList(List<String> tourList) {
+        this.tourList = tourList;
     }
 
     public void setName(String name) {

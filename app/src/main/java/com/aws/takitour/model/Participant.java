@@ -1,8 +1,9 @@
 package com.aws.takitour.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Participant {
+public class Participant implements Serializable {
     private String userEmail;
     private String longitude;
     private String latitude;
