@@ -42,7 +42,6 @@ public class RegisterActivity extends AppCompatActivity {
         linkElements();
 
 
-        toolbarReturn.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
         toolbarReturn.setNavigationOnClickListener(v -> {
             finish();
         });

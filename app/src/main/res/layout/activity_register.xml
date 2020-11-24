@@ -8,8 +8,10 @@
     android:orientation="vertical">
     <Toolbar
         android:id="@+id/tb_return"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,11 +50,11 @@
             android:id="@+id/edt_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:fontFamily="@font/signika"
             android:background="@drawable/bg_textview"
-            android:textColor="#206A5D"
+            android:fontFamily="@font/signika"
             android:hint="@string/hint_name"
-            />
+            android:singleLine="true"
+            android:textColor="#206A5D" />
     </LinearLayout>
 
     <LinearLayout
@@ -77,6 +79,7 @@
             android:layout_height="50dp"
             android:fontFamily="@font/signika"
             android:background="@drawable/bg_textview"
+            android:singleLine="true"
             android:hint="@string/hint_email"
             android:textColor="#206A5D"
             />
@@ -103,6 +106,7 @@
             android:fontFamily="@font/signika"
             android:inputType="textPassword"
             android:background="@drawable/bg_textview"
+            android:singleLine="true"
             android:hint="@string/hint_password"
             android:textColor="#206A5D"/>
     </LinearLayout>
@@ -129,6 +133,7 @@
             android:fontFamily="@font/signika"
             android:inputType="textPassword"
             android:background="@drawable/bg_textview"
+            android:singleLine="true"
             android:hint="@string/hint_password"
             android:textColor="#206A5D"/>
     </LinearLayout>
@@ -150,8 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="50dp">
+        android:gravity="center_horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

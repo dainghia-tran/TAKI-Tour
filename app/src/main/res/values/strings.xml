@@ -48,4 +48,8 @@
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email to sent you password reset instructions.</string>
+    <string name="explore">Khám phá</string>
+    <string name="tours">Tours</string>
+    <string name="notification">Thông báo</string>
+    <string name="profile">Hồ sơ</string>
 </resources>
