@@ -26,10 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-        startActivity(new Intent(MainActivity.this, TourCreate.class));
-=======
-
         new Thread(() -> {
             myDBReference.child("tours")
                     .addValueEventListener(new ValueEventListener() {
@@ -51,6 +47,5 @@ public class MainActivity extends AppCompatActivity {
 
 
         startActivity(new Intent(MainActivity.this, Maps.class));
->>>>>>> 5e901aa0199f4440e155ea596e1019063da13070
     }
 }
