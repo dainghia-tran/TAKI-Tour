@@ -14,11 +14,7 @@
             android:supportsRtl="true"
 
             android:theme="@style/Theme.AppCompat.NoActionBar">
-<<<<<<< HEAD
-        <activity android:name=".views.TourDashboard"/>
-=======
         <activity android:name=".views.Maps" />
->>>>>>> 5e901aa0199f4440e155ea596e1019063da13070
         <activity android:name=".views.TourDetails" />
         <activity android:name=".views.TourCreate" />
 

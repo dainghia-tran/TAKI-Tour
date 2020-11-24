@@ -1,18 +1,22 @@
 package com.aws.takitour.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
-import com.aws.takitour.model.Tour;
+import com.aws.takitour.models.Tour;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
+import com.aws.takitour.utilities.RandomString;
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class TourCreate extends AppCompatActivity {
@@ -40,7 +44,10 @@ public class TourCreate extends AppCompatActivity {
             String tourPrice = edtTourPrice.getText().toString();
             String tourEndDate = edtTourEndDate.getText().toString();
             String tourStartDate = edtTourStartDate.getText().toString();
-            String tourId = String.valueOf(Math.round(Math.random()*10));
+
+            RandomString generator = new RandomString(6, new SecureRandom());
+            String tourId = generator.nextString();
+            Log.e("somethingchanged", tourId);
             firebaseAuth = FirebaseAuth.getInstance();
             String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
             if(coverImage.isEmpty()){
@@ -50,8 +57,8 @@ public class TourCreate extends AppCompatActivity {
 
             myDBReference.child("tours").child(tourId).setValue(newTour);
         });
-    }
 
+    }
     private void linkElements() {
         edtTourName = findViewById(R.id.edt_tour_name);
         edtTourShortDescription = findViewById(R.id.edt_tour_short_description);
