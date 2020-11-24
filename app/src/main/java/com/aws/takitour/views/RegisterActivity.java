@@ -14,7 +14,7 @@ import android.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
-import com.aws.takitour.model.User;
+import com.aws.takitour.models.User;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 

@@ -1,4 +1,4 @@
-package com.aws.takitour.model;
+package com.aws.takitour.models;
 
 public class UserReview {
     private String userEmail;

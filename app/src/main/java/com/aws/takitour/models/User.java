@@ -1,6 +1,7 @@
-package com.aws.takitour.model;
+package com.aws.takitour.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable{
@@ -17,6 +18,7 @@ public class User implements Serializable{
         this.type = type;
         this.email = email;
         this.telephone = telephone;
+        this.tourList = new ArrayList<>();
         this.profileImage = profileImage;
         this.description = description;
     }

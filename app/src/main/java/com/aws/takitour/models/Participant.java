@@ -1,4 +1,4 @@
-package com.aws.takitour.model;
+package com.aws.takitour.models;
 
 import java.io.Serializable;
 import java.util.List;
@@ -6,7 +6,20 @@ import java.util.List;
 public class Participant implements Serializable {
     private String longitude;
     private String latitude;
+    private String name;
     private List<String> uploadImageLink;
+
+    public Participant(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getLongitude() {
         return longitude;
