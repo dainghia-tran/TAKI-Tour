@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="40dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,9 +82,10 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fontFamily="@font/signika"
+            android:textColorHint="#206A5D"
             android:background="@drawable/bg_textview"
             android:textColor="#206A5D"
-            android:hint="VNĐ"
+            android:hint="X.000.00 VNĐ"
             />
     </LinearLayout>
 
@@ -129,8 +130,9 @@
                    android:layout_height="50dp"
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
-                   android:hint="dd/mm/yy"
-                   android:textColor="#206A5D" />
+                   android:textColor="#206A5D"
+                   android:textColorHint="#206A5D"
+                   android:hint="dd/mm/yy" />
            </LinearLayout>
            <LinearLayout
                android:layout_width="match_parent"
@@ -155,6 +157,7 @@
                    android:layout_height="50dp"
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
+                   android:textColorHint="#206A5D"
                    android:hint="dd/mm/yy"
                    android:textColor="#206A5D" />
            </LinearLayout>
@@ -176,27 +179,32 @@
             android:text="@string/tour_upload_image"
             />
 
-        <EditText
+        <Button
             android:id="@+id/edt_upload_image"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:fontFamily="@font/signika"
-            android:background="@drawable/bg_textview"
+            android:background="@drawable/bg_button"
             android:textColor="#206A5D"
+            android:text="Thêm ảnh vào database"
             />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/tour_policy_quote"
+        android:textSize="14sp"
         android:layout_marginVertical="5dp"/>
     <Button
+        android:id="@+id/btn_create_tour"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginVertical="5dp"
-        android:fontFamily="@font/signika"
-        android:background="@color/white"
-        android:textColor="#206A5D"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_button"
+        android:fontFamily="@font/signika_semibold"
         android:text="@string/tour_create"
-        />
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+
 </LinearLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TAKI Tour</string>
+    <string name="app_name">Takitou</string>
     <string name="Hello">Xin chào</string>
     <string name="sign_in_to_continue">Đăng nhập để tiếp tục</string>
     <string name="forgot_password"><u>Quên mật khẩu?</u></string>
