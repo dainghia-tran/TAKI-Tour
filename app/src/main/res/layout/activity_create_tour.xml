@@ -53,7 +53,7 @@
             />
 
         <EditText
-            android:id="@+id/edt_short_description"
+            android:id="@+id/edt_tour_short_description"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:fontFamily="@font/signika"
@@ -125,12 +125,13 @@
                    android:textSize="12sp" />
 
                <EditText
-                   android:id="@+id/edit_tour_start"
+                   android:id="@+id/edt_tour_start_date"
                    android:layout_width="match_parent"
                    android:layout_height="50dp"
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
                    android:textColor="#206A5D"
+                   android:inputType="datetime"
                    android:textColorHint="#206A5D"
                    android:hint="dd/mm/yy" />
            </LinearLayout>
@@ -152,13 +153,14 @@
                    android:textSize="12sp" />
 
                <EditText
-                   android:id="@+id/edit_tour_end"
+                   android:id="@+id/edt_tour_end_date"
                    android:layout_width="match_parent"
                    android:layout_height="50dp"
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
                    android:textColorHint="#206A5D"
                    android:hint="dd/mm/yy"
+                   android:inputType="datetime"
                    android:textColor="#206A5D" />
            </LinearLayout>
        </LinearLayout>
@@ -180,14 +182,13 @@
             />
 
         <Button
-            android:id="@+id/edt_upload_image"
+            android:id="@+id/btn_upload_image"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:fontFamily="@font/signika"
             android:background="@drawable/bg_button"
-            android:textColor="#206A5D"
+            android:fontFamily="@font/signika"
             android:text="Thêm ảnh vào database"
-            />
+            android:textColor="#206A5D" />
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

@@ -9,8 +9,9 @@
             android:supportsRtl="true"
 
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".views.TourDashboard"></activity>
+        <activity android:name=".views.TourDashboard"/>
         <activity android:name=".views.TourDetails" />
+        <activity android:name=".views.TourCreate" />
 
         <activity android:name=".views.RegisterActivity" />
         <activity android:name=".views.Splash">

@@ -1,6 +1,7 @@
 package com.aws.takitour.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Tour implements Serializable {
@@ -18,9 +19,10 @@ public class Tour implements Serializable {
     private float overallRating;
     private List<UserReview> userReviewList;
 
-    public Tour(String name, String id, String description, List<String> coverImage, String tourGuide, String startDate, String host, String price, String endDate, boolean isAvailable) {
+    public Tour(String name, String id, String description, List<String> coverImage, String tourGuide, String price, String startDate, String endDate) {
         this.name = name;
         this.id = id;
+        this.participants = new ArrayList<>();
         this.description = description;
         this.coverImage = coverImage;
         this.tourGuide = tourGuide;
@@ -28,7 +30,7 @@ public class Tour implements Serializable {
         this.host = host;
         this.price = price;
         this.endDate = endDate;
-        this.isAvailable = isAvailable;
+        this.isAvailable = true;
     }
 
     public void addUserReview(UserReview newUserReview){
