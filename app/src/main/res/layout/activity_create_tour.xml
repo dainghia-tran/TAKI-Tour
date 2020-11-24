@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/tour_create_activity"
     android:background="#206A5D"
     android:padding="45dp"
     android:orientation="vertical">
@@ -11,7 +12,7 @@
         android:fontFamily="@font/signika_bold"
         android:textSize="36sp"
         android:textColor="@color/white"
-        android:text="Tạo tour mới"/>
+        android:text="@string/tour_create_label"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -178,17 +179,32 @@
             android:textColor="@color/white"
             android:layout_marginBottom="5dp"
             android:fontFamily="@font/signika"
-            android:text="@string/tour_upload_image"
+            android:text="@string/tour_bg_image"
             />
 
-        <Button
-            android:id="@+id/btn_upload_image"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/bg_button"
-            android:fontFamily="@font/signika"
-            android:text="Thêm ảnh vào database"
-            android:textColor="#206A5D" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <ImageView
+               android:id="@+id/iv_tour_background"
+               android:layout_width="200dp"
+               android:layout_height="100dp"
+               android:background="@drawable/bg_textview"
+               android:fontFamily="@font/signika"
+               android:textColor="#206A5D" />
+
+           <Button
+               android:id="@+id/btn_upload_image"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:background="@drawable/bg_button"
+               android:fontFamily="@font/signika_semibold"
+               android:text="@string/tour_upload_image"
+               android:textAllCaps="false"
+               android:textColor="@color/black"
+               android:textSize="14sp" />
+       </LinearLayout>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"

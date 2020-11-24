@@ -1,22 +1,42 @@
 package com.aws.takitour.views;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.aws.takitour.utilities.RandomString;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import io.reactivex.annotations.NonNull;
+
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class TourCreate extends AppCompatActivity {
@@ -26,11 +46,19 @@ public class TourCreate extends AppCompatActivity {
     private EditText edtTourPrice;
     private EditText edtTourStartDate;
     private EditText edtTourEndDate;
-
+    private ImageView ivTourBackground;
     private Button btnUploadImage;
     private Button btnCreateTour;
+    // Uri indicates, where the image will be picked from
+    private Uri filePath;
+    // request code
+    private final int PICK_IMAGE_REQUEST = 22;
 
     private FirebaseAuth firebaseAuth;
+
+    // instance for firebase storage and StorageReference
+    FirebaseStorage storage;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +66,12 @@ public class TourCreate extends AppCompatActivity {
         setContentView(R.layout.activity_create_tour);
         linkElements();
         List<String> coverImage = new ArrayList<>();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
+        btnUploadImage.setOnClickListener(v -> {
+            chooseImage();
+        });
         btnCreateTour.setOnClickListener(v -> {
             String tourName = edtTourName.getText().toString();
             String tourShortDescription = edtTourShortDescription.getText().toString();
@@ -47,10 +81,11 @@ public class TourCreate extends AppCompatActivity {
 
             RandomString generator = new RandomString(6, new SecureRandom());
             String tourId = generator.nextString();
-            Log.e("somethingchanged", tourId);
+
             firebaseAuth = FirebaseAuth.getInstance();
             String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
-            if(coverImage.isEmpty()){
+            uploadImage();
+            if (coverImage.isEmpty()) {
                 coverImage.add("https://firebasestorage.googleapis.com/v0/b/taki-tour.appspot.com/o/default-tour-image.jpg?alt=media&token=e424bece-bc5b-46bd-b218-db439b3d430c");
             }
             Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
@@ -59,14 +94,86 @@ public class TourCreate extends AppCompatActivity {
         });
 
     }
+
+    private void chooseImage() {
+        // Defining Implicit Intent to mobile gallery
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, "Select Image"),
+                PICK_IMAGE_REQUEST);
+    }
+
     private void linkElements() {
         edtTourName = findViewById(R.id.edt_tour_name);
         edtTourShortDescription = findViewById(R.id.edt_tour_short_description);
         edtTourPrice = findViewById(R.id.edt_tour_price);
         edtTourStartDate = findViewById(R.id.edt_tour_start_date);
         edtTourEndDate = findViewById(R.id.edt_tour_end_date);
-
+        ivTourBackground = findViewById(R.id.iv_tour_background);
         btnUploadImage = findViewById(R.id.btn_upload_image);
         btnCreateTour = findViewById(R.id.btn_create_tour);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            // Get the Uri of data
+            Log.e("somethingchaede", String.valueOf(requestCode));
+
+            filePath = data.getData();
+
+            try {
+                // Setting image on image view using Bitmap
+                Bitmap bitmap = MediaStore
+                        .Images
+                        .Media
+                        .getBitmap(
+                                getContentResolver(),
+                                filePath);
+                ivTourBackground.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                // Log the exception
+                e.printStackTrace();
+            }
+        }
+    }
+    private void uploadImage() {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+
+            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Snackbar.make(findViewById(R.id.tour_create_activity), "Failed "+e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }
     }
 }
