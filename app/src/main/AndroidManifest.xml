@@ -12,9 +12,11 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/app_icon"
             android:supportsRtl="true"
+
             android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".views.Maps" />
         <activity android:name=".views.TourDetails" />
+
         <activity android:name=".views.RegisterActivity" />
         <activity android:name=".views.Splash">
             <intent-filter>

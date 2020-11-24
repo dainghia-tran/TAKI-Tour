@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/explore"/>
+    <item
+        android:id="@+id/item_map"
+        android:icon="@drawable/ic_baseline_map_24"
+        android:title="@string/tours"/>
+    <item
+        android:id="@+id/item_notification"
+        android:icon="@drawable/ic_outline_notifications_24"
+        android:title="@string/notification"/>
+    <item
+        android:id="@+id/item_profile"
+        android:icon="@drawable/ic_outline_person_24"
+        android:title="@string/profile"/>
+
+</menu>
