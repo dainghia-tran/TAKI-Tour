@@ -10,13 +10,23 @@ public class User implements Serializable{
     private String telephone;
     private List<String> tourList;
     private String profileImage;
+    private String description;
 
-    public User(String name, int type, String email, String telephone, String profileImage) {
+    public User(String name, int type, String email, String telephone, String profileImage, String description) {
         this.name = name;
         this.type = type;
         this.email = email;
         this.telephone = telephone;
         this.profileImage = profileImage;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getProfileImage() {

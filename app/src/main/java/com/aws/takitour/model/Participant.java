@@ -4,22 +4,9 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Participant implements Serializable {
-    private String userEmail;
     private String longitude;
     private String latitude;
     private List<String> uploadImageLink;
-
-    public Participant(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
 
     public String getLongitude() {
         return longitude;
