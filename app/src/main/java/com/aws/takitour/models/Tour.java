@@ -1,4 +1,4 @@
-package com.aws.takitour.model;
+package com.aws.takitour.models;
 
 import java.io.Serializable;
 import java.util.List;
