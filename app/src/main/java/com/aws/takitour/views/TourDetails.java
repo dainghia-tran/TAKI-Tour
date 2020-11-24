@@ -2,15 +2,15 @@ package com.aws.takitour.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-public class Splash extends AppCompatActivity {
+import com.aws.takitour.R;
+
+public class TourDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(Splash.this, LoginActivity.class));
-        finish();
+        setContentView(R.layout.activity_tour_details);
     }
 }

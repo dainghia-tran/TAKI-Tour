@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText fullName;
     private Button register;
     private Toolbar toolbarReturn;
+    private TextView signIn;
 
     private final Handler handler = new Handler();
 
@@ -49,6 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
         register.setClickable(true);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        signIn.setOnClickListener(v->{
+            finish();
+        });
 
         register.setOnClickListener(v -> {
             String userEmail = email.getText().toString().trim();
@@ -76,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
             register.setClickable(false);
             String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/taki-tour.appspot.com/o/avatar.png?alt=media&token=591a850e-d704-4820-8b2d-a933fbb31b14";
-            User newUser = new User(userFullName, 0, userEmail, "", defaultProfileImage);
+            User newUser = new User(userFullName, 0, userEmail, "", defaultProfileImage, "");
 
             new Thread(() -> {
                 firebaseAuth.createUserWithEmailAndPassword(userEmail, userPassword)
@@ -116,12 +122,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void linkElements() {
-        //TODO link elements
         fullName = findViewById(R.id.edt_name);
         email = findViewById(R.id.edt_email);
         password = findViewById(R.id.edt_password);
         rePassword = findViewById((R.id.edt_re_password));
         register = findViewById(R.id.btn_signup);
         toolbarReturn = findViewById(R.id.tb_return);
+        signIn = findViewById(R.id.tv_sign_in);
     }
 }
