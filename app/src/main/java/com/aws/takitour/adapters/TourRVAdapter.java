@@ -52,6 +52,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         holder.tourCard.setOnClickListener(v->{
             Intent tourDashboard = new Intent(context, TourDashboard.class);
             tourDashboard.putExtra("TOUR_ID", tour.getId());
+            Log.d("adapter tour id", tour.getId());
             context.startActivity(tourDashboard);
         });
     }

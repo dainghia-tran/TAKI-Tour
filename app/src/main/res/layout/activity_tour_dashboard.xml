@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
     <Toolbar
-            android:id="@+id/tb_return"
+            android:id="@+id/tb_return_dashboard"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,45 +33,45 @@
         android:layout_width="match_parent"
         android:layout_height="300dp">
         <ImageButton
-            android:id="@+id/btn_locate"
+            android:id="@+id/imgbtn_locate"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="#BFDCAE"
             android:src="@drawable/ic_baseline_my_location_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_contact"
-            app:layout_constraintBottom_toTopOf="@id/btn_calendar"/>
+            app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
+            app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"/>
 
         <ImageButton
-            android:id="@+id/btn_contact"
+            android:id="@+id/imgbtn_call"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="#BFDCAE"
             android:src="@drawable/ic_baseline_perm_phone_msg_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_locate"
+            app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/btn_library"/>
+            app:layout_constraintBottom_toTopOf="@id/imgbtn_library"/>
         <ImageButton
-            android:id="@+id/btn_calendar"
+            android:id="@+id/imgbtn_timeline"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="#BFDCAE"
             android:src="@drawable/ic_baseline_event_note_24"
-            app:layout_constraintEnd_toStartOf="@id/btn_library"
+            app:layout_constraintEnd_toStartOf="@id/imgbtn_library"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btn_locate"
+            app:layout_constraintTop_toBottomOf="@id/imgbtn_locate"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <ImageButton
-            android:id="@+id/btn_library"
+            android:id="@+id/imgbtn_library"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="#BFDCAE"
             android:src="@drawable/ic_baseline_photo_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_calendar"
-            app:layout_constraintTop_toBottomOf="@id/btn_contact"
+            app:layout_constraintStart_toEndOf="@id/imgbtn_timeline"
+            app:layout_constraintTop_toBottomOf="@id/imgbtn_call"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
