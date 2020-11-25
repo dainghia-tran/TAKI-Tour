@@ -1,15 +1,13 @@
 package com.aws.takitour.views;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.ViewPagerAdapter;
@@ -60,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        startActivity(new Intent(MainActivity.this, TourDetails.class));
 
     }
 
