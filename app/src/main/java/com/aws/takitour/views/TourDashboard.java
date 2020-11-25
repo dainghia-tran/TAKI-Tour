@@ -11,12 +11,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
@@ -41,6 +44,13 @@ public class TourDashboard extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private final int PERMISSION_ID = 44;
 
+    private Toolbar tbReturn;
+    private TextView tvYourName;
+    private ImageButton imgbtnLocate;
+    private ImageButton imgbtnCall;
+    private ImageButton imgbtnTimeline;
+    private ImageButton imgbtnLibrary;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +62,70 @@ public class TourDashboard extends AppCompatActivity {
         tourId = intent.getStringExtra("TOUR_ID");
         ((TextView)(findViewById(R.id.your_name))).setText(tourId);
 
+        tbReturn = findViewById(R.id.tb_return_dashboard);
+        tbReturn.setNavigationOnClickListener(v -> {
+            finish();
+        });
+
+        imgbtnLocate = findViewById(R.id.imgbtn_locate);
+        imgbtnCall = findViewById(R.id.imgbtn_call);
+        imgbtnTimeline = findViewById(R.id.imgbtn_timeline);
+        imgbtnLibrary = findViewById(R.id.imgbtn_library);
+
+        imgbtnLocate.setOnClickListener(v->{
+            Intent intentMaps = new Intent(TourDashboard.this, Maps.class);
+            intentMaps.putExtra("TOUR_ID", tourId);
+            startActivity(intentMaps);
+        });
+
+        imgbtnCall.setOnClickListener(v->{
+            new Thread(()->{
+                myDBReference.child("tours")
+                        .child(tourId)
+                        .child("tourGuide")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String userPath = snapshot.getValue(String.class).replace(".", ",");
+                                myDBReference.child("users")
+                                        .child(userPath)
+                                        .child("telephone")
+                                        .addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                String telephone = snapshot.getValue(String.class);
+                                                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + telephone)));
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+            }).start();
+        });
+
+        imgbtnTimeline.setOnClickListener(v->{
+
+        });
+
+        imgbtnLibrary.setOnClickListener(v->{
+
+        });
+
+
         //Check if tour is available and get location from user
         new Thread(()->{
             myDBReference.child("tours")
                     .child(tourId)
-                    .child("isAvailable")
+                    .child("available")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
