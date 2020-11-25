@@ -37,7 +37,6 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container,false);
         tourRV = view.findViewById(R.id.rv_list_explore);
-
         new Thread(() -> {
             myDBReference.child("tours")
                     .addValueEventListener(new ValueEventListener() {
