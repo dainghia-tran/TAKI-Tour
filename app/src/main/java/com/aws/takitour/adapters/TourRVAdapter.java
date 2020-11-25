@@ -53,7 +53,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             holder.tourGuideName.setText((tour.getTourGuide()));
         }
         holder.tourCard.setOnClickListener(v->{
-<<<<<<< HEAD
             Dialog dialog = new Dialog(context);
             dialog.setContentView(R.layout.dialog_tour_details);
 
@@ -85,15 +84,10 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                 }
                 else
                 {
-                    Toast.makeText(context, "code nhập không đúng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Mã đã nhập không hợp lệ", Toast.LENGTH_SHORT).show();
                 }
             });
-=======
-            Intent tourDashboard = new Intent(context, TourDashboard.class);
-            tourDashboard.putExtra("TOUR_ID", tour.getId());
-            Log.d("adapter tour id", tour.getId());
-            context.startActivity(tourDashboard);
->>>>>>> d426fea9dfcd285c3eb1f60f90c6c363afeb5a35
+
         });
     }
 

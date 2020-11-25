@@ -43,7 +43,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container,false);
 
-<<<<<<< HEAD
         imageView = view.findViewById(R.id.img_image_profile);
         name = view.findViewById(R.id.tv_name_profile);
         email = view.findViewById(R.id.tv_email_profile);
@@ -121,9 +120,6 @@ public class ProfileFragment extends Fragment {
                 getActivity().finish();
             }
         });
-=======
-
->>>>>>> d426fea9dfcd285c3eb1f60f90c6c363afeb5a35
 
         return view;
     }
