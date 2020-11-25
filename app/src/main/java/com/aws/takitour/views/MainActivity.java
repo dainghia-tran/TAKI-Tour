@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -13,14 +12,8 @@ import com.aws.takitour.R;
 import com.aws.takitour.adapters.ViewPagerAdapter;
 import com.aws.takitour.models.Tour;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class MainActivity extends AppCompatActivity {
 

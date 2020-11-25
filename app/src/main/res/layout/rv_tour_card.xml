@@ -13,7 +13,8 @@
             android:layout_height="100dp"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp" />
+            tools:layout_editor_absoluteY="0dp"
+            android:contentDescription="@string/card_content_descriptor" />
 
     <TextView
             android:id="@+id/tv_tour_name"
@@ -41,9 +42,9 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:fontFamily="@font/signika"
-            android:text="rating"
             android:textSize="8sp"
-            android:textColor="#206A5D" />
+            android:textColor="#206A5D"
+            tools:ignore="SmallSp" />
 
     <TextView
             android:id="@+id/tv_tour_duration"
@@ -56,7 +57,6 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:fontFamily="@font/signika"
-            android:text="duration"
             android:textSize="8sp"
             android:textColor="#206A5D" />
 
@@ -81,7 +81,6 @@
             android:layout_height="35dp"
             android:maxLines="3"
             android:fontFamily="@font/signika_light"
-            android:text="detail"
             android:textColor="#206A5D"
             android:textSize="8sp"
             app:layout_constraintLeft_toRightOf="@id/img_tour_image"
@@ -115,6 +114,14 @@
             android:text=""
             android:textSize="8sp"
             android:textColor="#206A5D" />
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/img_tour_image"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

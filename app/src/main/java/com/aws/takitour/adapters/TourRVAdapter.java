@@ -1,5 +1,6 @@
 package com.aws.takitour.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import java.util.List;
 public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder> {
     private Context context;
     private List<Tour> tourList;
+    private Dialog dialog;
 
     public TourRVAdapter(Context context, List<Tour> tourList) {
         this.context = context;
@@ -31,7 +33,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.tour_card, parent, false);    //inflate layout
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_tour_card, parent, false);    //inflate layout
         return new ViewHolder(view);
     }
 
