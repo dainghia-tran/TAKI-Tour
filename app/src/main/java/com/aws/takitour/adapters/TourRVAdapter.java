@@ -1,5 +1,6 @@
 package com.aws.takitour.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +22,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
     private List<Tour> tourList;
     private Dialog dialog;
 
-
-
-
     public TourRVAdapter(Context context, List<Tour> tourList) {
         this.context = context;
         this.tourList = tourList;
@@ -39,34 +37,9 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
 
         ViewHolder viewHolder = new ViewHolder(view);
 
-        dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_tour_details);
 
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imageView = dialog.findViewById(R.id.img_image_detail);
-                TextView tourNameDetail = dialog.findViewById(R.id.tv_tour_name_detail);
-                TextView ratingDetail = dialog.findViewById(R.id.tv_rating_detail);
-                TextView durationDetail = dialog.findViewById(R.id.tv_duration_detail);
-                TextView costDetail = dialog.findViewById(R.id.tv_cost_detail);
-                TextView shortDescriptionDetail = dialog.findViewById(R.id.tv_short_description_detail);
-                TextView tourGuideNameDetail = dialog.findViewById(R.id.tv_tour_guide_name_detail);
-                TextView introduction = dialog.findViewById(R.id.tv_introduction);
 
-                Tour tour = tourList.get(viewHolder.getAdapterPosition());
-
-                tourNameDetail.setText(tour.getName());
-                ratingDetail.setText(String.valueOf(tour.getOverallRating()));
-                durationDetail.setText(tour.getDescription());
-                costDetail.setText(tour.getPrice());
-                shortDescriptionDetail.setText(tour.getDescription());
-                tourGuideNameDetail.setText((tour.getTourGuide()));
-
-                dialog.show();
-            }
-        });
         return viewHolder;
 
     }
@@ -78,6 +51,36 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         holder.cost.setText(tour.getPrice());
         holder.detail.setText(tour.getDescription());
         holder.tourGuideName.setText((tour.getTourGuide()));
+
+        holder.tourCard.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_tour_details);
+
+                ImageView imageView = dialog.findViewById(R.id.img_image_detail);
+                TextView tourNameDetail = dialog.findViewById(R.id.tv_tour_name_detail);
+                TextView ratingDetail = dialog.findViewById(R.id.tv_rating_detail);
+                TextView durationDetail = dialog.findViewById(R.id.tv_duration_detail);
+                TextView costDetail = dialog.findViewById(R.id.tv_cost_detail);
+                TextView shortDescriptionDetail = dialog.findViewById(R.id.tv_short_description_detail);
+                TextView tourGuideNameDetail = dialog.findViewById(R.id.tv_tour_guide_name_detail);
+                TextView introduction = dialog.findViewById(R.id.tv_introduction);
+
+                Tour tour = tourList.get(holder.getAdapterPosition());
+
+                tourNameDetail.setText(tour.getName());
+                ratingDetail.setText(String.valueOf(tour.getOverallRating()));
+                durationDetail.setText(tour.getDescription());
+                costDetail.setText(tour.getPrice());
+                shortDescriptionDetail.setText(tour.getDescription());
+                tourGuideNameDetail.setText((tour.getTourGuide()));
+
+                dialog.show();
+            }
+        });
     }
 
     @Override
