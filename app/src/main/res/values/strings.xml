@@ -69,5 +69,6 @@
     <string name="log_out">Đăng xuất</string>
     <string name="version">Phiên bản</string>
     <string name="build_number">1.0.0</string>
+    <string name="confirm">Xác nhận</string>
 
 </resources>
