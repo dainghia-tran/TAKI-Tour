@@ -131,6 +131,7 @@
                    android:id="@+id/edt_tour_start_date"
                    android:layout_width="match_parent"
                    android:layout_height="50dp"
+                   android:inputType="none"
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
                    android:textColor="#206A5D"
@@ -162,9 +163,9 @@
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
                    android:textColorHint="#206A5D"
+                   android:inputType="none"
                    android:clickable="true"
                    android:hint="dd/mm/yy"
-                   android:inputType="datetime"
                    android:textColor="#206A5D" />
            </LinearLayout>
        </LinearLayout>

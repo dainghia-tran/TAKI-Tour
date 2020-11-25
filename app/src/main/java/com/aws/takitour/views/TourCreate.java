@@ -97,7 +97,6 @@ public class TourCreate extends AppCompatActivity {
             chooseImage();
         });
 
-
         edtTourStartDate.setKeyListener(null);
         edtTourStartDate.setOnClickListener(v->{
             getCurrentDate(edtTourStartDate);
@@ -117,34 +116,54 @@ public class TourCreate extends AppCompatActivity {
             String tourId = generator.nextString();
 
             firebaseAuth = FirebaseAuth.getInstance();
-            String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
-            String tourImageId = "";
-            if (filePath != null) {
-                tourImageId = uploadImage(tourId);
-            }
-            storageReference.child("images/tours/" + tourId + "/" + tourImageId+".jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Log.d("imageLink", uri.toString());
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    Log.d("imageLinkNONONONO", "Dame Wrong");
-                }
-            });
-            if (coverImage.isEmpty()) {
-                coverImage.add("abc");
-            }
-            Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
 
-            myDBReference.child("tours").child(tourId).setValue(newTour);
+            String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
+
+            // Upload image to FireStore and add imageLink to ArrayList, then upload Tour to firebase RealTime
+            if (filePath != null) {
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+                StorageReference ref = storageReference.child("images/tours/" + tourId + "/" + UUID.randomUUID().toString());
+                ref.putFile(filePath)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uri.isComplete()) {
+                                    Log.d("URL", "Waiting to complete");
+                                }
+                                Uri url = uri.getResult();
+                                assert url != null;
+                                String imageLink = url.toString();
+
+                                if (coverImage.isEmpty()) {
+                                    coverImage.add(imageLink);
+                                }
+                                Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
+                                myDBReference.child("tours").child(tourId).setValue(newTour);
+                                progressDialog.dismiss();
+                                Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Snackbar.make(findViewById(R.id.tour_create_activity), "Failed " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                                        .getTotalByteCount());
+                                progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                            }
+                        });
+            }
         });
 
-    }
-
-    private void getImageLink(String imageLink) {
-        imageLinkOfCureentProject = imageLink;
     }
 
     private void chooseImage() {
@@ -171,8 +190,6 @@ public class TourCreate extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the Uri of data
             filePath = data.getData();
@@ -191,47 +208,5 @@ public class TourCreate extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    private String uploadImage(String tourId) {
-        String randomString = UUID.randomUUID().toString();
-        if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-            StorageReference ref = storageReference.child("images/tours/" + tourId + "/" + randomString);
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uri.isComplete()) {
-                                Log.d("URL", "Waiting to complete");
-                            }
-                            Uri url = uri.getResult();
-                            assert url != null;
-                            String imageLink = url.toString();
-                            progressDialog.dismiss();
-                            Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Snackbar.make(findViewById(R.id.tour_create_activity), "Failed " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
-                        }
-                    });
-
-        }
-        return randomString;
     }
 }
