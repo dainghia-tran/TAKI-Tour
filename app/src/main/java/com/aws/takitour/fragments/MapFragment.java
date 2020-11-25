@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi;
 
 import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -15,7 +14,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static com.aws.takitour.views.MainActivity.tourList;

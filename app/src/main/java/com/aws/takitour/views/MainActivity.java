@@ -1,15 +1,8 @@
 package com.aws.takitour.views;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -17,18 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.ViewPagerAdapter;
 import com.aws.takitour.models.Tour;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-
-        startActivity(new Intent(MainActivity.this, TourDetails.class));
-
     }
 
     private void setupViewPager() {

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aws.takitour.R;
@@ -47,7 +48,9 @@ public class TourDashboard extends AppCompatActivity {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        //TODO get tourId from MainActivity
+        Intent intent = getIntent();
+        tourId = intent.getStringExtra("TOUR_ID");
+        ((TextView)(findViewById(R.id.your_name))).setText(tourId);
 
         //Check if tour is available and get location from user
         new Thread(()->{

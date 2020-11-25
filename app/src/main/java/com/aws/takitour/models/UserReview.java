@@ -1,6 +1,8 @@
 package com.aws.takitour.models;
 
-public class UserReview {
+import java.io.Serializable;
+
+public class UserReview implements Serializable {
     private String userEmail;
     private int star;
     private String comment;

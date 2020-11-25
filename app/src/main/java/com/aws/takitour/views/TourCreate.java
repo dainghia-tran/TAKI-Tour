@@ -12,18 +12,22 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
+import com.aws.takitour.utilities.RandomString;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -31,14 +35,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
-
-import com.aws.takitour.utilities.RandomString;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import io.reactivex.annotations.NonNull;
 
@@ -62,11 +59,9 @@ public class TourCreate extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     // instance for firebase storage and StorageReference
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    private String imageLinkOfCureentProject;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    final Calendar myCalendar = Calendar.getInstance();
     public void getCurrentDate(EditText edtDate) {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TourCreate.this, new DatePickerDialog.OnDateSetListener() {
