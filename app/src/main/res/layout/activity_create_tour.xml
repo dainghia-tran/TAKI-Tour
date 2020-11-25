@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/tour_create_activity"
@@ -86,6 +87,7 @@
             android:textColorHint="#206A5D"
             android:background="@drawable/bg_textview"
             android:textColor="#206A5D"
+            android:inputType="number"
             android:hint="X.000.00 VNĐ"
             />
     </LinearLayout>
@@ -132,9 +134,9 @@
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
                    android:textColor="#206A5D"
-                   android:inputType="datetime"
+                   android:clickable="true"
                    android:textColorHint="#206A5D"
-                   android:hint="dd/mm/yy" />
+                   android:hint="dd/mm/yy"/>
            </LinearLayout>
            <LinearLayout
                android:layout_width="match_parent"
@@ -160,6 +162,7 @@
                    android:background="@drawable/bg_textview"
                    android:fontFamily="@font/signika"
                    android:textColorHint="#206A5D"
+                   android:clickable="true"
                    android:hint="dd/mm/yy"
                    android:inputType="datetime"
                    android:textColor="#206A5D" />
@@ -185,12 +188,15 @@
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="match_parent">
+
            <ImageView
                android:id="@+id/iv_tour_background"
-               android:layout_width="200dp"
+               android:layout_width="150dp"
                android:layout_height="100dp"
                android:background="@drawable/bg_textview"
                android:fontFamily="@font/signika"
+               android:scaleType="centerCrop"
+               android:adjustViewBounds="true"
                android:textColor="#206A5D" />
 
            <Button
