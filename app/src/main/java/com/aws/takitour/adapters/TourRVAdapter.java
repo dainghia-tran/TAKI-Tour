@@ -33,6 +33,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from(context).inflate(R.layout.rv_tour_card, parent, false);    //inflate layout
         return new ViewHolder(view);
     }
