@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Takitou</string>
+    <string name="attended">Tour của bạn</string>
     <string name="Hello">Xin chào</string>
     <string name="sign_in_to_continue">Đăng nhập để tiếp tục</string>
     <string name="forgot_password"><u>Quên mật khẩu?</u></string>
@@ -55,7 +56,7 @@
     <string name="tours">Tours</string>
     <string name="notification">Thông báo</string>
     <string name="profile">Hồ sơ</string>
-    
+
     <string name="where_do_you_wanna_go">Sắp tới bạn muốn đi đâu?</string>
     <string name="enter_code">Nhập mã CODE do hướng dẫn viên cung cấp</string>
     <string name="up_coming">Sắp tới</string>

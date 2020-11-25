@@ -1,15 +1,13 @@
 package com.aws.takitour.views;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.ViewPagerAdapter;
@@ -60,28 +58,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-//        new Thread(() -> {
-//            myDBReference.child("tours")
-//                    .addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            tourList = new ArrayList<>();
-//                            tourList.clear();
-//                            for (DataSnapshot data : snapshot.getChildren()) {
-//                                tourList.add(data.getValue(Tour.class));
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                            Log.e("Firebase", "Cannot get tour list");
-//                        }
-//                    });
-//        }).start();
-//
-//
-//        startActivity(new Intent(MainActivity.this, Maps.class));
-//        startActivity(new Intent(MainActivity.this, TourCreate.class));
+        startActivity(new Intent(MainActivity.this, TourDetails.class));
 
     }
 
