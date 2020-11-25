@@ -6,17 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -39,12 +35,12 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View view = inflater.inflate(R.layout.tour_card,parent,false);
+        View view = inflater.inflate(R.layout.rv_tour_card,parent,false);
 
         ViewHolder viewHolder = new ViewHolder(view);
 
         dialog = new Dialog(context);
-        dialog.setContentView(R.layout.activity_tour_details);
+        dialog.setContentView(R.layout.dialog_tour_details);
 
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,28 +1,19 @@
 package com.aws.takitour.views;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.ViewPagerAdapter;
 import com.aws.takitour.models.Tour;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startActivity(new Intent(MainActivity.this, TourCreate.class));
 
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -60,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        startActivity(new Intent(MainActivity.this, TourDetails.class));
 
     }
 

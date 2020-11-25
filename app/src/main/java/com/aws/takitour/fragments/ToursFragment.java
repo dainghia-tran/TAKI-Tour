@@ -85,7 +85,6 @@ public class ToursFragment extends Fragment {
                                                 tourRV.setHasFixedSize(true);
                                             });
                                         }
-
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
                                             Log.e("Firebase", "Cannot get tour list");

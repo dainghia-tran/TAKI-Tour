@@ -1,14 +1,15 @@
 package com.aws.takitour.views;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -17,23 +18,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
+import com.aws.takitour.utilities.RandomString;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
-
-import java.io.IOException;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
-
-import com.aws.takitour.utilities.RandomString;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.UUID;
 
 import io.reactivex.annotations.NonNull;
 
@@ -59,18 +61,46 @@ public class TourCreate extends AppCompatActivity {
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
+    private String imageLinkOfCureentProject;
 
+    final Calendar myCalendar = Calendar.getInstance();
+    public void getCurrentDate(EditText edtDate) {
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(TourCreate.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, monthOfYear);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                edtDate.setText(simpleDateFormat.format(calendar.getTime()));
+            }
+        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_tour);
+
         linkElements();
         List<String> coverImage = new ArrayList<>();
+
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
         btnUploadImage.setOnClickListener(v -> {
             chooseImage();
+        });
+
+        edtTourStartDate.setKeyListener(null);
+        edtTourStartDate.setOnClickListener(v->{
+            getCurrentDate(edtTourStartDate);
+        });
+        edtTourEndDate.setKeyListener(null);
+        edtTourEndDate.setOnClickListener(v->{
+            getCurrentDate(edtTourEndDate);
         });
         btnCreateTour.setOnClickListener(v -> {
             String tourName = edtTourName.getText().toString();
@@ -83,14 +113,52 @@ public class TourCreate extends AppCompatActivity {
             String tourId = generator.nextString();
 
             firebaseAuth = FirebaseAuth.getInstance();
-            String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
-            uploadImage();
-            if (coverImage.isEmpty()) {
-                coverImage.add("https://firebasestorage.googleapis.com/v0/b/taki-tour.appspot.com/o/default-tour-image.jpg?alt=media&token=e424bece-bc5b-46bd-b218-db439b3d430c");
-            }
-            Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
 
-            myDBReference.child("tours").child(tourId).setValue(newTour);
+            String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
+
+            // Upload image to FireStore and add imageLink to ArrayList, then upload Tour to firebase RealTime
+            if (filePath != null) {
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("Uploading...");
+                progressDialog.show();
+                StorageReference ref = storageReference.child("images/tours/" + tourId + "/" + UUID.randomUUID().toString());
+                ref.putFile(filePath)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uri.isComplete()) {
+                                    Log.d("URL", "Waiting to complete");
+                                }
+                                Uri url = uri.getResult();
+                                assert url != null;
+                                String imageLink = url.toString();
+
+                                if (coverImage.isEmpty()) {
+                                    coverImage.add(imageLink);
+                                }
+                                Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
+                                myDBReference.child("tours").child(tourId).setValue(newTour);
+                                progressDialog.dismiss();
+                                Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                progressDialog.dismiss();
+                                Snackbar.make(findViewById(R.id.tour_create_activity), "Failed " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                                        .getTotalByteCount());
+                                progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                            }
+                        });
+            }
         });
 
     }
@@ -119,12 +187,8 @@ public class TourCreate extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the Uri of data
-            Log.e("somethingchaede", String.valueOf(requestCode));
-
             filePath = data.getData();
 
             try {
@@ -140,40 +204,6 @@ public class TourCreate extends AppCompatActivity {
                 // Log the exception
                 e.printStackTrace();
             }
-        }
-    }
-    private void uploadImage() {
-
-        if(filePath != null)
-        {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
-            ref.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Snackbar.make(findViewById(R.id.tour_create_activity), "Failed "+e.getMessage(), Snackbar.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
-                                    .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
-                        }
-                    });
         }
     }
 }
