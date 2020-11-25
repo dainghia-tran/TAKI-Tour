@@ -5,6 +5,8 @@ public class UserReview {
     private int star;
     private String comment;
 
+    public UserReview(){}
+
     public UserReview(String userEmail, int star, String comment) {
         this.userEmail = userEmail;
         this.star = star;

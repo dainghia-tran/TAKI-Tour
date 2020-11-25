@@ -61,29 +61,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-//        new Thread(() -> {
-//            myDBReference.child("tours")
-//                    .addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            tourList = new ArrayList<>();
-//                            tourList.clear();
-//                            for (DataSnapshot data : snapshot.getChildren()) {
-//                                tourList.add(data.getValue(Tour.class));
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                            Log.e("Firebase", "Cannot get tour list");
-//                        }
-//                    });
-//        }).start();
-//
-//
-//        startActivity(new Intent(MainActivity.this, Maps.class));
-//        startActivity(new Intent(MainActivity.this, TourCreate.class));
-
     }
 
     private void setupViewPager() {

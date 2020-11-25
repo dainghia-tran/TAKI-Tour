@@ -9,6 +9,8 @@ public class Participant implements Serializable {
     private String name;
     private List<String> uploadImageLink;
 
+    public Participant(){}
+
     public Participant(String name) {
         this.name = name;
     }

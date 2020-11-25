@@ -40,7 +40,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Tour tour = tourList.get(position);
         holder.tourName.setText(tour.getName());
-        holder.rating.setText((int) tour.getOverallRating());
+        holder.rating.setText(String.valueOf(tour.getOverallRating()));
         holder.cost.setText(tour.getPrice());
         holder.detail.setText(tour.getDescription());
         holder.tourGuideName.setText((tour.getTourGuide()));

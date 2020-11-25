@@ -19,6 +19,9 @@ public class Tour implements Serializable {
     private float overallRating;
     private List<UserReview> userReviewList;
 
+    public Tour() {
+    }
+
     public Tour(String name, String id, String description, List<String> coverImage, String tourGuide, String price, String startDate, String endDate) {
         this.name = name;
         this.id = id;

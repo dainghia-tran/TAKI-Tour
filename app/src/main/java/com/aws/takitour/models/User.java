@@ -13,6 +13,8 @@ public class User implements Serializable{
     private String profileImage;
     private String description;
 
+    public User(){}
+
     public User(String name, int type, String email, String telephone, String profileImage, String description) {
         this.name = name;
         this.type = type;
