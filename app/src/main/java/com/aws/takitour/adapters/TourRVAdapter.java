@@ -2,6 +2,7 @@ package com.aws.takitour.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
+import com.aws.takitour.views.TourDashboard;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+<<<<<<< HEAD
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -80,6 +84,27 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
 
                 dialog.show();
             }
+=======
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_tour_card, parent, false);    //inflate layout
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Tour tour = tourList.get(position);
+        if (tour != null) {
+            Glide.with(context).load(tour.getCoverImage().get(0)).into(holder.image);
+            holder.tourName.setText(tour.getName());
+            holder.rating.setText(String.valueOf(tour.getOverallRating()));
+            holder.cost.setText(tour.getPrice());
+            holder.detail.setText(tour.getDescription());
+            holder.tourGuideName.setText((tour.getTourGuide()));
+        }
+        holder.tourCard.setOnClickListener(v->{
+            Intent tourDashboard = new Intent(context, TourDashboard.class);
+            tourDashboard.putExtra("TOUR_ID", tour.getId());
+            context.startActivity(tourDashboard);
+>>>>>>> e172a3e29952f7759224f4cdfb266736243145e8
         });
     }
 
@@ -88,24 +113,25 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         return tourList.size();
     }
 
-    public static class ViewHolder extends  RecyclerView.ViewHolder{
-        private ConstraintLayout tourCard;
-        private ImageView image;
-        private TextView tourName;
-        private TextView rating;
-        private TextView duration;
-        private TextView cost;
-        private TextView detail;
-        private TextView tourGuideName;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView image;
+        TextView tourName;
+        TextView rating;
+        TextView duration;
+        TextView cost;
+        TextView detail;
+        TextView tourGuideName;
+        ConstraintLayout tourCard;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tourCard = itemView.findViewById(R.id.tour_card);
+            tourCard = itemView.findViewById(R.id.tour_card_layout);
             image = itemView.findViewById(R.id.img_tour_image);
             tourName = itemView.findViewById(R.id.tv_tour_name);
             rating = itemView.findViewById(R.id.tv_tour_rating);
-            duration =itemView.findViewById(R.id.tv_tour_duration);
+            duration = itemView.findViewById(R.id.tv_tour_duration);
             cost = itemView.findViewById(R.id.tv_tour_cost);
             detail = itemView.findViewById(R.id.tv_tour_detail);
             tourGuideName = itemView.findViewById((R.id.tv_tour_guide_name));
