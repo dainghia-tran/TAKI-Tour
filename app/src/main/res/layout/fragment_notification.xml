@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="50dp"
-    android:background="#206A5D">
+    android:background="@color/main_color">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_notification"

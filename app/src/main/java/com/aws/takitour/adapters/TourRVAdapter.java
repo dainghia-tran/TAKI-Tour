@@ -3,6 +3,7 @@ package com.aws.takitour.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,20 @@ import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
 import com.aws.takitour.views.TourDashboard;
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
+
+import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder> {
     private Context context;
     private List<Tour> tourList;
+    private final Handler handler = new Handler();
 
     public TourRVAdapter(Context context, List<Tour> tourList) {
         this.context = context;
@@ -47,10 +56,27 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             Glide.with(context).load(tour.getCoverImage().get(0)).into(holder.image);
             holder.tourName.setText(tour.getName());
             holder.rating.setText(String.valueOf(tour.getOverallRating()));
-            holder.duration.setText(tour.getStartDate() + " to " + tour.getEndDate());
-            holder.cost.setText(tour.getPrice());
-            holder.detail.setText(tour.getDescription());
-            holder.tourGuideName.setText((tour.getTourGuide()));
+            holder.duration.setText("Từ " + tour.getStartDate() + " đến " + tour.getEndDate());
+            holder.cost.setText(NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(Double.valueOf(tour.getPrice())));
+
+            new Thread(()->{
+                myDBReference.child("users")
+                        .child(tour.getTourGuide().replace(".", ","))
+                        .child("name")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                handler.post(()->{
+                                    holder.tourGuideName.setText(snapshot.getValue(String.class));
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+            }).start();
         }
         holder.tourCard.setOnClickListener(v->{
             Dialog dialog = new Dialog(context);
@@ -69,10 +95,30 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             Glide.with(context).load(tour.getCoverImage().get(0)).into(imageView);
             tourNameDetail.setText(tour.getName());
             ratingDetail.setText(String.valueOf(tour.getOverallRating()));
-            durationDetail.setText(tour.getStartDate() + " to " + tour.getEndDate());
-            costDetail.setText(tour.getPrice());
+            durationDetail.setText("Từ " + tour.getStartDate() + " đến " + tour.getEndDate());
+            costDetail.setText(NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(Double.valueOf(tour.getPrice())));
             shortDescriptionDetail.setText(tour.getDescription());
             tourGuideNameDetail.setText((tour.getTourGuide()));
+
+            new Thread(()->{
+                myDBReference.child("users")
+                        .child(tour.getTourGuide().replace(".", ","))
+                        .child("name")
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                handler.post(()->{
+                                    tourGuideNameDetail.setText(snapshot.getValue(String.class));
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+            }).start();
+
 
             dialog.show();
 
@@ -103,7 +149,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         TextView rating;
         TextView duration;
         TextView cost;
-        TextView detail;
         TextView tourGuideName;
         ConstraintLayout tourCard;
 
@@ -116,7 +161,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             rating = itemView.findViewById(R.id.tv_tour_rating);
             duration = itemView.findViewById(R.id.tv_tour_duration);
             cost = itemView.findViewById(R.id.tv_tour_cost);
-            detail = itemView.findViewById(R.id.tv_tour_detail);
             tourGuideName = itemView.findViewById((R.id.tv_tour_guide_name));
         }
     }

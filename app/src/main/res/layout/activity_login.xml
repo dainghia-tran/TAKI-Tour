@@ -4,7 +4,7 @@
     android:id="@+id/login_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#206A5D"
+    android:background="@color/main_color"
     android:orientation="vertical">
 
     <TextView
@@ -57,7 +57,7 @@
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/bg_textview"
+            android:background="@drawable/bg_second_color"
             android:fontFamily="@font/signika"
             android:singleLine="true"
             android:hint="@string/hint_email"
@@ -86,7 +86,7 @@
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/bg_textview"
+            android:background="@drawable/bg_second_color"
             android:fontFamily="@font/signika"
             android:singleLine="true"
             android:hint="@string/hint_password"

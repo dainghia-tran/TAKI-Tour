@@ -6,7 +6,7 @@
     android:paddingTop="50dp"
     android:paddingLeft="50dp"
     android:paddingRight="50dp"
-    android:background="#206A5D">
+    android:background="@color/main_color">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,12 +29,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:background="@drawable/bg_textview"
+        android:background="@drawable/bg_second_color"
         android:fontFamily="@font/signika"
         android:gravity="center_horizontal"
         android:textSize="14sp"
         android:singleLine="true"
-        android:hint="@string/enter_code"
+        android:hint="@string/enter_provided_code"
         android:importantForAutofill="no"
         android:textColor="#206A5D" />
 
@@ -55,6 +55,7 @@
         android:id="@+id/rv_list_explore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_button"
         />
 
 </LinearLayout>
