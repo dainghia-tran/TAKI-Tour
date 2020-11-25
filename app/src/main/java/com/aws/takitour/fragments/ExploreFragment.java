@@ -39,34 +39,6 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_explore, container,false);
         tourRV = view.findViewById(R.id.rv_list_explore);
-
-<<<<<<< HEAD
-//        new Thread(() -> {
-//            myDBReference.child("tours")
-//                    .addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            tourList = new ArrayList<>();
-//                            tourList.clear();
-//                            for (DataSnapshot data : snapshot.getChildren()) {
-//                                tourList.add(data.getValue(Tour.class));
-//                            }
-//                            handler.post(()->{
-//                                adapter = new TourRVAdapter(getContext(), tourList);
-//                                tourRV.setAdapter(adapter);
-//                                tourRV.setLayoutManager(new LinearLayoutManager(getContext()));
-//                                tourRV.setHasFixedSize(true);
-//                            });
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                            Log.e("Firebase", "Cannot get tour list");
-//                        }
-//                    });
-//        }).start();
-=======
         new Thread(() -> {
             myDBReference.child("tours")
                     .addValueEventListener(new ValueEventListener() {
@@ -121,7 +93,6 @@ public class ExploreFragment extends Fragment {
                         }
                     });
         }).start();
->>>>>>> 284ab7d21d01a4706b19b06fbca496488b367184
 
         return view;
     }
