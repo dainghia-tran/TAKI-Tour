@@ -129,7 +129,6 @@ public class ToursFragment extends Fragment {
                         }
                     });
         }).start();
->>>>>>> 284ab7d21d01a4706b19b06fbca496488b367184
 
         return view;
     }
