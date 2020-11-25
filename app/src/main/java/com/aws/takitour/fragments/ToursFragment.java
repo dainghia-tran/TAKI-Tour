@@ -41,7 +41,7 @@ public class ToursFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_tours, container,false);
+        View view = inflater.inflate(R.layout.fragment_tours, container,false);
         tourRV = view.findViewById(R.id.rv_list_tours);
         firebaseAuth = FirebaseAuth.getInstance();
         new Thread(() -> {

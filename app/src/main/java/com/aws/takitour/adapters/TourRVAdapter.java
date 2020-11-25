@@ -3,12 +3,14 @@ package com.aws.takitour.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -45,14 +47,47 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             Glide.with(context).load(tour.getCoverImage().get(0)).into(holder.image);
             holder.tourName.setText(tour.getName());
             holder.rating.setText(String.valueOf(tour.getOverallRating()));
+            holder.duration.setText(tour.getStartDate() + " to " + tour.getEndDate());
             holder.cost.setText(tour.getPrice());
             holder.detail.setText(tour.getDescription());
             holder.tourGuideName.setText((tour.getTourGuide()));
         }
         holder.tourCard.setOnClickListener(v->{
-            Intent tourDashboard = new Intent(context, TourDashboard.class);
-            tourDashboard.putExtra("TOUR_ID", tour.getId());
-            context.startActivity(tourDashboard);
+            Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.dialog_tour_details);
+
+            ImageView imageView = dialog.findViewById(R.id.img_image_detail);
+            TextView tourNameDetail = dialog.findViewById(R.id.tv_tour_name_detail);
+            TextView ratingDetail = dialog.findViewById(R.id.tv_rating_detail);
+            TextView durationDetail = dialog.findViewById(R.id.tv_duration_detail);
+            TextView costDetail = dialog.findViewById(R.id.tv_cost_detail);
+            TextView shortDescriptionDetail = dialog.findViewById(R.id.tv_short_description_detail);
+            TextView tourGuideNameDetail = dialog.findViewById(R.id.tv_tour_guide_name_detail);
+            EditText code = dialog.findViewById(R.id.edt_code_detail);
+            Button confirm = dialog.findViewById(R.id.btn_confirm_detail);
+
+            Glide.with(context).load(tour.getCoverImage().get(0)).into(imageView);
+            tourNameDetail.setText(tour.getName());
+            ratingDetail.setText(String.valueOf(tour.getOverallRating()));
+            durationDetail.setText(tour.getStartDate() + " to " + tour.getEndDate());
+            costDetail.setText(tour.getPrice());
+            shortDescriptionDetail.setText(tour.getDescription());
+            tourGuideNameDetail.setText((tour.getTourGuide()));
+
+            dialog.show();
+
+            confirm.setOnClickListener(v1 -> {
+                if (code.getText().toString().equals(tour.getId())) {
+                    Intent tourDashboard = new Intent(context, TourDashboard.class);
+                    tourDashboard.putExtra("TOUR_ID", tour.getId());
+                    context.startActivity(tourDashboard);
+                }
+                else
+                {
+                    Toast.makeText(context, "Mã đã nhập không hợp lệ", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         });
     }
 

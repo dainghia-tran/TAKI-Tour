@@ -148,7 +148,7 @@
         android:fontFamily="@font/signika_semibold"
         android:text="@string/sign_up_now"
         android:textAllCaps="false"
-        android:textColor="@color/black"
+        android:textColor="#206A5D"
         android:textSize="18sp" />
 
     <LinearLayout

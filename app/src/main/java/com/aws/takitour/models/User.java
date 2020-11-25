@@ -12,6 +12,7 @@ public class User implements Serializable{
     private List<String> tourList;
     private String profileImage;
     private String description;
+    private String token;
 
     public User(){}
 
@@ -23,6 +24,15 @@ public class User implements Serializable{
         this.tourList = new ArrayList<>();
         this.profileImage = profileImage;
         this.description = description;
+        this.token = "";
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getDescription() {
