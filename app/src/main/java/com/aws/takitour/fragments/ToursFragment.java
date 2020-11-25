@@ -43,62 +43,62 @@ public class ToursFragment extends Fragment {
         tourRV = view.findViewById(R.id.rv_list_tours);
         firebaseAuth = FirebaseAuth.getInstance();
 
-        new Thread(() -> {
-            myDBReference.child("users")
-                    .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
-                    .child("tourList")
-                    .addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            tourCode = new ArrayList<>();
-                            tourCode.clear();
-                            for (DataSnapshot data : snapshot.getChildren()) {
-                                tourCode.add(data.getValue(String.class));
-                                Log.d("Attended tour", data.getValue(String.class));
-                            }
-                            Log.d("Number of tours", String.valueOf(tourCode.size()));
-                            if(tourCode.isEmpty()){
-                                ((TextView)view.findViewById(R.id.tv_attended)).setText("Bạn chưa tham gia tour nào");
-                                return;
-                            }
-                            myDBReference.child("tours")
-                                    .addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            tourList = new ArrayList<>();
-                                            tourList.clear();
-                                            for (DataSnapshot data : snapshot.getChildren()) {
-                                                tourList.add(data.getValue(Tour.class));
-                                            }
-                                            List<Tour> attendedTour = new ArrayList<>();
-                                            for(String tourId: tourCode){
-                                                for(Tour tour: tourList){
-                                                    if(tour.getId().equals(tourId)){
-                                                        attendedTour.add(tour);
-                                                    }
-                                                }
-                                            }
-                                            handler.post(()->{
-                                                adapter = new TourRVAdapter(getContext(), attendedTour);
-                                                tourRV.setAdapter(adapter);
-                                                tourRV.setLayoutManager(new LinearLayoutManager(getContext()));
-                                                tourRV.setHasFixedSize(true);
-                                            });
-                                        }
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-                                            Log.e("Firebase", "Cannot get tour list");
-                                        }
-                                    });
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Log.e("Firebase", "Cannot get tour list");
-                        }
-                    });
-        }).start();
+//        new Thread(() -> {
+//            myDBReference.child("users")
+//                    .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
+//                    .child("tourList")
+//                    .addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            tourCode = new ArrayList<>();
+//                            tourCode.clear();
+//                            for (DataSnapshot data : snapshot.getChildren()) {
+//                                tourCode.add(data.getValue(String.class));
+//                                Log.d("Attended tour", data.getValue(String.class));
+//                            }
+//                            Log.d("Number of tours", String.valueOf(tourCode.size()));
+//                            if(tourCode.isEmpty()){
+//                                ((TextView)view.findViewById(R.id.tv_attended)).setText("Bạn chưa tham gia tour nào");
+//                                return;
+//                            }
+//                            myDBReference.child("tours")
+//                                    .addValueEventListener(new ValueEventListener() {
+//                                        @Override
+//                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                            tourList = new ArrayList<>();
+//                                            tourList.clear();
+//                                            for (DataSnapshot data : snapshot.getChildren()) {
+//                                                tourList.add(data.getValue(Tour.class));
+//                                            }
+//                                            List<Tour> attendedTour = new ArrayList<>();
+//                                            for(String tourId: tourCode){
+//                                                for(Tour tour: tourList){
+//                                                    if(tour.getId().equals(tourId)){
+//                                                        attendedTour.add(tour);
+//                                                    }
+//                                                }
+//                                            }
+//                                            handler.post(()->{
+//                                                adapter = new TourRVAdapter(getContext(), attendedTour);
+//                                                tourRV.setAdapter(adapter);
+//                                                tourRV.setLayoutManager(new LinearLayoutManager(getContext()));
+//                                                tourRV.setHasFixedSize(true);
+//                                            });
+//                                        }
+//                                        @Override
+//                                        public void onCancelled(@NonNull DatabaseError error) {
+//                                            Log.e("Firebase", "Cannot get tour list");
+//                                        }
+//                                    });
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//                            Log.e("Firebase", "Cannot get tour list");
+//                        }
+//                    });
+//        }).start();
 
         return view;
     }
