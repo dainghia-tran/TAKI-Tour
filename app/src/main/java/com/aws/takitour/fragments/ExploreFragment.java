@@ -15,12 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.TourRVAdapter;
+import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
+import com.aws.takitour.models.UserReview;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
@@ -35,7 +38,6 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_explore, container,false);
         tourRV = view.findViewById(R.id.rv_list_explore);
-
         new Thread(() -> {
             myDBReference.child("tours")
                     .addValueEventListener(new ValueEventListener() {
@@ -44,7 +46,36 @@ public class ExploreFragment extends Fragment {
                             tourList = new ArrayList<>();
                             tourList.clear();
                             for (DataSnapshot data : snapshot.getChildren()) {
-                                tourList.add((Tour) data.getValue());
+                                Tour temp = new Tour();
+                                temp.setAvailable(data.child("available").getValue(Boolean.class));
+                                temp.setName(data.child("name").getValue(String.class));
+                                temp.setId(data.child("id").getValue(String.class));
+                                temp.setDescription(data.child("description").getValue(String.class));
+                                temp.setTourGuide(data.child("tourGuide").getValue(String.class));
+                                temp.setStartDate(data.child("startDate").getValue(String.class));
+                                temp.setHost(data.child("host").getValue(String.class));
+                                temp.setPrice(data.child("price").getValue(String.class));
+                                temp.setEndDate(data.child("endDate").getValue(String.class));
+                                temp.setOverallRating(data.child("overallRating").getValue(Float.class));
+
+                                List<String> coverImage = new ArrayList<>();
+                                for(DataSnapshot dataCoverImage: data.child("coverImage").getChildren()){
+                                    coverImage.add(dataCoverImage.getValue(String.class));
+                                }
+                                temp.setCoverImage(coverImage);
+
+                                List<Participant> participants = new ArrayList<>();
+                                for(DataSnapshot dataParticipants: data.child("participants").getChildren()){
+                                    participants.add(dataParticipants.getValue(Participant.class));
+                                }
+                                temp.setParticipants(participants);
+
+                                List<UserReview> userReviews = new ArrayList<>();
+                                for(DataSnapshot dataUserReviews: data.child("userReviewList").getChildren()){
+                                    userReviews.add(dataUserReviews.getValue(UserReview.class));
+                                }
+                                temp.setUserReviewList(userReviews);
+                                tourList.add(temp);
                             }
                             handler.post(()->{
                                 adapter = new TourRVAdapter(getContext(), tourList);

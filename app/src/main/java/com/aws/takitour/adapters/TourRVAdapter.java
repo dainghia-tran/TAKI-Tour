@@ -3,6 +3,7 @@ package com.aws.takitour.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ import java.util.List;
 public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder> {
     private Context context;
     private List<Tour> tourList;
-    private Dialog dialog;
 
     public TourRVAdapter(Context context, List<Tour> tourList) {
         this.context = context;
