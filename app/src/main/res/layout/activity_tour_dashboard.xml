@@ -8,7 +8,7 @@
         android:orientation="vertical">
 
     <Toolbar
-            android:id="@+id/tb_return"
+            android:id="@+id/tb_return_dashboard"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

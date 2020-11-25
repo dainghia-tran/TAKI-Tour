@@ -62,4 +62,12 @@
     <string name="up_coming">Sắp tới</string>
     <string name="popular">Phổ biến</string>
     <string name="tour_guide">Hướng dẫn viên: </string>
+
+    <string name="account_setting">CÀI ĐẶT TÀI KHOẢN</string>
+    <string name="profile_information">Thông tin cá nhân</string>
+    <string name="for_tour_guide">DÀNH CHO HƯỚNG DẪN VIÊN</string>
+    <string name="log_out">Đăng xuất</string>
+    <string name="version">Phiên bản</string>
+    <string name="build_number">1.0.0</string>
+
 </resources>

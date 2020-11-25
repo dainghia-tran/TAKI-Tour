@@ -22,7 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
@@ -34,7 +33,7 @@ public class ExploreFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_explore, container,false);
+        View view = inflater.inflate(R.layout.fragment_explore, container,false);
         tourRV = view.findViewById(R.id.rv_list_explore);
 
         new Thread(() -> {
