@@ -62,11 +62,9 @@ public class TourCreate extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
 
     // instance for firebase storage and StorageReference
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    private String imageLinkOfCureentProject;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
-    final Calendar myCalendar = Calendar.getInstance();
     public void getCurrentDate(EditText edtDate) {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TourCreate.this, new DatePickerDialog.OnDateSetListener() {

@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
@@ -44,7 +45,7 @@ public class ExploreFragment extends Fragment {
                             tourList = new ArrayList<>();
                             tourList.clear();
                             for (DataSnapshot data : snapshot.getChildren()) {
-                                tourList.add(data.getValue(Tour.class));
+                                tourList.add((Tour) data.getValue());
                             }
                             handler.post(()->{
                                 adapter = new TourRVAdapter(getContext(), tourList);

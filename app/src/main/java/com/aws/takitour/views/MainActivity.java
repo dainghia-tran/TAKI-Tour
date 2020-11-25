@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(MainActivity.this, TourCreate.class));
 
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -59,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-
-        startActivity(new Intent(MainActivity.this, TourDetails.class));
-
     }
 
     private void setupViewPager() {
