@@ -25,6 +25,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class ProfileFragment extends Fragment {
@@ -36,7 +38,10 @@ public class ProfileFragment extends Fragment {
     private TextView infoProfile;
     private TextView addTour;
     private Button logout;
-    
+
+    private List<String> pendingMessage;
+
+
     private final Handler handler = new Handler();
     @Nullable
     @Override

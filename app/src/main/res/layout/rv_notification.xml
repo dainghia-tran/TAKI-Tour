@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/second_color">
+    android:background="@color/second_color"
+    android:padding="5dp">
+
     <TextView
         android:id="@+id/tv_name_notification"
         android:layout_width="match_parent"
@@ -21,11 +23,5 @@
         android:fontFamily="@font/signika"
         android:textColor="@color/main_color"
         android:text="@string/tour_short_description"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/tour_create_activity"
     android:background="@color/main_color"
-    android:padding="45dp"
+    android:padding="30dp"
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"

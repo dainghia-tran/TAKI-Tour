@@ -96,10 +96,8 @@ public class TourDashboard extends AppCompatActivity {
                                                 String telephone = snapshot.getValue(String.class);
                                                 startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + telephone)));
                                             }
-
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
-
                                             }
                                         });
                             }

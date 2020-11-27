@@ -35,34 +35,6 @@ public class MyMessagingService extends FirebaseMessagingService {
         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
    
     }
-//    @Override
-//    public void onNewToken(String token) {
-//        super.onNewToken(token);
-//        Log.d("TAG", "Refreshed token: " + token);
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-//            @Override
-//            public void onComplete(@NonNull Task<String> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-//                    return;
-//                }
-//
-//                // Get new FCM registration token
-//                String token = task.getResult();
-//
-//                // Log and toast
-//                String msg = getString(R.string.msg_token_fmt, token);
-//                Log.d("TAG", msg);
-//            }
-//        });
-//        sendRegistrationToServer(token);
-//    }
-//
-//    private void sendRegistrationToServer(String token) {
-//        // TODO: Implement this method to send token to your app server.
-//
-//    }
 
     public void sendNotification(String title, String message){
         Intent intent = new Intent(this, MainActivity.class);
