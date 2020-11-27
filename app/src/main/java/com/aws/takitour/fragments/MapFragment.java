@@ -32,11 +32,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private GoogleMap map;
     private final Handler handler = new Handler();
 
-//    public MapFragment(String tourId) {
-//        this.tourId = tourId;
-//        getMapAsync(this);
-//    }
-
     public MapFragment() {
         getMapAsync(this);
     }
@@ -84,7 +79,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                                 temp.setUserReviewList(userReviews);
                                 tourList.add(temp);
                             }
-                            Tour currentTour = null;
+                            Tour currentTour = new Tour();
                             for (Tour tour : tourList) {
                                 if (tour.getId().equals(tourId)) {
                                     currentTour = tour;
