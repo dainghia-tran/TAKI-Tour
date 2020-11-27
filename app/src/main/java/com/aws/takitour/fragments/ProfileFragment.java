@@ -51,7 +51,7 @@ public class ProfileFragment extends Fragment {
         infoProfile = view.findViewById(R.id.tv_information_profile);
         addTour = view.findViewById(R.id.tv_add_tour_profile);
         logout = view.findViewById(R.id.btn_logout);
-    
+
 
         myDBReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                 .addValueEventListener(new ValueEventListener() {
