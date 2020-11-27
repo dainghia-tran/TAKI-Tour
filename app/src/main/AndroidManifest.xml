@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aws.takitour">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.aws.takitour">
 
     <application
         android:icon="@mipmap/app_icon"
@@ -33,7 +34,8 @@
 
         <service
             android:name=".utilities.MyMessagingService"
-            android:exported="false">
+            android:exported="false"
+                tools:ignore="Instantiatable">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -43,7 +45,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

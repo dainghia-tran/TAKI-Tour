@@ -20,15 +20,7 @@ public class Maps extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        Toolbar toolbarReturn = findViewById(R.id.tb_return_maps);
-        toolbarReturn.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24);
-        toolbarReturn.setNavigationOnClickListener(v -> {
-            finish();
-        });
-
         tourId = getIntent().getStringExtra("TOUR_ID");
-//        Log.d("received tour id", tourId);
-//        mapFragment = new MapFragment(tourId);
 
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         mapFragment = (MapFragment)fragmentManager.findFragmentById(R.id.fragment_map);

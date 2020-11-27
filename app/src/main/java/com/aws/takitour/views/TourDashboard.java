@@ -60,7 +60,9 @@ public class TourDashboard extends AppCompatActivity {
 
         Intent intent = getIntent();
         tourId = intent.getStringExtra("TOUR_ID");
-        ((TextView)(findViewById(R.id.your_name))).setText(tourId);
+        String tourName = getIntent().getStringExtra("TOUR_NAME");
+
+        ((TextView)(findViewById(R.id.your_name))).setText(tourName);
 
         tbReturn = findViewById(R.id.tb_return_dashboard);
         tbReturn.setNavigationOnClickListener(v -> {
