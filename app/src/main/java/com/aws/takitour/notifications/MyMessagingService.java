@@ -33,6 +33,7 @@ public class MyMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+   
     }
 //    @Override
 //    public void onNewToken(String token) {
