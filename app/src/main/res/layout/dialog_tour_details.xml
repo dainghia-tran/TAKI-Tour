@@ -2,12 +2,11 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="350dp"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     tools:context=".views.TourDetails"
-    android:background="#206A5D"
+    android:background="@drawable/bg_main_color"
     android:orientation="vertical">
     <ImageView
         android:id="@+id/img_image_detail"
@@ -19,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/signika_bold"
+        android:textColor="@color/white"
         android:textSize="20sp"
 
         />
@@ -40,6 +40,7 @@
             android:maxLines="1"
             android:text="rating"
             android:fontFamily="@font/signika_light"
+            android:textColor="@color/white"
             android:textSize="12sp"/>
         <TextView
             android:id="@+id/tv_duration_detail"
@@ -49,6 +50,7 @@
             android:maxLines="1"
             android:text="duration"
             android:fontFamily="@font/signika_light"
+            android:textColor="@color/white"
             android:textSize="12sp"/>
         <TextView
             android:id="@+id/tv_cost_detail"
@@ -58,6 +60,7 @@
             android:maxLines="1"
             android:text="cost"
             android:fontFamily="@font/signika_light"
+            android:textColor="@color/white"
             android:textSize="12sp"/>
     </LinearLayout>
     <View
@@ -72,6 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/signika_semibold"
+        android:textColor="@color/white"
         android:textSize="15sp"
         android:text="@string/tour_short_description"/>
     <TextView
@@ -81,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/signika_light"
+        android:textColor="@color/white"
         android:textSize="12sp"/>
     <View
         android:layout_width="match_parent"
@@ -93,21 +98,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         android:layout_margin="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/signika_semibold"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:text="@string/tour_guide"/>
         <TextView
             android:id="@+id/tv_tour_guide_name_detail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+            android:maxLines="1"
             android:fontFamily="@font/signika_semibold"
+            android:textColor="@color/white"
             android:textSize="15sp"/>
     </LinearLayout>
 
@@ -118,11 +125,13 @@
         android:gravity="center"
         android:layout_margin="10dp">
         <EditText
-            android:background="@drawable/bg_textview"
+            android:background="@drawable/bg_second_color"
             android:id="@+id/edt_code_detail"
             android:layout_width="150dp"
             android:gravity="center"
-            android:layout_marginRight="20dp"
+            android:hint="@string/enter_code"
+            android:layout_marginEnd="20dp"
+            android:inputType="textCapWords"
             android:layout_height="wrap_content"
             android:textSize="15sp"/>
         <Button

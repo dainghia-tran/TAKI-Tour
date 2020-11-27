@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
 
-public class ChangeInfomation extends AppCompatActivity {
+public class ChangeInformation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_infomation);
+        setContentView(R.layout.activity_change_information);
     }
 }
