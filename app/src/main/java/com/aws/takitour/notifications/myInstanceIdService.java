@@ -11,9 +11,9 @@ public class myInstanceIdService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         super.onTokenRefresh();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String tokenRefresh = FirebaseInstanceId.getInstance().getToken();
-        if(user!=null){
+        if(currentUser!=null){
             updateToken(tokenRefresh);
         }
     }
@@ -22,6 +22,5 @@ public class myInstanceIdService extends FirebaseInstanceIdService {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
         Token token = new Token(tokenRefresh);
         ref.child(user.getUid()).setValue(token);
-
     }
 }

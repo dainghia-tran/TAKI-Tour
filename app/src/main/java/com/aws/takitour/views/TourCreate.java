@@ -138,6 +138,11 @@ public class TourCreate extends AppCompatActivity {
                                 Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
                                 myDBReference.child("tours").child(tourId).setValue(newTour);
                                 progressDialog.dismiss();
+                                myDBReference.child("users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
+                                        .child("tourList")
+                                        .child(newTour.getId())
+                                        .setValue(newTour.getId());
                                 Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
                             }
                         })

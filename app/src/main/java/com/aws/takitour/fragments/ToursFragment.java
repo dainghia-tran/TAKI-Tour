@@ -44,6 +44,7 @@ public class ToursFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tours, container,false);
         tourRV = view.findViewById(R.id.rv_list_tours);
         firebaseAuth = FirebaseAuth.getInstance();
+
         new Thread(() -> {
             myDBReference.child("users")
                     .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))

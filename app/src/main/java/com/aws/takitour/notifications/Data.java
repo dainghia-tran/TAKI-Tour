@@ -8,7 +8,7 @@ public class Data {
     public Data() {
     }
 
-    public Data(String user, String to, String title, String body) {
+    public Data(String user, String title, String body) {
         this.user = user;
         this.title = title;
         this.body = body;

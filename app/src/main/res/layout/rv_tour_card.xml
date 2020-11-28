@@ -43,7 +43,7 @@
         android:maxLines="1"
         android:paddingEnd="2dp"
         android:textColor="@color/main_color"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
         app:layout_constraintRight_toLeftOf="@id/img_star"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
@@ -67,7 +67,7 @@
         android:fontFamily="@font/signika"
         android:maxLines="1"
         android:textColor="@color/main_color"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintLeft_toRightOf="@id/img_star"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
         tools:ignore="SmallSp" />
@@ -80,7 +80,7 @@
         android:fontFamily="@font/signika"
         android:maxLines="1"
         android:textColor="@color/main_color"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_rating"
         tools:ignore="SmallSp" />
@@ -96,7 +96,7 @@
         android:paddingRight="5dp"
         android:text="@string/tour_guide"
         android:textColor="@color/main_color"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
         app:layout_constraintRight_toLeftOf="@id/tv_tour_guide_name"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_duration" />
@@ -108,7 +108,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/signika_light"
         android:textColor="@color/main_color"
-        android:textSize="8sp"
+        android:textSize="10sp"
         app:layout_constraintLeft_toRightOf="@id/tv_tour_guide"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_duration" />

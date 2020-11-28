@@ -87,19 +87,37 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             new Thread(() -> {
                 myDBReference.child("tours")
                         .child(tour.getId())
-                        .child("participants")
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 List<Participant> participants = new ArrayList<>();
-                                for (DataSnapshot data : snapshot.getChildren()) {
+                                for (DataSnapshot data : snapshot.child("participants").getChildren()) {
                                     participants.add(data.getValue(Participant.class));
                                 }
                                 boolean attended = false;
-                                if(participants.size() != 0) {
+                                String tourGuide = snapshot.child("tourGuide").getValue(String.class);
+                                String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                                Log.d("tour guide", tourGuide);
+
+                                if (tourGuide.equals(currentUserEmail)) {
+                                    handler.post(() -> {
+                                        Intent intent = new Intent(context, TourDashboard.class);
+                                        intent.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        intent.putExtra("TOUR_ID", tour.getId());
+                                        intent.putExtra("TOUR_NAME", tour.getName());
+                                        context.startActivity(intent);
+                                    });
+                                    attended = true;
+                                    if (attended) {
+                                        return;
+                                    }
+                                }
+
+                                if (participants.size() != 0) {
                                     for (Participant participant : participants) {
                                         String participantEmail = participant.getEmail();
-                                        if (participantEmail != null && participantEmail.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                                        if (participantEmail != null && participantEmail.equals(currentUserEmail)) {
                                             handler.post(() -> {
                                                 Intent intent = new Intent(context, TourDashboard.class);
                                                 intent.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -111,12 +129,12 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                             attended = true;
                                             break;
                                         }
-                                        if(attended){
+                                        if (attended) {
                                             return;
                                         }
                                     }
                                 }
-                                if(attended){
+                                if (attended) {
                                     return;
                                 }
                                 Dialog dialog = new Dialog(context);
@@ -167,7 +185,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                         tourDashboard.putExtra("TOUR_NAME", tour.getName());
                                         tourDashboard.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                                         tourDashboard.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                        handler.post(()->{
+                                        handler.post(() -> {
                                             dialog.dismiss();
                                             context.startActivity(tourDashboard);
                                             updateUserTourList(tour);
@@ -187,7 +205,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         });
     }
 
-    public void updateUserTourList(Tour tour){
+    public void updateUserTourList(Tour tour) {
         new Thread(() -> {
             myDBReference.child("users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))

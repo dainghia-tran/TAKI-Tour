@@ -11,5 +11,5 @@ public interface APIService {
             "Authorization: key=AAAA5IDb_3E:APA91bHGeUbncTMaH5q52TbLEiiF7suxzLQUQtLAZ_ItotF8ya551FWPRih1iI883AG-nSbPTYMgZJQ78CKpEkdpuSfa7HARLPnt_FPiJs2YZMBpqc3XYVizo1EBVnH0Yu4E7YFY6OkU"
     })
     @POST("form/send")
-    Call<Response> sendNotification(@Body Sender body);
+    Call<MyResponse> sendNotification(@Body Sender body);
 }
