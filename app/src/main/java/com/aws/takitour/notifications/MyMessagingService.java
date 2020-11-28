@@ -53,34 +53,13 @@ public class MyMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "Fetching FCM device token failed", task.getException());
-                            return;
-                        }
-                        // Get new FCM device token
-                        String token = task.getResult();
-
-                        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                        if(currentUser!=null){
-                            sendRegistrationToServer(token);
-                        }
-                    }
-                });
-
-    }
-
-    private  void sendRegistrationToServer(String tokenRefresh){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
-        Token token = new Token(tokenRefresh);
+        Token token = new Token(newToken);
         ref.child(user.getUid()).setValue(token);
 
     }
+
     public void sendNotification(String title, String message) {
         Intent intent = new Intent(this, MainActivity.class);
         int notificationID = 5 + (int) (Math.random() * ((1000 - 0) + 1));
