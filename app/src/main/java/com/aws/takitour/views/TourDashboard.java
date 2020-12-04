@@ -117,7 +117,9 @@ public class TourDashboard extends AppCompatActivity {
         });
 
         imgbtnLibrary.setOnClickListener(v->{
-
+            Intent intentLibrary = new Intent(TourDashboard.this, Library.class);
+            intentLibrary.putExtra("TOUR_ID", tourId);
+            startActivity(intentLibrary);
         });
 
 
