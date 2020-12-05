@@ -1,94 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="50dp"
-        android:id="@+id/tour_dashboard_activity"
-        android:background="@color/main_color"
-        android:orientation="vertical">
+        android:layout_width="match_parent">
 
-    <Toolbar
-            android:id="@+id/tb_return_dashboard"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
-
-    <TextView
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/your_name"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/signika"
-            android:text="@string/name" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"/>
+            android:layout_height="match_parent"
+            android:padding="50dp"
+            android:id="@+id/tour_dashboard_activity"
+            android:background="@color/main_color"
+            android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="500dp">
+        <Toolbar
+                android:id="@+id/tb_return_dashboard"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
 
-        <ImageButton
-            android:id="@+id/imgbtn_locate"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="#BFDCAE"
-            android:src="@drawable/ic_baseline_my_location_24"
-            app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"
-            app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/your_name"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/signika"
+                android:text="@string/name" />
 
-        <ImageButton
-            android:id="@+id/imgbtn_call"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="#BFDCAE"
-            android:src="@drawable/ic_baseline_perm_phone_msg_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/imgbtn_library"/>
-        <ImageButton
-            android:id="@+id/imgbtn_timeline"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="#BFDCAE"
-            android:src="@drawable/ic_baseline_event_note_24"
-            app:layout_constraintEnd_toStartOf="@id/imgbtn_library"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgbtn_locate"
-            app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos"/>
-        <ImageButton
-            android:id="@+id/imgbtn_library"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="#BFDCAE"
-            android:src="@drawable/ic_baseline_photo_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgbtn_timeline"
-            app:layout_constraintTop_toBottomOf="@id/imgbtn_call"
-            app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos"/>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp" />
 
-        <ImageButton
-                android:id="@+id/imgbtn_add_photos"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="#BFDCAE"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="300dp"
+                android:layout_height="500dp">
 
+            <ImageButton
+                    android:id="@+id/imgbtn_locate"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#BFDCAE"
+                    android:src="@drawable/ic_baseline_my_location_24"
+                    app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"
+                    app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                    android:id="@+id/imgbtn_call"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#BFDCAE"
+                    android:src="@drawable/ic_baseline_perm_phone_msg_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/imgbtn_library" />
 
-</LinearLayout>
+            <ImageButton
+                    android:id="@+id/imgbtn_timeline"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#BFDCAE"
+                    android:src="@drawable/ic_baseline_event_note_24"
+                    app:layout_constraintEnd_toStartOf="@id/imgbtn_library"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgbtn_locate"
+                    app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos" />
+
+            <ImageButton
+                    android:id="@+id/imgbtn_library"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#BFDCAE"
+                    android:src="@drawable/ic_baseline_photo_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imgbtn_timeline"
+                    app:layout_constraintTop_toBottomOf="@id/imgbtn_call"
+                    app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos" />
+
+            <ImageButton
+                    android:id="@+id/imgbtn_add_photos"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#BFDCAE"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</ScrollView>
