@@ -33,6 +33,9 @@ public class MyMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyMessagingService";
     private static final String CHANNEL_ID = "my_noti_channel";
     private String token;
+    Data newNoti;
+    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -42,21 +45,26 @@ public class MyMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
         }
-        if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.d(TAG, "To: " + remoteMessage.getTo());
+        if (remoteMessage.getNotification() != null && remoteMessage.getFrom()!=null) {
+            String notiTitle = remoteMessage.getNotification().getTitle();
+            String notiBody = remoteMessage.getNotification().getBody();
+            String notiFrom = remoteMessage.getFrom();
+            Log.d(TAG,  "Message Notification Title: " + notiTitle);
+            Log.d(TAG, "Message Notification Body: " + notiBody);
+            newNoti = new Data(notiFrom, notiTitle,notiBody);
         }
 
+        ref.child(currentUser.getEmail().replace(".", ",")).child("notifications").child(remoteMessage.getMessageId()).setValue(newNoti);
         showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
-
-
     }
 
     @Override
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         Token token = new Token(newToken);
+        // save FCM token to users collection
         ref.child(currentUser.getEmail().replace(".", ",")).child("token").setValue(token.getToken());
     }
 
