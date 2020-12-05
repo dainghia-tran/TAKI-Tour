@@ -45,7 +45,8 @@ public class MyMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
-        sendNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+
+        showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
 
 
     }
@@ -53,14 +54,13 @@ public class MyMessagingService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Tokens");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         Token token = new Token(newToken);
-        ref.child(user.getUid()).setValue(token);
-
+        ref.child(currentUser.getEmail().replace(".", ",")).child("token").setValue(token.getToken());
     }
 
-    public void sendNotification(String title, String message) {
+    public void showNotification(String title, String message) {
         Intent intent = new Intent(this, MainActivity.class);
         int notificationID = 5 + (int) (Math.random() * ((1000 - 0) + 1));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
