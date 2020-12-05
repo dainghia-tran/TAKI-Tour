@@ -1,5 +1,6 @@
 package com.aws.takitour.adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.media.Image;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,10 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.LibraryViewHolder> {
-    private Context context;
+    private Activity context;
     private List<Picture> pictureList;
 
-    public LibraryRVAdapter(Context context, List<Picture> pictureList) {
+    public LibraryRVAdapter(Activity context, List<Picture> pictureList) {
         this.context = context;
         this.pictureList = pictureList;
     }
@@ -33,7 +35,8 @@ public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.Libr
     @Override
     public LibraryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.rv_library, parent, false);    //inflate layout
-        return new LibraryViewHolder(view);
+        LibraryViewHolder libraryViewHolder =  new LibraryViewHolder(view);
+        return libraryViewHolder;
     }
 
     @Override
@@ -44,6 +47,17 @@ public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.Libr
             Glide.with(context).load(picture.getPic().get(0)).into(holder.picture);
             holder.owner.setText(picture.getOwner());
         }
+        holder.item.setOnClickListener(v -> {
+            Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.dialog_picture_item);
+
+            ImageView imageView = dialog.findViewById(R.id.img_picture_dialog);
+            TextView owner = dialog.findViewById(R.id.tv_owner_dialog);
+
+            Glide.with(context).load(picture.getPic().get(0)).into(imageView);
+            owner.setText("Nguồn: " + picture.getOwner());
+            dialog.show();
+        });
 
 
     }

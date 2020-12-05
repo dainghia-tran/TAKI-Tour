@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -75,10 +76,10 @@ public class Library extends AppCompatActivity {
                                 }
                             }
                             handler.post(() -> {
-                                adapter = new LibraryRVAdapter(getBaseContext(), pictureList);
+                                adapter = new LibraryRVAdapter(Library.this, pictureList);
                                 pictureRV.setAdapter(adapter);
 
-                                pictureRV.setLayoutManager(new GridLayoutManager(getBaseContext(),2));
+                                pictureRV.setLayoutManager(new GridLayoutManager(getBaseContext(),3));
                                 pictureRV.setHasFixedSize(true);
                             });
                         }
