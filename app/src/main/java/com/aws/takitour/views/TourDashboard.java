@@ -1,17 +1,16 @@
 package com.aws.takitour.views;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
@@ -21,40 +20,61 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.aws.takitour.R;
-import com.aws.takitour.models.Tour;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
-import static com.aws.takitour.views.MainActivity.tourList;
 
 public class TourDashboard extends AppCompatActivity {
     private String tourId;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private final int PERMISSION_ID = 44;
 
+    private static final int PERMISSION_TO_SELECT_IMAGE_FROM_GALLERY = 100;
+    private static final int PICK_IMAGE_MULTIPLE = 200;
+
+    private String imageEncoded;
+    private List<String> imagesEncodedList;
+
     private Toolbar tbReturn;
     private TextView tvYourName;
-    private ImageButton imgbtnLocate;
-    private ImageButton imgbtnCall;
-    private ImageButton imgbtnTimeline;
-    private ImageButton imgbtnLibrary;
+    private ImageButton imgBtnLocate;
+    private ImageButton imgBtnCall;
+    private ImageButton imgBtnTimeline;
+    private ImageButton imgBtnLibrary;
+    private ImageButton imgBtnAddPhotos;
+
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_dashboard);
+
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -62,33 +82,34 @@ public class TourDashboard extends AppCompatActivity {
         tourId = intent.getStringExtra("TOUR_ID");
         String tourName = getIntent().getStringExtra("TOUR_NAME");
 
-        ((TextView)(findViewById(R.id.your_name))).setText(tourName);
+        ((TextView) (findViewById(R.id.your_name))).setText(tourName);
 
         tbReturn = findViewById(R.id.tb_return_dashboard);
         tbReturn.setNavigationOnClickListener(v -> {
             finish();
         });
 
-        imgbtnLocate = findViewById(R.id.imgbtn_locate);
-        imgbtnCall = findViewById(R.id.imgbtn_call);
-        imgbtnTimeline = findViewById(R.id.imgbtn_timeline);
-        imgbtnLibrary = findViewById(R.id.imgbtn_library);
+        imgBtnLocate = findViewById(R.id.imgbtn_locate);
+        imgBtnCall = findViewById(R.id.imgbtn_call);
+        imgBtnTimeline = findViewById(R.id.imgbtn_timeline);
+        imgBtnLibrary = findViewById(R.id.imgbtn_library);
+        imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
 
-        imgbtnLocate.setOnClickListener(v->{
+        imgBtnLocate.setOnClickListener(v -> {
             Intent intentMaps = new Intent(TourDashboard.this, Maps.class);
             intentMaps.putExtra("TOUR_ID", tourId);
             startActivity(intentMaps);
         });
 
-        imgbtnCall.setOnClickListener(v->{
-            new Thread(()->{
+        imgBtnCall.setOnClickListener(v -> {
+            new Thread(() -> {
                 myDBReference.child("tours")
                         .child(tourId)
                         .child("tourGuide")
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String userPath = snapshot.getValue(String.class).replace(".", ",");
+                                String userPath = Objects.requireNonNull(snapshot.getValue(String.class)).replace(".", ",");
                                 myDBReference.child("users")
                                         .child(userPath)
                                         .child("telephone")
@@ -98,6 +119,7 @@ public class TourDashboard extends AppCompatActivity {
                                                 String telephone = snapshot.getValue(String.class);
                                                 startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + telephone)));
                                             }
+
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError error) {
                                             }
@@ -112,30 +134,42 @@ public class TourDashboard extends AppCompatActivity {
             }).start();
         });
 
-        imgbtnTimeline.setOnClickListener(v->{
+        imgBtnTimeline.setOnClickListener(v -> {
 
         });
 
-        imgbtnLibrary.setOnClickListener(v->{
+        imgBtnLibrary.setOnClickListener(v -> {
             Intent intentLibrary = new Intent(TourDashboard.this, Library.class);
             intentLibrary.putExtra("TOUR_ID", tourId);
             startActivity(intentLibrary);
         });
 
+        imgBtnAddPhotos.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_TO_SELECT_IMAGE_FROM_GALLERY);
+            } else {
+                Intent choosePhotosIntent = new Intent();
+                choosePhotosIntent.setType("image/*");
+                choosePhotosIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                choosePhotosIntent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(choosePhotosIntent, "Select Picture"), PICK_IMAGE_MULTIPLE);
+            }
+        });
+
 
         //Check if tour is available and get location from user
-        new Thread(()->{
+        new Thread(() -> {
             myDBReference.child("tours")
                     .child(tourId)
                     .child("available")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            try{
-                                if(snapshot.getValue(Boolean.class)){
+                            try {
+                                if (snapshot.getValue(Boolean.class)) {
                                     getLastLocation();
                                 }
-                            }catch (NullPointerException e){
+                            } catch (NullPointerException e) {
                                 Log.d("Get isAvailable", "failed");
                             }
                         }
@@ -146,6 +180,58 @@ public class TourDashboard extends AppCompatActivity {
                         }
                     });
         }).start();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK && null != data) {
+                List<Uri> mArrayUri = new ArrayList<>();
+
+                if (data.getData() != null) {         //on Single image selected
+                    mArrayUri.add(data.getData());
+                } else {                              //on multiple image selected
+                    if (data.getClipData() != null) {
+                        ClipData mClipData = data.getClipData();
+                        for (int i = 0; i < mClipData.getItemCount(); i++) {
+                            ClipData.Item item = mClipData.getItemAt(i);
+                            mArrayUri.add(item.getUri());
+                        }
+                        Log.v("TourDashboard", "Selected Images" + mArrayUri.size());
+                    }
+                }
+                for (int i = 0; i < mArrayUri.size(); i++) {
+                    StorageReference ref = storageReference.child("images/tours/" + tourId + "/userPhotos/" + UUID.randomUUID().toString());
+                    ref.putFile(mArrayUri.get(i))
+                            .addOnSuccessListener(taskSnapshot -> {
+                                Task<Uri> uri = taskSnapshot.getStorage().getDownloadUrl();
+                                while (!uri.isComplete()) {
+                                    Log.d("URL", "Waiting to complete");
+                                }
+                                Uri url = uri.getResult();
+                                assert url != null;
+                                String imageLink = url.toString();
+
+                                myDBReference.child("tours").child(tourId)
+                                        .child("participants")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
+                                        .child("photos")
+                                        .child(UUID.randomUUID().toString())
+                                        .setValue(imageLink);
+                            })
+                            .addOnFailureListener(e -> {
+                                Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Failed " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                            });
+                }
+                Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Photos uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "You haven't picked any image", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @SuppressLint("MissingPermission")
@@ -159,7 +245,7 @@ public class TourDashboard extends AppCompatActivity {
                             if (location == null) {
                                 requestNewLocationData();
                             } else {
-                                new Thread(()->{
+                                new Thread(() -> {
                                     myDBReference.child("tours")
                                             .child(tourId)
                                             .child("participants")

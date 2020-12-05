@@ -73,5 +73,7 @@
     <string name="confirm">Xác nhận</string>
     <string name="profile_image">Profile image</string>
     <string name="library">Thư viện</string>
+    <string name="upload">Tải lên</string>
+    <string name="choose_photos">Chọn ảnh</string>
 
 </resources>

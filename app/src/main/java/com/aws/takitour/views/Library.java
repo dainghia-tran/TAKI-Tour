@@ -75,7 +75,7 @@ public class Library extends AppCompatActivity {
                                 }
                             }
                             handler.post(() -> {
-                                adapter = new LibraryRVAdapter(getBaseContext(), pictureList);
+                                adapter = new LibraryRVAdapter(Library.this, pictureList);
                                 pictureRV.setAdapter(adapter);
 
                                 pictureRV.setLayoutManager(new GridLayoutManager(getBaseContext(),2));

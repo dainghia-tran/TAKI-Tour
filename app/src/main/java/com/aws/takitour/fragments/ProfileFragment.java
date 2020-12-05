@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
@@ -71,7 +72,7 @@ public class ProfileFragment extends Fragment {
                         currentUser.setType(snapshot.child("type").getValue(Integer.class));
                         currentUser.setProfileImage(snapshot.child("profileImage").getValue(String.class));
 
-                        Glide.with(getContext()).load(currentUser.getProfileImage()).into(imageView);
+                        Glide.with(Objects.requireNonNull(getContext())).load(currentUser.getProfileImage()).into(imageView);
                         name.setText(currentUser.getName());
                         email.setText(currentUser.getEmail());
                         phoneNumber.setText(currentUser.getTelephone());
@@ -85,45 +86,34 @@ public class ProfileFragment extends Fragment {
                 });
 
 
-        infoProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        infoProfile.setOnClickListener(v -> {
 
-            }
         });
 
-        addTour.setOnClickListener(new View.OnClickListener() {
+        addTour.setOnClickListener(v -> myDBReference.child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
+                .child("type").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                myDBReference.child("users")
-                        .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
-                        .child("type").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.getValue(Integer.class) == 0){
-                            handler.post(()->{
-                                Toast.makeText(getContext(), "Bạn không phải hướng dẫn viên", Toast.LENGTH_SHORT).show();
-                            });
-                        }
-                        else 
-                            startActivity(new Intent(getContext(), TourCreate.class));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(Integer.class) == 0){
+                    handler.post(()->{
+                        Toast.makeText(getContext(), "Bạn không phải hướng dẫn viên", Toast.LENGTH_SHORT).show();
+                    });
+                }
+                else
+                    startActivity(new Intent(getContext(), TourCreate.class));
             }
-        });
 
-        logout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(), LoginActivity.class));
-                getActivity().finish();
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
+        }));
+
+        logout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
         });
 
         return view;

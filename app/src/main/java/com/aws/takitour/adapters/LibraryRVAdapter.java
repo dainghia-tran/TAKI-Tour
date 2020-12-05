@@ -1,5 +1,6 @@
 package com.aws.takitour.adapters;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.media.Image;
@@ -21,10 +22,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.List;
 
 public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.LibraryViewHolder> {
-    private Context context;
+    private Activity context;
     private List<Picture> pictureList;
 
-    public LibraryRVAdapter(Context context, List<Picture> pictureList) {
+    public LibraryRVAdapter(Activity context, List<Picture> pictureList) {
         this.context = context;
         this.pictureList = pictureList;
     }
@@ -44,8 +45,6 @@ public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.Libr
             Glide.with(context).load(picture.getPic().get(0)).into(holder.picture);
             holder.owner.setText(picture.getOwner());
         }
-
-
     }
 
     @Override
