@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         signUp.setOnClickListener(v -> {
-           startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+           startActivity(new Intent(this, RegisterActivity.class));
         });
 
         forgotPassword.setOnClickListener(v->{
@@ -165,14 +165,14 @@ public class LoginActivity extends AppCompatActivity {
             AuthCredential authCredential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
             firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(getBaseContext(), "Login with Google successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), "Đăng nhập với Google thành công.", Toast.LENGTH_SHORT).show();
                     new Thread(()->{
                         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                         String userEmail = currentUser.getEmail();
                         String userPhoneNumber = currentUser.getPhoneNumber();
                         String userName = currentUser.getDisplayName();
                         String userProfileImage = currentUser.getPhotoUrl().toString();
-                        User googleUser = new User(userName, 0, userEmail, userPhoneNumber, userProfileImage, "");
+                        User googleUser = new User(userName, 2, userEmail, userPhoneNumber, userProfileImage, "");
                         myDBReference.child("users")
                                 .child(currentUser.getEmail().replace(".", ","))
                                 .setValue(googleUser);
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
-                    Snackbar.make(findViewById(R.id.login_activity), "Login with Google failed", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.login_activity), "Đăng nhập với Google thất bại", Snackbar.LENGTH_SHORT).show();
                 }
             });
         }

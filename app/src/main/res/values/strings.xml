@@ -83,6 +83,10 @@
     <string name="phone_number">Số điện thoại</string>
     <string name="no_phone_yet">Chưa có số điện thoại</string>
     <string name="Save">Lưu những thay đổi</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="retype_password">Xác nhận mật khẩu</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="change">Thay đổi</string>
 
 
 </resources>
