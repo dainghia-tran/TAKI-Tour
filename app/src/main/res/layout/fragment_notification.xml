@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
+    android:background="@color/main_color"
     android:orientation="vertical"
-    android:background="@color/main_color">
-    <TextView
+    android:padding="30dp">
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/signika_semibold"
-        android:text="Thông báo"
-        android:textColor="@color/white"
-        android:textSize="42sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/signika_semibold"
+            android:text="Thông báo"
+            android:textColor="@color/white"
+            android:textSize="42sp" />
+        <Button
+            android:id="@+id/btn_create_noti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="+"
+            android:textSize="16sp" />
+    </LinearLayout>
+
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:id="@+id/tv_attended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/signika"
         android:text="Mới nhất"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/white"
-        android:layout_marginBottom="10dp" />
-    <androidx.recyclerview.widget.RecyclerView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rv_list_notification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

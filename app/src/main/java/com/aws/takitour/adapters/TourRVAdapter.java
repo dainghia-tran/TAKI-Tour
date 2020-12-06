@@ -21,26 +21,41 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aws.takitour.R;
 import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
+import com.aws.takitour.notifications.APIService;
+import com.aws.takitour.notifications.Client;
+import com.aws.takitour.notifications.Data;
+import com.aws.takitour.notifications.MyResponse;
+import com.aws.takitour.notifications.Sender;
 import com.aws.takitour.views.TourDashboard;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT;
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder> {
+    private static final String TAG = "TourRVAdapter";
     private Context context;
+
     private List<Tour> tourList;
     private final Handler handler = new Handler();
-
+    private APIService apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
     public TourRVAdapter(Context context, List<Tour> tourList) {
         this.context = context;
         this.tourList = tourList;
@@ -206,19 +221,53 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
     }
 
     public void updateUserTourList(Tour tour) {
+
         new Thread(() -> {
             myDBReference.child("users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
-                    .child("name")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Participant newParticipant = new Participant(FirebaseAuth.getInstance().getCurrentUser().getEmail(), snapshot.getValue(String.class));
+                            String newParticipantToken = snapshot.child("token").getValue(String.class);
+                            Participant newParticipant = new Participant(FirebaseAuth.getInstance().getCurrentUser().getEmail(), snapshot.child("name").getValue(String.class));
                             myDBReference.child("tours")
                                     .child(tour.getId())
                                     .child("participants")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
-                                    .setValue(newParticipant);
+                                    .setValue(newParticipant).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) { // Send Noti to tell user joined this tour successfully
+
+//                                    FirebaseMessaging.getInstance().subscribeToTopic(tour.getId())
+//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                @Override
+//                                                public void onComplete(@NonNull Task<Void> task) {
+//                                                    String msg = "Successfull";
+//                                                    if (!task.isSuccessful()) {
+//                                                        msg = "Subcribed Topic Failed";
+//                                                    }
+//                                                    Log.d(TAG, msg);
+//                                                }
+//                                            });
+//                                    Data data = new Data(newParticipant.getName(), "First test message from code", "Hura, Successfully");
+//                                    Sender sender = new Sender(data,newParticipantToken);
+//                                    apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
+//                                        @Override
+//                                        public void onResponse(Call<MyResponse> call, retrofit2.Response<MyResponse> response) {
+//                                            if (response.code() == 200) {
+//                                                if (response.body().success != 1) {
+//                                                    Log.d(TAG, "Failed");
+//                                                }
+//                                                return;
+//                                            }
+//                                        }
+//                                        @Override
+//                                        public void onFailure(Call<MyResponse> call, Throwable t) {
+//
+//                                        }
+//                                    });
+                                }
+                            });
                             myDBReference.child("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                                     .child("tourList")
@@ -233,6 +282,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                     });
         }).start();
     }
+
 
     @Override
     public int getItemCount() {

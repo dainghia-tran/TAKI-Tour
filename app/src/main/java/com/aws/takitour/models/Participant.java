@@ -17,6 +17,7 @@ public class Participant implements Serializable {
         this.name = name;
     }
 
+
     public String getEmail() {
         return email;
     }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,22 +31,42 @@ import java.util.Objects;
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class NotificationFragment extends Fragment {
-    private final static String TAG ="NotificationFragment";
+    private final static String TAG = "NotificationFragment";
     private RecyclerView notiRV;
     private List<Notification> notificationList;
     List<String> notiCode;
     private NotificationRVAdapter adapter;
     private final Handler handler = new Handler();
     private FirebaseAuth firebaseAuth;
+//    private Button btnCreateNoti;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_notification, container,false);
+        View view = inflater.inflate(R.layout.fragment_notification, container, false);
         notiRV = view.findViewById(R.id.rv_list_notification);
+//        btnCreateNoti = view.findViewById(R.id.btn_create_noti);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        new Thread(()->{
+//        btnCreateNoti.setOnClickListener(v -> {
+//            String tourId;
+//            ValueEventListener userListener = new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    String user = snapshot.getValue(String.class);
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            };
+//            myDBReference.child("users")
+//                    .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
+//                    .addValueEventListener(userListener)
+//
+//            Notification notiHandler = new Notification("hoanglong", "This is body", "This is title", )
+//        });
+        new Thread(() -> {
             myDBReference.child("users")
                     .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
                     .child("notifications").child("notiId")
@@ -54,7 +75,7 @@ public class NotificationFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             notificationList = new ArrayList<Notification>();
                             notificationList.clear();
-                            for(DataSnapshot data : snapshot.getChildren()){
+                            for (DataSnapshot data : snapshot.getChildren()) {
                                 Notification tempNoti = new Notification();
                                 tempNoti.setTitle(data.child("title").getValue(String.class));
                                 tempNoti.setBody(data.child("body").getValue(String.class));
@@ -64,13 +85,14 @@ public class NotificationFragment extends Fragment {
                             List<Notification> sentNoti = new ArrayList<>();
 
                             Log.d(TAG, String.valueOf(notificationList));
-                            handler.post(()->{
+                            handler.post(() -> {
                                 adapter = new NotificationRVAdapter(getContext(), notificationList);
                                 notiRV.setAdapter(adapter);
                                 notiRV.setLayoutManager(new LinearLayoutManager(getContext()));
                                 notiRV.setHasFixedSize(true);
                             });
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             Log.e("Firebase", "Cannot get notification list");
