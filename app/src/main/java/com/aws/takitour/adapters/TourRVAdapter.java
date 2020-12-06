@@ -159,7 +159,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                 TextView tourNameDetail = dialog.findViewById(R.id.tv_tour_name_detail);
                                 TextView ratingDetail = dialog.findViewById(R.id.tv_rating_detail);
                                 TextView durationDetail = dialog.findViewById(R.id.tv_duration_detail);
-                                TextView costDetail = dialog.findViewById(R.id.tv_cost_detail);
+                                TextView costDetail = dialog.findViewById(R.id.tv_price_detail);
                                 TextView shortDescriptionDetail = dialog.findViewById(R.id.tv_short_description_detail);
                                 TextView tourGuideNameDetail = dialog.findViewById(R.id.tv_tour_guide_name_detail);
                                 EditText code = dialog.findViewById(R.id.edt_code_detail);

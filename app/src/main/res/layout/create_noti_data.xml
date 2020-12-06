@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Toolbar
+        android:id="@+id/tb_return"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/signika_bold"
+        android:text="Gửi thông báo"
+        android:textColor="@color/white"
+        android:textSize="46sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gửi thông báo cho du khách trong tour"
+        android:fontFamily="@font/signika"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:layout_gravity="center_horizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/signika"
+            android:text="Tiêu đề"
+            />
+
+        <EditText
+            android:id="@+id/edt_noti_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_second_color"
+            android:fontFamily="@font/signika"
+            android:hint="Nhập tiêu đề của thông báo"
+            android:singleLine="true"
+            android:textColor="#206A5D" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="15dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/signika"
+            android:text="Nội dung"
+            />
+
+        <EditText
+            android:id="@+id/edt_noti_body"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:fontFamily="@font/signika"
+            android:background="@drawable/bg_second_color"
+            android:singleLine="true"
+            android:hint="Nhập nội dung thông báo"
+            android:textColor="#206A5D"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_button"
+        android:fontFamily="@font/signika_semibold"
+        android:text="Gửi"
+        android:textAllCaps="false"
+        android:textColor="#206A5D"
+        android:textSize="18sp" />
+</LinearLayout>

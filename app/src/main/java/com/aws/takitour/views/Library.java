@@ -63,7 +63,7 @@ public class Library extends AppCompatActivity {
                             pictureList.clear();
                             for (DataSnapshot data : snapshot.getChildren()) {
                                 String name = data.child("name").getValue(String.class);
-                                for (DataSnapshot image : data.child("images").getChildren())
+                                for (DataSnapshot image : data.child("photos").getChildren())
                                 {
                                     List<String> picture = new ArrayList<>();
                                     picture.add(image.getValue(String.class));

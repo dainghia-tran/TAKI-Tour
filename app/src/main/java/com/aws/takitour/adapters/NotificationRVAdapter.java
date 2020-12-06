@@ -13,16 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Notification;
+import com.aws.takitour.notifications.Data;
 
 import java.util.List;
 
 
 public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAdapter.NotificationViewHolder> {
     Context context;
-    private List<Notification> notificationList;
+    private List<Data> notificationList;
     private final Handler handler = new Handler();
 
-    public NotificationRVAdapter(Context context, List<Notification> notificationList) {
+    public NotificationRVAdapter(Context context, List<Data> notificationList) {
         this.context = context;
         this.notificationList = notificationList;
     }
@@ -31,15 +32,14 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
     @NonNull
     @Override
     public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_notification,parent,false);
-        NotificationViewHolder notificationViewHolder = new NotificationViewHolder(view);
-        return notificationViewHolder;
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_notification, parent, false);
+        return new NotificationViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-        Notification notification = notificationList.get(position);
-        if(notification !=null){
+        Data notification = notificationList.get(position);
+        if (notification != null) {
             holder.tvSender.setText(notification.getUser());
             holder.tvTitle.setText(notification.getTitle());
             holder.tvBody.setText(notification.getBody());
@@ -50,6 +50,7 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
     public int getItemCount() {
         return notificationList.size();
     }
+
     public static class NotificationViewHolder extends RecyclerView.ViewHolder {
         TextView tvSender;
         TextView tvTitle;

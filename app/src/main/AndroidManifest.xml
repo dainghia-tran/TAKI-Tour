@@ -20,7 +20,6 @@
         <activity android:name=".views.ChangeInformation" />
         <activity android:name=".views.TourDashboard" />
         <activity android:name=".views.Maps" />
-        <activity android:name=".views.TourDetails" />
         <activity android:name=".views.TourCreate" />
         <activity android:name=".views.RegisterActivity" />
         <activity android:name=".views.Splash">

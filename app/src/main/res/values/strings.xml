@@ -40,18 +40,18 @@
     <string name="create_new_account">Tạo tài khoản</string>
     <string name="create_new_account_to_continue">Tạo mới một tài khoản</string>
     <string name="sign_in_now">Đăng nhập</string>
-    <string name="btn_link_to_login">Already registered. Login Me!</string>
+    <string name="btn_link_to_login">Tài khoản đã tồn tại, hãy đăng nhập</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
     <string name="btn_forgot_password">Forgot your password?</string>
     <string name="btn_reset_password">Reset Password</string>
     <string name="btn_back"><![CDATA[<< Back]]></string>
     <string name="hint_new_email">New Email</string>
-    <string name="btn_change">Change</string>
-    <string name="btn_send">Send</string>
-    <string name="btn_remove">Remove</string>
-    <string name="btn_sign_out">Sign Out</string>
-    <string name="lbl_forgot_password">Forgot password?</string>
-    <string name="forgot_password_msg">We just need your registered Email to sent you password reset instructions.</string>
+    <string name="btn_change">Thay đổi</string>
+    <string name="btn_send">Gửi</string>
+    <string name="btn_remove">Xóa</string>
+    <string name="btn_sign_out">Đăng xuất</string>
+    <string name="lbl_forgot_password">Quên mật khẩu?</string>
+    <string name="forgot_password_msg">Chúng tôi đã gửi hướng dẫn đặt lại mật khẩu vào email của bạn.</string>
     <string name="explore">Khám phá</string>
     <string name="tours">Tours</string>
     <string name="notification">Thông báo</string>
@@ -77,5 +77,20 @@
     <string name="choose_photos">Chọn ảnh</string>
     <string name="enter_your_email">Nhập email của bạn để tiếp tục</string>
     <string name="next">Tiếp tục</string>
+
+    <string name="introduction">Tiểu sử</string>
+    <string name="no_introduction_yet">Chưa có tiểu sử</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="no_phone_yet">Chưa có số điện thoại</string>
+    <string name="Save">Lưu những thay đổi</string>
+    <string name="current_password">Mật khẩu hiện tại</string>
+    <string name="retype_password">Xác nhận mật khẩu</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="change">Thay đổi</string>
+    <string name="cover_image">Ảnh bìa</string>
+    <string name="rating">Đánh giá</string>
+    <string name="duration">Thời gian</string>
+    <string name="price">Giá</string>
+
 
 </resources>

@@ -220,15 +220,15 @@ public class TourDashboard extends AppCompatActivity {
                                         .setValue(imageLink);
                             })
                             .addOnFailureListener(e -> {
-                                Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Failed " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Tải lên thất bại.", Snackbar.LENGTH_SHORT).show();
                             });
                 }
-                Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Photos uploaded successfully.", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Hình ảnh đã được tải lên.", Snackbar.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "You haven't picked any image", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Bạn chưa chọn hình.", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Đã có lỗi xảy ra.", Toast.LENGTH_LONG).show();
         }
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -263,7 +263,7 @@ public class TourDashboard extends AppCompatActivity {
                             }
                         });
             } else {
-                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Vui lòng bật định vị...", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
