@@ -75,5 +75,7 @@
     <string name="library">Thư viện</string>
     <string name="upload">Tải lên</string>
     <string name="choose_photos">Chọn ảnh</string>
+    <string name="enter_your_email">Nhập email của bạn để tiếp tục</string>
+    <string name="next">Tiếp tục</string>
 
 </resources>

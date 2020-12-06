@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         forgotPassword.setOnClickListener(v->{
-            //TODO change activity to Forgot Password
+            startActivity(new Intent(this, ForgotPassword.class));
         });
 
         signIn.setOnClickListener(v->{
