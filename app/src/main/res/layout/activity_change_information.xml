@@ -22,7 +22,7 @@
         android:id="@+id/iv_profile_image_change_information"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"/>
     <TextView
         android:layout_width="wrap_content"
