@@ -76,12 +76,13 @@ public class ProfileFragment extends Fragment {
                         } else {
                             currentUser.setType(snapshot.child("type").getValue(Integer.class));
                         }
-
-                        Glide.with(getContext()).load(currentUser.getProfileImage()).into(imageView);
-                        name.setText(currentUser.getName());
-                        email.setText(currentUser.getEmail());
-                        phoneNumber.setText(currentUser.getTelephone());
-                        introduction.setText(currentUser.getDescription());
+                        if(getActivity() != null) {
+                            Glide.with(getContext()).load(currentUser.getProfileImage()).into(imageView);
+                            name.setText(currentUser.getName());
+                            email.setText(currentUser.getEmail());
+                            phoneNumber.setText(currentUser.getTelephone());
+                            introduction.setText(currentUser.getDescription());
+                        }
                     }
 
                     @Override

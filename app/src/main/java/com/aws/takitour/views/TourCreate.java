@@ -118,7 +118,7 @@ public class TourCreate extends AppCompatActivity {
             // Upload image to FireStore and add imageLink to ArrayList, then upload Tour to firebase RealTime
             if (filePath != null) {
                 final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setTitle("Uploading...");
+                progressDialog.setTitle("Đang tải lên...");
                 progressDialog.show();
                 StorageReference ref = storageReference.child("images/tours/" + tourId + "/" + UUID.randomUUID().toString());
                 ref.putFile(filePath)
@@ -144,14 +144,14 @@ public class TourCreate extends AppCompatActivity {
                                         .child("tourList")
                                         .child(newTour.getId())
                                         .setValue(newTour.getId());
-                                Snackbar.make(findViewById(R.id.tour_create_activity), "Uploaded", Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(R.id.tour_create_activity), "Đã tải lên.", Snackbar.LENGTH_SHORT).show();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 progressDialog.dismiss();
-                                Snackbar.make(findViewById(R.id.tour_create_activity), "Failed " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(findViewById(R.id.tour_create_activity), "Tải lên thất bại.", Snackbar.LENGTH_SHORT).show();
                             }
                         })
                         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -159,7 +159,7 @@ public class TourCreate extends AppCompatActivity {
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                                 double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                         .getTotalByteCount());
-                                progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                                progressDialog.setMessage("Đã tải " + (int) progress + "%");
                             }
                         });
             }
@@ -173,7 +173,7 @@ public class TourCreate extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(
-                Intent.createChooser(intent, "Select Image"),
+                Intent.createChooser(intent, "Chọn hình ảnh"),
                 PICK_IMAGE_REQUEST);
     }
 

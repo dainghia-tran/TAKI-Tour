@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_noti_card"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/second_color"
-    android:padding="5dp">
-    <TextView
-        android:id="@+id/tv_noti_sender"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_noti_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:fontFamily="@font/signika_semibold"
-        android:textColor="@color/main_color"
-        android:text="Ten người gửi"/>
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:background="@color/second_color"
+        android:padding="5dp">
+
     <TextView
-        android:id="@+id/tv_noti_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:fontFamily="@font/signika_semibold"
-        android:textColor="@color/main_color"
-        android:text="Ten thong bao"/>
+            android:id="@+id/tv_noti_sender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/signika_semibold"
+            android:textColor="@color/main_color" />
+
     <TextView
-        android:id="@+id/tv_noti_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:fontFamily="@font/signika"
-        android:textColor="@color/main_color"
-        android:text="@string/tour_short_description"/>
+            android:id="@+id/tv_noti_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:fontFamily="@font/signika_semibold"
+            android:textColor="@color/main_color" />
+
+    <TextView
+            android:id="@+id/tv_noti_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="@font/signika"
+            android:textColor="@color/main_color"
+            android:text="@string/tour_short_description" />
 
 </LinearLayout>

@@ -31,15 +31,14 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
     @NonNull
     @Override
     public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_notification,parent,false);
-        NotificationViewHolder notificationViewHolder = new NotificationViewHolder(view);
-        return notificationViewHolder;
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_notification, parent, false);
+        return new NotificationViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
         Notification notification = notificationList.get(position);
-        if(notification !=null){
+        if (notification != null) {
             holder.tvSender.setText(notification.getUser());
             holder.tvTitle.setText(notification.getTitle());
             holder.tvBody.setText(notification.getBody());
@@ -50,6 +49,7 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
     public int getItemCount() {
         return notificationList.size();
     }
+
     public static class NotificationViewHolder extends RecyclerView.ViewHolder {
         TextView tvSender;
         TextView tvTitle;

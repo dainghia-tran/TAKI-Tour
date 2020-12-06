@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {
-                    Snackbar.make(findViewById(R.id.login_activity), "Đăng nhập với Google thất bại", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(R.id.login_activity), "Đăng nhập với Google thất bại.", Snackbar.LENGTH_SHORT).show();
                 }
             });
         }

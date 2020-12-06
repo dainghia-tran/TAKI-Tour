@@ -15,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.NotificationRVAdapter;
-import com.aws.takitour.adapters.TourRVAdapter;
 import com.aws.takitour.models.Notification;
-import com.aws.takitour.models.Tour;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,9 +29,8 @@ import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class NotificationFragment extends Fragment {
     private final static String TAG ="NotificationFragment";
-    private RecyclerView notiRV;
+    private RecyclerView notificationRV;
     private List<Notification> notificationList;
-    List<String> notiCode;
     private NotificationRVAdapter adapter;
     private final Handler handler = new Handler();
     private FirebaseAuth firebaseAuth;
@@ -42,39 +39,33 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_notification, container,false);
-        notiRV = view.findViewById(R.id.rv_list_notification);
+        notificationRV = view.findViewById(R.id.rv_list_notification);
         firebaseAuth = FirebaseAuth.getInstance();
 
         new Thread(()->{
             myDBReference.child("users")
                     .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
-                    .child("notifications").child("notiId")
+                    .child("notifications")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            notificationList = new ArrayList<Notification>();
+                            notificationList = new ArrayList<>();
                             notificationList.clear();
                             for(DataSnapshot data : snapshot.getChildren()){
-                                Notification tempNoti = new Notification();
-                                tempNoti.setTitle(data.child("title").getValue(String.class));
-                                tempNoti.setBody(data.child("body").getValue(String.class));
-                                tempNoti.setUser(data.child("sender").getValue(String.class));
-                                notificationList.add(tempNoti);
+                                notificationList.add(data.getValue(Notification.class));
                             }
-                            List<Notification> sentNoti = new ArrayList<>();
 
                             Log.d(TAG, String.valueOf(notificationList));
                             handler.post(()->{
                                 adapter = new NotificationRVAdapter(getContext(), notificationList);
-                                notiRV.setAdapter(adapter);
-                                notiRV.setLayoutManager(new LinearLayoutManager(getContext()));
-                                notiRV.setHasFixedSize(true);
+                                notificationRV.setAdapter(adapter);
+                                notificationRV.setLayoutManager(new LinearLayoutManager(getContext()));
+                                notificationRV.setHasFixedSize(true);
                             });
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             Log.e("Firebase", "Cannot get notification list");
-
                         }
                     });
         }).start();
