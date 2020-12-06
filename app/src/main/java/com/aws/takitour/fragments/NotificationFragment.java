@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.NotificationRVAdapter;
-import com.aws.takitour.models.Notification;
+import com.aws.takitour.notifications.Data;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,19 +31,41 @@ import static com.aws.takitour.views.LoginActivity.myDBReference;
 public class NotificationFragment extends Fragment {
     private final static String TAG ="NotificationFragment";
     private RecyclerView notificationRV;
-    private List<Notification> notificationList;
+    private List<Data> notificationList;
     private NotificationRVAdapter adapter;
     private final Handler handler = new Handler();
     private FirebaseAuth firebaseAuth;
+//    private Button btnCreateNoti;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+//        btnCreateNoti = view.findViewById(R.id.btn_create_noti);
+
         View view = inflater.inflate(R.layout.fragment_notification, container,false);
         notificationRV = view.findViewById(R.id.rv_list_notification);
         firebaseAuth = FirebaseAuth.getInstance();
-
-        new Thread(()->{
+//        btnCreateNoti.setOnClickListener(v -> {
+//            String tourId;
+//            ValueEventListener userListener = new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                    String user = snapshot.getValue(String.class);
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError error) {
+//
+//                }
+//            };
+//            myDBReference.child("users")
+//                    .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
+//                    .addValueEventListener(userListener)
+//
+//            Notification notiHandler = new Notification("hoanglong", "This is body", "This is title", )
+//        });
+        new Thread(() -> {
             myDBReference.child("users")
                     .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
                     .child("notifications")
@@ -51,18 +74,19 @@ public class NotificationFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             notificationList = new ArrayList<>();
                             notificationList.clear();
+
                             for(DataSnapshot data : snapshot.getChildren()){
-                                notificationList.add(data.getValue(Notification.class));
-                            }
+                                notificationList.add(data.getValue(Data.class));                            }
 
                             Log.d(TAG, String.valueOf(notificationList));
-                            handler.post(()->{
+                            handler.post(() -> {
                                 adapter = new NotificationRVAdapter(getContext(), notificationList);
                                 notificationRV.setAdapter(adapter);
                                 notificationRV.setLayoutManager(new LinearLayoutManager(getContext()));
                                 notificationRV.setHasFixedSize(true);
                             });
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             Log.e("Firebase", "Cannot get notification list");

@@ -27,7 +27,7 @@
     <ImageView
         android:layout_gravity="bottom"
         android:id="@+id/img_picture"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         android:layout_width="100dp"
         android:layout_height="100dp"
         />

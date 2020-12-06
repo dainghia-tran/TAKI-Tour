@@ -13,16 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Notification;
+import com.aws.takitour.notifications.Data;
 
 import java.util.List;
 
 
 public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAdapter.NotificationViewHolder> {
     Context context;
-    private List<Notification> notificationList;
+    private List<Data> notificationList;
     private final Handler handler = new Handler();
 
-    public NotificationRVAdapter(Context context, List<Notification> notificationList) {
+    public NotificationRVAdapter(Context context, List<Data> notificationList) {
         this.context = context;
         this.notificationList = notificationList;
     }
@@ -37,7 +38,7 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
 
     @Override
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-        Notification notification = notificationList.get(position);
+        Data notification = notificationList.get(position);
         if (notification != null) {
             holder.tvSender.setText(notification.getUser());
             holder.tvTitle.setText(notification.getTitle());

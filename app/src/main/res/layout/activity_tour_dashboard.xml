@@ -42,26 +42,26 @@
                 android:layout_height="500dp">
 
             <ImageButton
-                    android:id="@+id/imgbtn_locate"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    android:src="@drawable/ic_baseline_my_location_24"
-                    app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"
-                    app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/imgbtn_locate"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#BFDCAE"
+                android:src="@drawable/ic_baseline_my_location_24"
+                app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"
+                app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                    android:id="@+id/imgbtn_call"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    android:src="@drawable/ic_baseline_perm_phone_msg_24"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/imgbtn_library" />
+                android:id="@+id/imgbtn_call"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#BFDCAE"
+                android:src="@drawable/ic_baseline_perm_phone_msg_24"
+                app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                     android:id="@+id/imgbtn_timeline"
@@ -86,15 +86,29 @@
                     app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos" />
 
             <ImageButton
-                    android:id="@+id/imgbtn_add_photos"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
+                android:id="@+id/imgbtn_add_photos"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#BFDCAE"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.165"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
+                tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
+
+            <ImageButton
+                android:id="@+id/imgbtn_create_noti"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#BFDCAE"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.835"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
+                tools:src="@drawable/ic_outline_notifications_24" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
