@@ -234,40 +234,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                     .child(tour.getId())
                                     .child("participants")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
-                                    .setValue(newParticipant).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) { // Send Noti to tell user joined this tour successfully
-
-//                                    FirebaseMessaging.getInstance().subscribeToTopic(tour.getId())
-//                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                                @Override
-//                                                public void onComplete(@NonNull Task<Void> task) {
-//                                                    String msg = "Successfull";
-//                                                    if (!task.isSuccessful()) {
-//                                                        msg = "Subcribed Topic Failed";
-//                                                    }
-//                                                    Log.d(TAG, msg);
-//                                                }
-//                                            });
-//                                    Data data = new Data(newParticipant.getName(), "First test message from code", "Hura, Successfully");
-//                                    Sender sender = new Sender(data,newParticipantToken);
-//                                    apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
-//                                        @Override
-//                                        public void onResponse(Call<MyResponse> call, retrofit2.Response<MyResponse> response) {
-//                                            if (response.code() == 200) {
-//                                                if (response.body().success != 1) {
-//                                                    Log.d(TAG, "Failed");
-//                                                }
-//                                                return;
-//                                            }
-//                                        }
-//                                        @Override
-//                                        public void onFailure(Call<MyResponse> call, Throwable t) {
-//
-//                                        }
-//                                    });
-                                }
-                            });
+                                    .setValue(newParticipant);
                             myDBReference.child("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                                     .child("tourList")

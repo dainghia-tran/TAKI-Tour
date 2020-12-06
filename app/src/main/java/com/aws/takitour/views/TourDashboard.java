@@ -64,6 +64,7 @@ public class TourDashboard extends AppCompatActivity {
     private ImageButton imgBtnTimeline;
     private ImageButton imgBtnLibrary;
     private ImageButton imgBtnAddPhotos;
+    private ImageButton imgBtnCreateNoti;
 
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -94,6 +95,7 @@ public class TourDashboard extends AppCompatActivity {
         imgBtnTimeline = findViewById(R.id.imgbtn_timeline);
         imgBtnLibrary = findViewById(R.id.imgbtn_library);
         imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
+        imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);
 
         imgBtnLocate.setOnClickListener(v -> {
             Intent intentMaps = new Intent(TourDashboard.this, Maps.class);
@@ -156,6 +158,11 @@ public class TourDashboard extends AppCompatActivity {
             }
         });
 
+        imgBtnCreateNoti.setOnClickListener(v->{
+            Intent intentCreateNoti = new Intent(TourDashboard.this, CreateNotification.class);
+            intentCreateNoti.putExtra("TOUR_ID", tourId);
+            startActivity(intentCreateNoti);
+        });
 
         //Check if tour is available and get location from user
         new Thread(() -> {

@@ -18,23 +18,21 @@ public class Notification implements Serializable {
     private String sender;
     private String body;
     private String title;
-    private String targetToken;
     APIService apiService;
 
     public Notification(){
     }
 
-    public Notification(String sender, String body, String title, String targetToken) {
+    public Notification(String sender, String title, String body) {
         this.sender = sender;
         this.body = body;
         this.title = title;
-        this.targetToken = targetToken;
         this.apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
     }
-    public void sendNotification(){
+    public void sendNotification(String targetToken){
         Data data = new Data(this.sender, this.title, this.body);
-        Sender sendWorker = new Sender(data, this.targetToken);
+        Sender sendWorker = new Sender(data, targetToken);
         apiService.sendNotification(sendWorker).enqueue(new Callback<MyResponse>() {
             @Override
             public void onResponse(Call<MyResponse> call, retrofit2.Response<MyResponse> response) {
@@ -42,7 +40,6 @@ public class Notification implements Serializable {
                     if (response.body().success != 1) {
                         Log.d("TAG", "Failed");
                     }
-                    return;
                 }
             }
             @Override
@@ -51,9 +48,4 @@ public class Notification implements Serializable {
             }
         });
     }
-
-    //    Notification(Data userData, Sender userSender){
-//        this.sender =
-//        this.apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
-//    }
 }
