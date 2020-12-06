@@ -72,7 +72,7 @@ public class ToursFragment extends Fragment {
                         }
                     });
             myDBReference.child("users")
-                    .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
+                    .child(firebaseAuth.getCurrentUser().getEmail().replace(".", ","))
                     .child("tourList")
                     .addValueEventListener(new ValueEventListener() {
                         @Override

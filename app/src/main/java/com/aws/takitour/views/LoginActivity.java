@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aws.takitour.R;
+import com.aws.takitour.models.User;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,10 +24,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private GoogleSignInClient googleSignInClient;
     private final int RC_SIGN_IN = 1;
-    private List<String> config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         signUp.setPaintFlags(signUp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("981414444913-gto09va4p3jfu5gt7s9teakrag62uulm.apps.googleusercontent.com")
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -164,6 +166,17 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getBaseContext(), "Login with Google successfully", Toast.LENGTH_SHORT).show();
+                    new Thread(()->{
+                        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                        String userEmail = currentUser.getEmail();
+                        String userPhoneNumber = currentUser.getPhoneNumber();
+                        String userName = currentUser.getDisplayName();
+                        String userProfileImage = currentUser.getPhotoUrl().toString();
+                        User googleUser = new User(userName, 0, userEmail, userPhoneNumber, userProfileImage, "");
+                        myDBReference.child("users")
+                                .child(currentUser.getEmail().replace(".", ","))
+                                .setValue(googleUser);
+                    }).start();
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                     finish();
                 } else {

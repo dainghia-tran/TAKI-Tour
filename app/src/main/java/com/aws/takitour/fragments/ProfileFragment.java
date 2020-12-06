@@ -70,10 +70,14 @@ public class ProfileFragment extends Fragment {
                         currentUser.setDescription(snapshot.child("description").getValue(String.class));
                         currentUser.setEmail(snapshot.child("email").getValue(String.class));
                         currentUser.setTelephone(snapshot.child("telephone").getValue(String.class));
-                        currentUser.setType(snapshot.child("type").getValue(Integer.class));
                         currentUser.setProfileImage(snapshot.child("profileImage").getValue(String.class));
+                        if(snapshot.child("type").getValue(Integer.class) == null){
+                            currentUser.setType(0);
+                        }else{
+                            currentUser.setType(snapshot.child("type").getValue(Integer.class));
+                        }
 
-                        Glide.with(Objects.requireNonNull(getContext())).load(currentUser.getProfileImage()).into(imageView);
+                        Glide.with(getContext()).load(currentUser.getProfileImage()).into(imageView);
                         name.setText(currentUser.getName());
                         email.setText(currentUser.getEmail());
                         phoneNumber.setText(currentUser.getTelephone());
