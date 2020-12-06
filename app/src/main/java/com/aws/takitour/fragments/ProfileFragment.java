@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.User;
+import com.aws.takitour.views.ChangeInformation;
 import com.aws.takitour.views.LoginActivity;
 import com.aws.takitour.views.TourCreate;
 import com.bumptech.glide.Glide;
@@ -87,7 +88,7 @@ public class ProfileFragment extends Fragment {
 
 
         infoProfile.setOnClickListener(v -> {
-
+            startActivity(new Intent(getContext(), ChangeInformation.class));
         });
 
         addTour.setOnClickListener(v -> myDBReference.child("users")

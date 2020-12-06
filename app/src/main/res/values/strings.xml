@@ -78,4 +78,11 @@
     <string name="enter_your_email">Nhập email của bạn để tiếp tục</string>
     <string name="next">Tiếp tục</string>
 
+    <string name="introduction">Tiểu sử</string>
+    <string name="no_introduction_yet">Chưa có tiểu sử</string>
+    <string name="phone_number">Số điện thoại</string>
+    <string name="no_phone_yet">Chưa có số điện thoại</string>
+    <string name="Save">Lưu những thay đổi</string>
+
+
 </resources>
