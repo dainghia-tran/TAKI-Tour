@@ -123,10 +123,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                         intent.putExtra("TOUR_NAME", tour.getName());
                                         context.startActivity(intent);
                                     });
-                                    attended = true;
-                                    if (attended) {
-                                        return;
-                                    }
+                                    return;
                                 }
 
                                 if (participants.size() != 0) {
@@ -143,9 +140,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                             });
                                             attended = true;
                                             break;
-                                        }
-                                        if (attended) {
-                                            return;
                                         }
                                     }
                                 }
@@ -203,10 +197,12 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                         handler.post(() -> {
                                             dialog.dismiss();
                                             context.startActivity(tourDashboard);
-                                            updateUserTourList(tour);
+                                            updateUserTourList(tour.getId());
                                         });
                                     } else {
-                                        Toast.makeText(context, "Mã đã nhập không hợp lệ", Toast.LENGTH_SHORT).show();
+                                        handler.post(()->{
+                                            Toast.makeText(context, "Mã đã nhập không hợp lệ", Toast.LENGTH_SHORT).show();
+                                        });
                                     }
                                 });
                             }
@@ -220,7 +216,7 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         });
     }
 
-    public void updateUserTourList(Tour tour) {
+    public void updateUserTourList(String tourId) {
 
         new Thread(() -> {
             myDBReference.child("users")
@@ -231,15 +227,15 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                             String newParticipantToken = snapshot.child("token").getValue(String.class);
                             Participant newParticipant = new Participant(FirebaseAuth.getInstance().getCurrentUser().getEmail(), snapshot.child("name").getValue(String.class));
                             myDBReference.child("tours")
-                                    .child(tour.getId())
+                                    .child(tourId)
                                     .child("participants")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                                     .setValue(newParticipant);
                             myDBReference.child("users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                                     .child("tourList")
-                                    .child(tour.getId())
-                                    .setValue(tour.getId());
+                                    .child(tourId)
+                                    .setValue(tourId);
                         }
 
                         @Override

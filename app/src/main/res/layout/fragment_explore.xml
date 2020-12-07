@@ -37,6 +37,7 @@
                 android:background="@drawable/bg_second_color"
                 android:fontFamily="@font/signika"
                 android:inputType="textCapCharacters"
+                android:imeOptions="actionDone"
                 android:gravity="center_horizontal"
                 android:textSize="14sp"
                 android:singleLine="true"
