@@ -32,6 +32,8 @@
         <activity android:name=".views.LoginActivity" />
         <activity android:name=".views.MainActivity" />
         <activity android:name=".views.CreateNotification" />
+        <activity android:name=".views.Announcement" />
+
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCbjSd_WogDL47q_Jxdt6mNjGcOgZTXK84" />

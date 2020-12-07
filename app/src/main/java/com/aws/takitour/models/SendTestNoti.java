@@ -26,7 +26,7 @@ public class SendTestNoti implements Serializable {
     }
     public void sendNoti(String uToken, String title, String message){
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Data data = new Data(currentUser.getEmail(), title,message);
+        Data data = new Data(currentUser.getEmail(), title,message, uToken);
         Sender sender = new Sender(data,uToken);
         apiService.sendNotification(sender).enqueue(new Callback<MyResponse>() {
             @Override

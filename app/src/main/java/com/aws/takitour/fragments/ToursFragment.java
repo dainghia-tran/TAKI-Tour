@@ -64,7 +64,6 @@ public class ToursFragment extends Fragment {
                             }
                             // Get new FCM device token
                             String token = task.getResult();
-                            Log.d(TAG, "Token" + token);
                             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
                             if (currentUser != null) {
                                 fcmService.onNewToken(token);
@@ -81,9 +80,7 @@ public class ToursFragment extends Fragment {
                             tourCode.clear();
                             for (DataSnapshot data : snapshot.getChildren()) {
                                 tourCode.add(data.getValue(String.class));
-                                Log.d("Attended tour", data.getValue(String.class));
                             }
-                            Log.d("Number of tours", String.valueOf(tourCode.size()));
                             if (tourCode.isEmpty()) {
                                 ((TextView) view.findViewById(R.id.tv_attended)).setText("Bạn chưa tham gia tour nào");
                                 return;

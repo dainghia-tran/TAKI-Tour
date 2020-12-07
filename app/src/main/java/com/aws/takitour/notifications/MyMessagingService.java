@@ -15,19 +15,27 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.aws.takitour.R;
+import com.aws.takitour.models.User;
 import com.aws.takitour.views.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class MyMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyMessagingService";
@@ -43,13 +51,16 @@ public class MyMessagingService extends FirebaseMessagingService {
         String notiTitle = null;
         String notiBody = null;
         String notiFrom = null;
-
-        Log.d(TAG, "Body: " + remoteMessage.getData().get("body"));
+        String noTiReceiveToken = null;
         if (remoteMessage.getData().size() > 0) {
             notiTitle = remoteMessage.getData().get("title");
             notiBody = remoteMessage.getData().get("body");
             notiFrom = remoteMessage.getData().get("user");
-            newNoti = new Data(notiFrom, notiTitle, notiBody);
+            noTiReceiveToken = remoteMessage.getData().get("receiveToken");
+            newNoti = new Data(notiFrom, notiTitle, notiBody, noTiReceiveToken);
+
+            List<User> users = new ArrayList<>();
+
             ref.child(currentUser.getEmail().replace(".", ",")).child("notifications").child(remoteMessage.getMessageId()).setValue(newNoti);
         }
         if (notiTitle != null && notiBody != null) {
@@ -61,7 +72,7 @@ public class MyMessagingService extends FirebaseMessagingService {
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
         Token token = new Token(newToken);
-        // save FCM token to "users" collection
+        // save new FCM token to "users" collection
         ref.child(currentUser.getEmail().replace(".", ",")).child("token").setValue(token.getToken());
     }
 

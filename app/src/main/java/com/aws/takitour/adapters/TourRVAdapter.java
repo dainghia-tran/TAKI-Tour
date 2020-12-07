@@ -55,7 +55,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
 
     private List<Tour> tourList;
     private final Handler handler = new Handler();
-    private APIService apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
     public TourRVAdapter(Context context, List<Tour> tourList) {
         this.context = context;
         this.tourList = tourList;
@@ -112,7 +111,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                 boolean attended = false;
                                 String tourGuide = snapshot.child("tourGuide").getValue(String.class);
                                 String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                                Log.d("tour guide", tourGuide);
 
                                 if (tourGuide.equals(currentUserEmail)) {
                                     handler.post(() -> {

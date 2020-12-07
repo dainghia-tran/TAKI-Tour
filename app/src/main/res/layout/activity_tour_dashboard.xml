@@ -47,7 +47,7 @@
                 android:layout_height="100dp"
                 android:background="#BFDCAE"
                 android:src="@drawable/ic_baseline_my_location_24"
-                app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"
+                app:layout_constraintBottom_toTopOf="@id/imgbtn_annoucement"
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                    android:id="@+id/imgbtn_timeline"
+                    android:id="@+id/imgbtn_annoucement"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="#BFDCAE"
@@ -81,7 +81,7 @@
                     android:background="#BFDCAE"
                     android:src="@drawable/ic_baseline_photo_24"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imgbtn_timeline"
+                    app:layout_constraintStart_toEndOf="@id/imgbtn_annoucement"
                     app:layout_constraintTop_toBottomOf="@id/imgbtn_call"
                     app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos" />
 
@@ -94,7 +94,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.165"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
+                app:layout_constraintTop_toBottomOf="@+id/imgbtn_annoucement"
                 tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
 
             <ImageButton
@@ -106,7 +106,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.835"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
+                app:layout_constraintTop_toBottomOf="@+id/imgbtn_annoucement"
                 tools:src="@drawable/ic_outline_notifications_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

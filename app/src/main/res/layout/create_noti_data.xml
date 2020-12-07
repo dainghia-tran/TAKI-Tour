@@ -77,19 +77,24 @@
             android:background="@drawable/bg_second_color"
             android:singleLine="true"
             android:hint="Nhập nội dung thông báo"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:minLines="6"
+            android:maxLines="10"
             android:textColor="#206A5D"
             />
+        <Button
+            android:id="@+id/btn_send_noti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/signika_semibold"
+            android:text="Gửi"
+            android:textAllCaps="false"
+            android:textColor="#206A5D"
+            android:textSize="18sp" />
     </LinearLayout>
-    <Button
-        android:id="@+id/btn_send_noti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_button"
-        android:fontFamily="@font/signika_semibold"
-        android:text="Gửi"
-        android:textAllCaps="false"
-        android:textColor="#206A5D"
-        android:textSize="18sp" />
+
 </LinearLayout>

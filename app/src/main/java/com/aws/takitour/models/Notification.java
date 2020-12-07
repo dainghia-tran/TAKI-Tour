@@ -31,7 +31,7 @@ public class Notification implements Serializable {
 
     }
     public void sendNotification(String targetToken){
-        Data data = new Data(this.sender, this.title, this.body);
+        Data data = new Data(this.sender, this.title, this.body, targetToken );
         Sender sendWorker = new Sender(data, targetToken);
         apiService.sendNotification(sendWorker).enqueue(new Callback<MyResponse>() {
             @Override

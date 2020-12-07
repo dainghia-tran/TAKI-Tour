@@ -4,14 +4,23 @@ public class Data {
     private String user;
     private String title;
     private String body;
-
+    private String receiveToken;
     public Data() {
     }
 
-    public Data(String user, String title, String body) {
+    public Data(String user, String title, String body, String receiveToken) {
         this.user = user;
         this.title = title;
         this.body = body;
+        this.receiveToken = receiveToken;
+    }
+
+    public String getReceiveToken() {
+        return receiveToken;
+    }
+
+    public void setReceiveToken(String receiveToken) {
+        this.receiveToken = receiveToken;
     }
 
     public String getUser() {

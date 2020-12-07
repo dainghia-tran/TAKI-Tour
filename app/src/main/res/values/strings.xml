@@ -92,5 +92,7 @@
     <string name="duration">Thời gian</string>
     <string name="price">Giá</string>
 
+    <string name="announcement">Thông báo chung từ HDV</string>
+
 
 </resources>

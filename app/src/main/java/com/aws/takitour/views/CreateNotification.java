@@ -48,12 +48,10 @@ public class CreateNotification extends AppCompatActivity {
         btnSendNotification.setOnClickListener(v->{
             String userTitle = edtTitle.getText().toString().trim();
             String userBody = edtBody.getText().toString().trim();
-            Log.d(TAG, "Send button is clicked");
             new Thread(()->{
                 ValueEventListener participantListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Log.d(TAG, "LOG 1");
                         List<Participant> participants = new ArrayList<>();
                         // Save participants to List
                         for (DataSnapshot data : snapshot.getChildren()) {
@@ -67,7 +65,6 @@ public class CreateNotification extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String token = snapshot.getValue(String.class);
-                                        Log.d(TAG, token);
                                         Notification notificationHandler = new Notification("TourGuide", userTitle, userBody);
                                         notificationHandler.sendNotification(token);
                                     }

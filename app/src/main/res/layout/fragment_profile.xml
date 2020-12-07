@@ -163,7 +163,7 @@
                 android:fontFamily="@font/signika_light"
                 android:textColor="@color/white"
                 android:text="@string/version"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 tools:ignore="SmallSp" />
 
         <TextView
@@ -174,7 +174,7 @@
                 android:fontFamily="@font/signika_light"
                 android:textColor="@color/white"
                 android:text="@string/build_number"
-                android:textSize="10sp"
+                android:textSize="14sp"
                 tools:ignore="SmallSp" />
 
     </LinearLayout>

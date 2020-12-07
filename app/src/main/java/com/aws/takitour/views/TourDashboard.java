@@ -2,7 +2,6 @@ package com.aws.takitour.views;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -61,7 +60,7 @@ public class TourDashboard extends AppCompatActivity {
     private TextView tvYourName;
     private ImageButton imgBtnLocate;
     private ImageButton imgBtnCall;
-    private ImageButton imgBtnTimeline;
+    private ImageButton ingBtnAnnouncement;
     private ImageButton imgBtnLibrary;
     private ImageButton imgBtnAddPhotos;
     private ImageButton imgBtnCreateNoti;
@@ -92,7 +91,7 @@ public class TourDashboard extends AppCompatActivity {
 
         imgBtnLocate = findViewById(R.id.imgbtn_locate);
         imgBtnCall = findViewById(R.id.imgbtn_call);
-        imgBtnTimeline = findViewById(R.id.imgbtn_timeline);
+        ingBtnAnnouncement = findViewById(R.id.imgbtn_annoucement);
         imgBtnLibrary = findViewById(R.id.imgbtn_library);
         imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
         imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);
@@ -136,8 +135,10 @@ public class TourDashboard extends AppCompatActivity {
             }).start();
         });
 
-        imgBtnTimeline.setOnClickListener(v -> {
-
+        ingBtnAnnouncement.setOnClickListener(v -> {
+            Intent intentAnnouncement = new Intent(TourDashboard.this, Announcement.class);
+            intentAnnouncement.putExtra("TOUR_ID", tourId);
+            startActivity(intentAnnouncement);
         });
 
         imgBtnLibrary.setOnClickListener(v -> {
