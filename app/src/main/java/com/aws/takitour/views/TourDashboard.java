@@ -73,7 +73,7 @@ public class TourDashboard extends AppCompatActivity {
     public void linkElements(){
         imgBtnLocate = findViewById(R.id.imgbtn_locate);
         imgBtnCall = findViewById(R.id.imgbtn_call);
-        ingBtnAnnouncement = findViewById(R.id.imgbtn_annoucement);
+//        ingBtnAnnouncement = findViewById(R.id.imgbtn_annoucement);
         imgBtnLibrary = findViewById(R.id.imgbtn_library);
         imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
         imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);
@@ -172,11 +172,11 @@ public class TourDashboard extends AppCompatActivity {
             }).start();
         });
 
-        ingBtnAnnouncement.setOnClickListener(v -> {
-            Intent intentAnnouncement = new Intent(TourDashboard.this, Announcement.class);
-            intentAnnouncement.putExtra("TOUR_ID", tourId);
-            startActivity(intentAnnouncement);
-        });
+//        ingBtnAnnouncement.setOnClickListener(v -> {
+//            Intent intentAnnouncement = new Intent(TourDashboard.this, Announcement.class);
+//            intentAnnouncement.putExtra("TOUR_ID", tourId);
+//            startActivity(intentAnnouncement);
+//        });
 
         imgBtnLibrary.setOnClickListener(v -> {
             Intent intentLibrary = new Intent(TourDashboard.this, Library.class);
