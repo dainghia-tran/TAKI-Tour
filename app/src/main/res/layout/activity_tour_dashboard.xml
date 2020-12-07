@@ -14,21 +14,37 @@
             android:background="@color/main_color"
             android:orientation="vertical">
 
-        <Toolbar
-                android:id="@+id/tb_return_dashboard"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <Toolbar
+                    android:id="@+id/tb_return_dashboard"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
+
+            <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            <Toolbar
+                    android:layout_width="wrap_content"
+                    android:id="@+id/tb_edit_tour"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:navigationIcon="@drawable/ic_baseline_edit_24" />
+        </LinearLayout>
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/your_name"
+                android:id="@+id/tour_name"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/signika"
-                android:text="@string/name" />
+                android:fontFamily="@font/signika" />
 
         <View
                 android:layout_width="match_parent"
@@ -51,17 +67,16 @@
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
             <ImageButton
-                android:id="@+id/imgbtn_call"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:background="#BFDCAE"
-                android:src="@drawable/ic_baseline_perm_phone_msg_24"
-                app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
-                app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/imgbtn_call"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="#BFDCAE"
+                    android:src="@drawable/ic_baseline_perm_phone_msg_24"
+                    app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                     android:id="@+id/imgbtn_annoucement"
@@ -108,6 +123,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgbtn_annoucement"
                 tools:src="@drawable/ic_outline_notifications_24" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

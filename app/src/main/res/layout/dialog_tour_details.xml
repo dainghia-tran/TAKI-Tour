@@ -147,7 +147,7 @@
                         android:gravity="center"
                         android:hint="@string/enter_code"
                         android:layout_marginEnd="20dp"
-                        android:inputType="textCapWords"
+                        android:inputType="textCapCharacters"
                         android:layout_height="wrap_content"
                         android:textSize="15sp" />
 

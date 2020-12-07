@@ -102,7 +102,7 @@ public class ChangeInformation extends AppCompatActivity {
                             btnChangePassword.setVisibility(View.INVISIBLE);
                         }
 
-                        if (currentUser.getProfileImage() != null) {
+                        if (currentUser.getProfileImage() != null && getApplicationContext() != null) {
                             Glide.with(ChangeInformation.this).load(currentUser.getProfileImage()).into(ivProfileImage);
                         }
                         edtName.setText(currentUser.getName());
@@ -236,6 +236,7 @@ public class ChangeInformation extends AppCompatActivity {
                                         .setValue(imageLink);
 
                                 progressDialog.dismiss();
+                                Toast.makeText(ChangeInformation.this, "Thay đổi thông tin thành công.", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         })

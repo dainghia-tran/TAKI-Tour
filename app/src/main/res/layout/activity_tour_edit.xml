@@ -11,13 +11,26 @@
             android:padding="30dp"
             android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/signika_bold"
-                android:textSize="36sp"
-                android:textColor="@color/white"
-                android:text="@string/tour_create_label" />
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/signika_bold"
+                    android:textSize="36sp"
+                    android:textColor="@color/white"
+                    android:text="@string/edit_tour" />
+
+            <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/img_btn_tour_end"
+                    android:contentDescription="@string/tour_end"
+                    android:layout_marginStart="50dp"
+                    android:src="@drawable/ic_baseline_check_24" />
+        </LinearLayout>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -35,13 +48,12 @@
                     android:text="@string/tour_name" />
 
             <EditText
-                    android:id="@+id/edt_tour_name"
+                    android:id="@+id/edt_edit_tour_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:fontFamily="@font/signika"
                     android:background="@drawable/bg_second_color"
-                    android:textColor="#206A5D"
-                    android:hint="" />
+                    android:textColor="#206A5D" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,7 +72,7 @@
                     android:text="@string/tour_short_description" />
 
             <EditText
-                    android:id="@+id/edt_tour_short_description"
+                    android:id="@+id/edt_edit_tour_short_description"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:fontFamily="@font/signika"
@@ -85,7 +97,7 @@
                     android:text="@string/tour_price" />
 
             <EditText
-                    android:id="@+id/edt_tour_price"
+                    android:id="@+id/edt_edit_tour_price"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:fontFamily="@font/signika"
@@ -118,7 +130,7 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:orientation="vertical"
                         android:layout_weight="1">
 
@@ -133,7 +145,7 @@
                             android:textSize="12sp" />
 
                     <EditText
-                            android:id="@+id/edt_tour_start_date"
+                            android:id="@+id/edt_edit_tour_start_date"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:inputType="none"
@@ -163,7 +175,7 @@
                             android:textSize="12sp" />
 
                     <EditText
-                            android:id="@+id/edt_tour_end_date"
+                            android:id="@+id/edt_edit_tour_end_date"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:background="@drawable/bg_second_color"
@@ -198,7 +210,7 @@
                     android:layout_height="match_parent">
 
                 <ImageView
-                        android:id="@+id/iv_tour_background"
+                        android:id="@+id/iv_edit_tour_background"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
                         android:background="@drawable/bg_second_color"
@@ -208,10 +220,10 @@
                         android:textColor="#206A5D" />
 
                 <Button
-                        android:id="@+id/btn_upload_image"
+                        android:id="@+id/btn_edit_upload_image"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:background="@drawable/bg_button"
                         android:fontFamily="@font/signika_semibold"
                         android:text="@string/tour_upload_image"
@@ -221,24 +233,16 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tour_policy_quote"
-                android:textSize="14sp"
-                android:layout_marginVertical="5dp" />
-
         <Button
-                android:id="@+id/btn_create_tour"
+                android:id="@+id/btn_edit_confirm_changes"
                 android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_button"
                 android:fontFamily="@font/signika_semibold"
-                android:text="@string/tour_create"
+                android:text="@string/change"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
-
-
     </LinearLayout>
 </ScrollView>

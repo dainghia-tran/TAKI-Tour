@@ -55,14 +55,14 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
         TextView tvSender;
         TextView tvTitle;
         TextView tvBody;
-        LinearLayout layoutNotiCard;
+        LinearLayout layoutNotificationCard;
 
         public NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
             tvSender = itemView.findViewById(R.id.tv_noti_sender);
             tvTitle = itemView.findViewById(R.id.tv_noti_title);
             tvBody = itemView.findViewById(R.id.tv_noti_description);
-            layoutNotiCard = itemView.findViewById(R.id.layout_noti_card);
+            layoutNotificationCard = itemView.findViewById(R.id.layout_noti_card);
         }
     }
 }

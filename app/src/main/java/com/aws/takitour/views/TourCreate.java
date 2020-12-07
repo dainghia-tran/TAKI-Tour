@@ -63,7 +63,7 @@ public class TourCreate extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    public void getCurrentDate(EditText edtDate) {
+    public void getDate(EditText edtDate) {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TourCreate.this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -95,11 +95,11 @@ public class TourCreate extends AppCompatActivity {
 
         edtTourStartDate.setKeyListener(null);
         edtTourStartDate.setOnClickListener(v->{
-            getCurrentDate(edtTourStartDate);
+            getDate(edtTourStartDate);
         });
         edtTourEndDate.setKeyListener(null);
         edtTourEndDate.setOnClickListener(v->{
-            getCurrentDate(edtTourEndDate);
+            getDate(edtTourEndDate);
         });
         btnCreateTour.setOnClickListener(v -> {
             String tourName = edtTourName.getText().toString();
@@ -145,6 +145,7 @@ public class TourCreate extends AppCompatActivity {
                                         .child(newTour.getId())
                                         .setValue(newTour.getId());
                                 Snackbar.make(findViewById(R.id.tour_create_activity), "Đã tải lên.", Snackbar.LENGTH_SHORT).show();
+                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

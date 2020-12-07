@@ -17,7 +17,7 @@
     <string name="tour_duration">Độ dài tour</string>
     <string name="tour_start">Bắt đầu</string>
     <string name="tour_end">Kết thúc</string>
-    <string name="tour_bg_image">Ảnh nền</string>
+    <string name="tour_bg_image">Ảnh bìa</string>
 
     <string name="tour_upload_image">Tải ảnh lên</string>
     <string name="tour_policy_quote">Bằng cách ấn vào nút tạo mới, bạn đồng ý với điều khoản quy định và chính sách của Takitou</string>
@@ -91,6 +91,8 @@
     <string name="rating">Đánh giá</string>
     <string name="duration">Thời gian</string>
     <string name="price">Giá</string>
+    <string name="edit_tour">Chỉnh sửa tour</string>
+    <string name="ended">Đã kết thúc</string>
 
     <string name="announcement">Thông báo chung từ HDV</string>
 
