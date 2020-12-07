@@ -13,22 +13,38 @@
             android:id="@+id/tour_dashboard_activity"
             android:background="@color/main_color"
             android:orientation="vertical">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Toolbar
+        android:id="@+id/tb_return_dashboard"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <Toolbar
-                android:id="@+id/tb_return_dashboard"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
+    <Toolbar
+        android:layout_width="wrap_content"
+        android:id="@+id/tb_edit_tour"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:navigationIcon="@drawable/ic_baseline_edit_24" />
+
+</LinearLayout>
+
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/your_name"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/signika"
-                android:text="@string/name" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tour_name"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/signika" />
 
         <View
                 android:layout_width="match_parent"
