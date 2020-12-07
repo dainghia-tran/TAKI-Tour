@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
@@ -54,11 +55,10 @@ public class TourDashboard extends AppCompatActivity {
     private static final int PERMISSION_TO_SELECT_IMAGE_FROM_GALLERY = 100;
     private static final int PICK_IMAGE_MULTIPLE = 200;
 
-    private String imageEncoded;
-    private List<String> imagesEncodedList;
 
     private Toolbar tbReturn;
-    private TextView tvYourName;
+    private Toolbar tbEditTour;
+
     private ImageButton imgBtnLocate;
     private ImageButton imgBtnCall;
     private ImageButton imgBtnTimeline;
@@ -68,6 +68,21 @@ public class TourDashboard extends AppCompatActivity {
 
     private FirebaseStorage storage;
     private StorageReference storageReference;
+
+    private final Handler handler = new Handler();
+
+    public void linkElements(){
+        imgBtnLocate = findViewById(R.id.imgbtn_locate);
+        imgBtnCall = findViewById(R.id.imgbtn_call);
+        imgBtnTimeline = findViewById(R.id.imgbtn_timeline);
+        imgBtnLibrary = findViewById(R.id.imgbtn_library);
+        imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
+        imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);
+
+        tbReturn = findViewById(R.id.tb_return_dashboard);
+        tbEditTour = findViewById(R.id.tb_edit_tour);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,19 +98,40 @@ public class TourDashboard extends AppCompatActivity {
         tourId = intent.getStringExtra("TOUR_ID");
         String tourName = getIntent().getStringExtra("TOUR_NAME");
 
-        ((TextView) (findViewById(R.id.your_name))).setText(tourName);
+        linkElements();
 
-        tbReturn = findViewById(R.id.tb_return_dashboard);
+        ((TextView) (findViewById(R.id.tour_name))).setText(tourName);
+
         tbReturn.setNavigationOnClickListener(v -> {
             finish();
         });
 
-        imgBtnLocate = findViewById(R.id.imgbtn_locate);
-        imgBtnCall = findViewById(R.id.imgbtn_call);
-        imgBtnTimeline = findViewById(R.id.imgbtn_timeline);
-        imgBtnLibrary = findViewById(R.id.imgbtn_library);
-        imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
-        imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);
+        tbEditTour.setNavigationOnClickListener(v->{
+            myDBReference.child("tours")
+                    .child(tourId)
+                    .child("tourGuide")
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String tourGuideEmail = snapshot.getValue(String.class);
+                            assert tourGuideEmail != null;
+                            if(tourGuideEmail.equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())){
+                                Intent intentEdit = new Intent(TourDashboard.this, TourEdit.class);
+                                intentEdit.putExtra("TOUR_ID", tourId);
+                                startActivity(intentEdit);
+                            }else{
+                                handler.post(()->{
+                                   Toast.makeText(TourDashboard.this, "Bạn không có quyền chỉnh sửa tour này.", Toast.LENGTH_SHORT).show();
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+        });
 
         imgBtnLocate.setOnClickListener(v -> {
             Intent intentMaps = new Intent(TourDashboard.this, Maps.class);
@@ -175,6 +211,10 @@ public class TourDashboard extends AppCompatActivity {
                             try {
                                 if (snapshot.getValue(Boolean.class)) {
                                     getLastLocation();
+                                }else{
+                                    handler.post(()->{
+                                       Toast.makeText(TourDashboard.this, "Tour đã kết thúc.", Toast.LENGTH_SHORT).show();
+                                    });
                                 }
                             } catch (NullPointerException e) {
                                 Log.d("Get isAvailable", "failed");

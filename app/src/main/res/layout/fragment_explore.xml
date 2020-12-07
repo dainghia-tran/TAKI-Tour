@@ -1,68 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_height="match_parent"
-    android:layout_width="match_parent">
-
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="30dp"
-    android:paddingHorizontal="20dp"
-    android:background="@color/main_color">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/signika_semibold"
-        android:text="@string/Hello"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/signika"
-        android:text="@string/where_do_you_wanna_go"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/edt_code"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/bg_second_color"
-        android:fontFamily="@font/signika"
-        android:gravity="center_horizontal"
-        android:textSize="14sp"
-        android:singleLine="true"
-        android:hint="@string/enter_provided_code"
-        android:importantForAutofill="no"
-        android:textColor="#206A5D" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/signika"
-        android:text="@string/up_coming"
-        android:textColor="@color/white"
-        android:textSize="14sp" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/white"
-        android:layout_marginBottom="10dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_explore"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_main_color"
-        android:padding="0dp"/>
+        android:layout_width="match_parent">
 
-</LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="30dp"
+            android:paddingHorizontal="20dp"
+            android:background="@color/main_color">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/signika_semibold"
+                android:text="@string/Hello"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/signika"
+                android:text="@string/where_do_you_wanna_go"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        <EditText
+                android:id="@+id/edt_code"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:inputType="textCapCharacters"
+                android:gravity="center_horizontal"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:hint="@string/enter_provided_code"
+                android:importantForAutofill="no"
+                android:textColor="#206A5D" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/up_coming"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"
+                android:layout_marginBottom="10dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_explore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_main_color"
+                android:padding="0dp" />
+
+    </LinearLayout>
 
 </ScrollView>

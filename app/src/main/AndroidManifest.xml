@@ -15,7 +15,8 @@
             android:roundIcon="@mipmap/app_icon"
             android:supportsRtl="true"
             android:theme="@style/SplashscreenTheme">
-        <activity android:name=".views.ForgotPassword"></activity>
+        <activity android:name=".views.TourEdit"></activity>
+        <activity android:name=".views.ForgotPassword" />
         <activity android:name=".views.Library" />
         <activity android:name=".views.ChangeInformation" />
         <activity android:name=".views.TourDashboard" />
@@ -32,6 +33,7 @@
         <activity android:name=".views.LoginActivity" />
         <activity android:name=".views.MainActivity" />
         <activity android:name=".views.CreateNotification" />
+
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyCbjSd_WogDL47q_Jxdt6mNjGcOgZTXK84" />
