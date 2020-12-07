@@ -27,19 +27,20 @@
                 android:fontFamily="@font/signika"
                 android:text="@string/where_do_you_wanna_go"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
         <EditText
                 android:id="@+id/edt_code"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
+                android:textAlignment="center"
                 android:background="@drawable/bg_second_color"
                 android:fontFamily="@font/signika"
                 android:inputType="textCapCharacters"
                 android:imeOptions="actionDone"
                 android:gravity="center_horizontal"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:singleLine="true"
                 android:hint="@string/enter_provided_code"
                 android:importantForAutofill="no"
@@ -52,7 +53,7 @@
                 android:fontFamily="@font/signika"
                 android:text="@string/up_coming"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="16sp" />
 
         <View
                 android:layout_width="match_parent"

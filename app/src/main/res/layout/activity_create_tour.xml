@@ -1,243 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/tour_create_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_color"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tour_create_activity"
-            android:background="@color/main_color"
-            android:padding="30dp"
+            android:fontFamily="@font/signika_bold"
+            android:text="@string/tour_create_label"
+            android:textColor="@color/white"
+            android:textSize="36sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
-        <TextView
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/signika_bold"
-                android:textSize="36sp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/tour_name"
                 android:textColor="@color/white"
-                android:text="@string/tour_create_label" />
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="40dp">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/signika"
-                    android:text="@string/tour_name" />
+                android:textSize="18sp" />
 
             <EditText
-                    android:id="@+id/edt_tour_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/signika"
-                    android:background="@drawable/bg_second_color"
-                    android:textColor="#206A5D"
-                    android:hint="" />
+                android:id="@+id/edt_tour_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:hint=""
+                android:textColor="#206A5D" />
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/signika"
-                    android:text="@string/tour_short_description" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/tour_short_description"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <EditText
-                    android:id="@+id/edt_tour_short_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:fontFamily="@font/signika"
-                    android:background="@drawable/bg_second_color"
-                    android:textColor="#206A5D"
-                    android:hint="" />
+                android:id="@+id/edt_tour_short_description"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:gravity="top|left"
+                android:hint=""
+                android:inputType="textMultiLine"
+                android:lines="6"
+                android:maxLines="8"
+                android:minLines="4"
+                android:textColor="#206A5D" />
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/signika"
-                    android:text="@string/tour_price" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/tour_price"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <EditText
-                    android:id="@+id/edt_tour_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:fontFamily="@font/signika"
-                    android:textColorHint="#206A5D"
-                    android:background="@drawable/bg_second_color"
-                    android:textColor="#206A5D"
-                    android:inputType="number" />
+                android:id="@+id/edt_tour_price"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:inputType="number"
+                android:textColor="#206A5D"
+                android:textColorHint="#206A5D" />
         </LinearLayout>
 
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/signika"
-                    android:text="@string/tour_duration" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/signika"
+                android:text="@string/tour_duration"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/signika"
-                            android:text="@string/tour_start"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/signika"
+                        android:text="@string/tour_start"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <EditText
-                            android:id="@+id/edt_tour_start_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:inputType="none"
-                            android:background="@drawable/bg_second_color"
-                            android:fontFamily="@font/signika"
-                            android:textColor="#206A5D"
-                            android:clickable="true"
-                            android:textColorHint="#206A5D"
-                            android:focusable="true" />
+                        android:id="@+id/edt_tour_start_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_second_color"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/signika"
+                        android:inputType="none"
+                        android:textColor="#206A5D"
+                        android:textColorHint="#206A5D" />
                 </LinearLayout>
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginStart="5dp"
-                        android:layout_weight="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="5dp"
-                            android:fontFamily="@font/signika"
-                            android:text="@string/tour_end"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/signika"
+                        android:text="@string/tour_end"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
 
                     <EditText
-                            android:id="@+id/edt_tour_end_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:background="@drawable/bg_second_color"
-                            android:fontFamily="@font/signika"
-                            android:textColorHint="#206A5D"
-                            android:inputType="none"
-                            android:clickable="true"
-                            android:textColor="#206A5D"
-                            android:focusable="true" />
+                        android:id="@+id/edt_tour_end_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_second_color"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/signika"
+                        android:inputType="none"
+                        android:textColor="#206A5D"
+                        android:textColorHint="#206A5D" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginVertical="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"
-                    android:fontFamily="@font/signika"
-                    android:text="@string/tour_bg_image" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/tour_bg_image"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <ImageView
-                        android:id="@+id/iv_tour_background"
-                        android:layout_width="150dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/bg_second_color"
-                        android:fontFamily="@font/signika"
-                        android:scaleType="centerCrop"
-                        android:adjustViewBounds="true"
-                        android:textColor="#206A5D" />
+                    android:id="@+id/iv_tour_background"
+                    android:layout_width="150dp"
+                    android:layout_height="100dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/bg_second_color"
+                    android:fontFamily="@font/signika"
+                    android:scaleType="centerCrop"
+                    android:textColor="#206A5D" />
 
                 <Button
-                        android:id="@+id/btn_upload_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:background="@drawable/bg_button"
-                        android:fontFamily="@font/signika_semibold"
-                        android:text="@string/tour_upload_image"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                    android:id="@+id/btn_upload_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/bg_button"
+                    android:fontFamily="@font/signika_semibold"
+                    android:text="@string/tour_upload_image"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tour_policy_quote"
-                android:textSize="14sp"
-                android:layout_marginVertical="5dp" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:text="@string/tour_policy_quote"
+            android:textSize="14sp" />
 
         <Button
-                android:id="@+id/btn_create_tour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_button"
-                android:fontFamily="@font/signika_semibold"
-                android:text="@string/tour_create"
-                android:textAllCaps="false"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+            android:id="@+id/btn_create_tour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/signika_semibold"
+            android:text="@string/tour_create"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
 
     </LinearLayout>
