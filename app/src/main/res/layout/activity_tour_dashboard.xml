@@ -14,37 +14,21 @@
             android:background="@color/main_color"
             android:orientation="vertical">
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <Toolbar
-                    android:id="@+id/tb_return_dashboard"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
-
-            <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-            <Toolbar
-                    android:layout_width="wrap_content"
-                    android:id="@+id/tb_edit_tour"
-                    android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content"
-                    android:navigationIcon="@drawable/ic_baseline_edit_24" />
-        </LinearLayout>
+        <Toolbar
+                android:id="@+id/tb_return_dashboard"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tour_name"
+                android:id="@+id/your_name"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/signika" />
+                android:fontFamily="@font/signika"
+                android:text="@string/name" />
 
         <View
                 android:layout_width="match_parent"
@@ -58,7 +42,6 @@
                 android:layout_height="500dp">
 
             <ImageButton
-<<<<<<< HEAD
                 android:id="@+id/imgbtn_locate"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -68,28 +51,17 @@
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-=======
-                    android:id="@+id/imgbtn_locate"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    android:src="@drawable/ic_baseline_my_location_24"
-                    app:layout_constraintBottom_toTopOf="@id/imgbtn_timeline"
-                    app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
->>>>>>> 4c503c0eeb60899d4d82d5656f4e0145aa70eed6
 
             <ImageButton
-                    android:id="@+id/imgbtn_call"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    android:src="@drawable/ic_baseline_perm_phone_msg_24"
-                    app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/imgbtn_call"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#BFDCAE"
+                android:src="@drawable/ic_baseline_perm_phone_msg_24"
+                app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                     android:id="@+id/imgbtn_annoucement"
@@ -114,7 +86,6 @@
                     app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos" />
 
             <ImageButton
-<<<<<<< HEAD
                 android:id="@+id/imgbtn_add_photos"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -137,30 +108,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgbtn_annoucement"
                 tools:src="@drawable/ic_outline_notifications_24" />
-=======
-                    android:id="@+id/imgbtn_add_photos"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.165"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
-                    tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
-
-            <ImageButton
-                    android:id="@+id/imgbtn_create_noti"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="#BFDCAE"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.835"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgbtn_timeline"
-                    tools:src="@drawable/ic_outline_notifications_24" />
->>>>>>> 4c503c0eeb60899d4d82d5656f4e0145aa70eed6
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
