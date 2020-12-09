@@ -103,7 +103,7 @@ public class ChangeInformation extends AppCompatActivity {
                         }
 
                         if (currentUser.getProfileImage() != null && getApplicationContext() != null) {
-                            Glide.with(ChangeInformation.this).load(currentUser.getProfileImage()).into(ivProfileImage);
+                            Glide.with(getBaseContext()).load(currentUser.getProfileImage()).into(ivProfileImage);
                         }
                         edtName.setText(currentUser.getName());
                         edtDescription.setText(currentUser.getDescription());
@@ -198,22 +198,12 @@ public class ChangeInformation extends AppCompatActivity {
             String newTelephone = edtTelephone.getText().toString();
 
             List<String> coverImage = new ArrayList<>();
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Đang cập nhật...");
-            progressDialog.show();
 
             DatabaseReference databaseReference = myDBReference.child("users")
                     .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","));
 
-            databaseReference
-                    .child("description")
-                    .setValue(newDescription);
-            databaseReference
-                    .child("name")
-                    .setValue(newName);
-            databaseReference
-                    .child("telephone")
-                    .setValue(newTelephone);
+
+
             if (filePath != null) {
                 StorageReference ref = storageReference.child("images/users/" + FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ",") + "/" + UUID.randomUUID().toString());
                 ref.putFile(filePath)
@@ -245,13 +235,18 @@ public class ChangeInformation extends AppCompatActivity {
                         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
-                                        .getTotalByteCount());
-                                progressDialog.setMessage("Đã tải " + (int) progress + "%");
                             }
                         });
             }
-            progressDialog.dismiss();
+            databaseReference
+                    .child("description")
+                    .setValue(newDescription);
+            databaseReference
+                    .child("name")
+                    .setValue(newName);
+            databaseReference
+                    .child("telephone")
+                    .setValue(newTelephone);
             Toast.makeText(ChangeInformation.this, "Thay đổi thông tin thành công.", Toast.LENGTH_SHORT).show();
             finish();
         });

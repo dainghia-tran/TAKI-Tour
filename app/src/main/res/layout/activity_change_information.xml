@@ -32,7 +32,14 @@
         android:fontFamily="@font/signika"
         android:text="@string/name"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/signika_light"
+        android:text="@string/max_length_20"
+        />
     <EditText
         android:id="@+id/edt_name_change_information"
         android:layout_width="match_parent"
@@ -41,7 +48,7 @@
         android:fontFamily="@font/signika"
         android:hint="@string/hint_name"
         android:singleLine="true"
-        android:maxLength="40"
+        android:maxLength="20"
         android:textColor="@color/main_color"
         android:layout_marginBottom="20dp"/>
 

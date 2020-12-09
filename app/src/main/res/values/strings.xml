@@ -9,6 +9,7 @@
     <string name="password">Mật khẩu</string>
     <string name="re_password">Xác nhận mật khẩu</string>
     <string name="name">Tên của bạn</string>
+    <string name="max_length_20">tối đa 20 kí tự</string>
     <string name="or">Hoặc</string>
     <string name="tour_create_label">Tạo tour mới</string>
     <string name="tour_name">Tên tour</string>
