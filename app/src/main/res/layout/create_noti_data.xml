@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color">
     <Toolbar
         android:id="@+id/tb_return_tour_dashboard"
         android:layout_marginTop="10dp"
@@ -39,7 +45,7 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:fontFamily="@font/signika"
-            android:text="Tiêu đề"
+            android:text="@string/title"
             />
 
         <EditText
@@ -48,9 +54,9 @@
             android:layout_height="50dp"
             android:background="@drawable/bg_second_color"
             android:fontFamily="@font/signika"
-            android:hint="Nhập tiêu đề của thông báo"
+            android:hint="@string/enter_title"
             android:singleLine="true"
-            android:textColor="#206A5D" />
+            android:textColor="@color/main_color" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,7 +72,7 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:fontFamily="@font/signika"
-            android:text="Nội dung"
+            android:text="@string/content"
             />
 
         <EditText
@@ -76,25 +82,27 @@
             android:fontFamily="@font/signika"
             android:background="@drawable/bg_second_color"
             android:singleLine="true"
-            android:hint="Nhập nội dung thông báo"
+            android:hint="@string/enter_content_notification"
             android:gravity="top|left"
             android:inputType="textMultiLine"
             android:lines="8"
             android:minLines="6"
             android:maxLines="10"
-            android:textColor="#206A5D"
+            android:textColor="@color/main_color"
             />
         <Button
             android:id="@+id/btn_send_noti"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/bg_button"
             android:fontFamily="@font/signika_semibold"
-            android:text="Gửi"
+            android:text="@string/btn_send"
             android:textAllCaps="false"
-            android:textColor="#206A5D"
+            android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

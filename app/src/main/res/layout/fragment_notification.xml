@@ -13,9 +13,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_gravity="center"
             android:fontFamily="@font/signika_semibold"
-            android:text="Thông báo"
+            android:text="@string/notification"
             android:textColor="@color/white"
             android:textSize="42sp" />
 
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/signika"
         android:layout_marginTop="10dp"
-        android:text="Mới nhất"
+        android:text="@string/newest"
         android:textColor="@color/white"
         android:textSize="16sp" />
 
@@ -40,6 +40,7 @@
         android:id="@+id/rv_list_notification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/main_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

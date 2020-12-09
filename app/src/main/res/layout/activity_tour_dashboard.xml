@@ -75,7 +75,7 @@
                 android:id="@+id/imgbtn_locate"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="#BFDCAE"
+                android:background="@drawable/bg_button"
                 android:src="@drawable/ic_baseline_my_location_24"
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_create_noti"
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
@@ -86,7 +86,7 @@
                 android:id="@+id/imgbtn_call"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="#BFDCAE"
+                android:background="@drawable/bg_button"
                 android:src="@drawable/ic_baseline_perm_phone_msg_24"
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +97,7 @@
                 android:id="@+id/imgbtn_create_noti"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="#BFDCAE"
+                android:background="@drawable/bg_button"
                 android:src="@drawable/ic_baseline_event_note_24"
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos"
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_library"
@@ -108,7 +108,7 @@
                 android:id="@+id/imgbtn_library"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:background="#BFDCAE"
+                android:background="@drawable/bg_button"
                 android:src="@drawable/ic_baseline_photo_24"
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,12 +120,12 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginBottom="96dp"
-                android:background="#BFDCAE"
+                android:background="@drawable/bg_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.21"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:src="@drawable/ic_baseline_add_photo_alternate_24" />
+                android:src="@drawable/ic_baseline_add_a_photo_24" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

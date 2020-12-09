@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
     <LinearLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:gravity="top"
+            android:gravity="center"
             android:background="@drawable/bg_main_color"
-            android:orientation="vertical"
-            android:padding="0dp">
+            android:orientation="vertical">
 
         <ImageView
                 android:id="@+id/img_image_detail"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/cover_image" />
 
         <LinearLayout
@@ -39,27 +38,12 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_star_rate_24" />
-
-                <TextView
-                        android:id="@+id/tv_rating_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:maxLines="1"
-                        android:text="@string/rating"
-                        android:fontFamily="@font/signika_light"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
 
                 <TextView
                         android:id="@+id/tv_duration_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+
                         android:maxLines="1"
                         android:text="@string/duration"
                         android:fontFamily="@font/signika_light"
@@ -67,12 +51,21 @@
                         android:textSize="12sp" />
 
                 <TextView
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:maxLines="1"
+                    android:text="@string/price"
+                    android:fontFamily="@font/signika_light"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+                <TextView
                         android:id="@+id/tv_price_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="5dp"
                         android:maxLines="1"
-                        android:text="@string/price"
                         android:fontFamily="@font/signika_light"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -134,33 +127,34 @@
             </LinearLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_margin="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <EditText
-                        android:background="@drawable/bg_second_color"
-                        android:id="@+id/edt_code_detail"
-                        android:layout_width="150dp"
-                        android:gravity="center"
-                        android:hint="@string/enter_code"
-                        android:layout_marginEnd="20dp"
-                        android:inputType="textCapCharacters"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
+                    android:id="@+id/edt_code_detail"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/bg_second_color"
+                    android:gravity="center"
+                    android:hint="@string/enter_code"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/main_color"
+                    android:textSize="15sp" />
 
                 <Button
-                        android:background="@drawable/bg_button"
-                        android:id="@+id/btn_confirm_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/confirm"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/signika_semibold"
-                        android:textAllCaps="false"
-                        android:textColor="#206A5D" />
+                    android:id="@+id/btn_confirm_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_button"
+                    android:fontFamily="@font/signika_semibold"
+                    android:text="@string/confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
 

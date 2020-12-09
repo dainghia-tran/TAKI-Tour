@@ -3,6 +3,8 @@ package com.aws.takitour.adapters;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,7 +76,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
         if (tour != null) {
             Glide.with(context).load(tour.getCoverImage().get(0)).into(holder.image);
             holder.tourName.setText(tour.getName());
-            holder.rating.setText(String.valueOf(tour.getOverallRating()));
             holder.duration.setText(("Từ " + tour.getStartDate() + " đến " + tour.getEndDate()));
             holder.cost.setText(NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(Double.valueOf(tour.getPrice())));
 
@@ -146,10 +147,11 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                 }
                                 Dialog dialog = new Dialog(context);
                                 dialog.setContentView(R.layout.dialog_tour_details);
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                                 ImageView imageView = dialog.findViewById(R.id.img_image_detail);
                                 TextView tourNameDetail = dialog.findViewById(R.id.tv_tour_name_detail);
-                                TextView ratingDetail = dialog.findViewById(R.id.tv_rating_detail);
+
                                 TextView durationDetail = dialog.findViewById(R.id.tv_duration_detail);
                                 TextView costDetail = dialog.findViewById(R.id.tv_price_detail);
                                 TextView shortDescriptionDetail = dialog.findViewById(R.id.tv_short_description_detail);
@@ -159,7 +161,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
 
                                 Glide.with(context).load(tour.getCoverImage().get(0)).into(imageView);
                                 tourNameDetail.setText(tour.getName());
-                                ratingDetail.setText(String.valueOf(tour.getOverallRating()));
                                 durationDetail.setText(("Từ " + tour.getStartDate() + " đến " + tour.getEndDate()));
                                 costDetail.setText(NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(Double.valueOf(tour.getPrice())));
                                 shortDescriptionDetail.setText(tour.getDescription());
@@ -254,7 +255,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
 
         ImageView image;
         TextView tourName;
-        TextView rating;
         TextView duration;
         TextView cost;
         TextView tourGuideName;
@@ -266,7 +266,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
             tourCard = itemView.findViewById(R.id.tour_card_layout);
             image = itemView.findViewById(R.id.img_tour_image);
             tourName = itemView.findViewById(R.id.tv_tour_name);
-            rating = itemView.findViewById(R.id.tv_tour_rating);
             duration = itemView.findViewById(R.id.tv_tour_duration);
             cost = itemView.findViewById(R.id.tv_tour_cost);
             tourGuideName = itemView.findViewById((R.id.tv_tour_guide_name));

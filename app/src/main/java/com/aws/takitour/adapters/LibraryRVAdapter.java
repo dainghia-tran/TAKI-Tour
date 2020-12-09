@@ -3,6 +3,8 @@ package com.aws.takitour.adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,11 +47,11 @@ public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.Libr
 
         if (picture != null) {
             Glide.with(context).load(picture.getPic().get(0)).into(holder.picture);
-            holder.owner.setText(picture.getOwner());
         }
         holder.item.setOnClickListener(v -> {
             Dialog dialog = new Dialog(context);
             dialog.setContentView(R.layout.dialog_picture_item);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             ImageView imageView = dialog.findViewById(R.id.img_picture_dialog);
             TextView owner = dialog.findViewById(R.id.tv_owner_dialog);
@@ -66,13 +68,11 @@ public class LibraryRVAdapter extends RecyclerView.Adapter<LibraryRVAdapter.Libr
     }
 
     public static class LibraryViewHolder extends RecyclerView.ViewHolder{
-        private TextView owner;
         private ImageView picture;
         LinearLayout item;
         public LibraryViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            owner = itemView.findViewById(R.id.tv_owner);
             picture = itemView.findViewById(R.id.img_picture);
             item = itemView.findViewById((R.id.picture_item_layout));
         }

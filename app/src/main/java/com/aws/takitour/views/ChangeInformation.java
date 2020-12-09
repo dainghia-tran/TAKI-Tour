@@ -198,11 +198,23 @@ public class ChangeInformation extends AppCompatActivity {
             String newTelephone = edtTelephone.getText().toString();
 
             List<String> coverImage = new ArrayList<>();
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Đang cập nhật...");
+            progressDialog.show();
 
+            DatabaseReference databaseReference = myDBReference.child("users")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","));
+
+            databaseReference
+                    .child("description")
+                    .setValue(newDescription);
+            databaseReference
+                    .child("name")
+                    .setValue(newName);
+            databaseReference
+                    .child("telephone")
+                    .setValue(newTelephone);
             if (filePath != null) {
-                final ProgressDialog progressDialog = new ProgressDialog(this);
-                progressDialog.setTitle("Đang cập nhật...");
-                progressDialog.show();
                 StorageReference ref = storageReference.child("images/users/" + FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ",") + "/" + UUID.randomUUID().toString());
                 ref.putFile(filePath)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -219,25 +231,10 @@ public class ChangeInformation extends AppCompatActivity {
                                 if (coverImage.isEmpty()) {
                                     coverImage.add(imageLink);
                                 }
-                                DatabaseReference databaseReference = myDBReference.child("users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","));
 
-                                databaseReference
-                                        .child("description")
-                                        .setValue(newDescription);
-                                databaseReference
-                                        .child("name")
-                                        .setValue(newName);
-                                databaseReference
-                                        .child("telephone")
-                                        .setValue(newTelephone);
                                 databaseReference
                                         .child("profileImage")
                                         .setValue(imageLink);
-
-                                progressDialog.dismiss();
-                                Toast.makeText(ChangeInformation.this, "Thay đổi thông tin thành công.", Toast.LENGTH_SHORT).show();
-                                finish();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -254,6 +251,9 @@ public class ChangeInformation extends AppCompatActivity {
                             }
                         });
             }
+            progressDialog.dismiss();
+            Toast.makeText(ChangeInformation.this, "Thay đổi thông tin thành công.", Toast.LENGTH_SHORT).show();
+            finish();
         });
 
     }

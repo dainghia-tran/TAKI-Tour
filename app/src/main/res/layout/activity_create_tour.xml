@@ -40,8 +40,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/bg_second_color"
                 android:fontFamily="@font/signika"
-                android:hint=""
-                android:textColor="#206A5D" />
+                android:textColor="@color/main_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -71,7 +70,7 @@
                 android:lines="6"
                 android:maxLines="8"
                 android:minLines="4"
-                android:textColor="#206A5D" />
+                android:textColor="@color/main_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,8 +95,7 @@
                 android:background="@drawable/bg_second_color"
                 android:fontFamily="@font/signika"
                 android:inputType="number"
-                android:textColor="#206A5D"
-                android:textColorHint="#206A5D" />
+                android:textColor="@color/main_color" />
         </LinearLayout>
 
 
@@ -146,8 +144,7 @@
                         android:focusable="true"
                         android:fontFamily="@font/signika"
                         android:inputType="none"
-                        android:textColor="#206A5D"
-                        android:textColorHint="#206A5D" />
+                        android:textColor="@color/main_color" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -176,8 +173,7 @@
                         android:focusable="true"
                         android:fontFamily="@font/signika"
                         android:inputType="none"
-                        android:textColor="#206A5D"
-                        android:textColorHint="#206A5D" />
+                        android:textColor="@color/main_color" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -209,8 +205,7 @@
                     android:adjustViewBounds="true"
                     android:background="@drawable/bg_second_color"
                     android:fontFamily="@font/signika"
-                    android:scaleType="centerCrop"
-                    android:textColor="#206A5D" />
+                    android:scaleType="centerCrop" />
 
                 <Button
                     android:id="@+id/btn_upload_image"

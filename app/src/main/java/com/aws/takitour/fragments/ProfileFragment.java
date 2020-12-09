@@ -82,7 +82,7 @@ public class ProfileFragment extends Fragment {
                             email.setText(currentUser.getEmail());
                             phoneNumber.setText(currentUser.getTelephone());
                             introduction.setText(currentUser.getDescription());
-                            introduction.setText("Xin chào, tôi yêu du lịch và gặp gỡ mọi người từ nhiều vùng miền của đất nước Việt Nam này. Tôi tin sự chăm chỉ và nhiệt tình của tôi sẽ khiến bạn hài lòng.");
+                            //introduction.setText("Xin chào, tôi yêu du lịch và gặp gỡ mọi người từ nhiều vùng miền của đất nước Việt Nam này. Tôi tin sự chăm chỉ và nhiệt tình của tôi sẽ khiến bạn hài lòng.");
                         }
                     }
 

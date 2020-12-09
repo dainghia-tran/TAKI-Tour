@@ -95,6 +95,10 @@
     <string name="ended">Đã kết thúc</string>
 
     <string name="announcement">Thông báo chung từ HDV</string>
-
+    <string name="title">Tiêu đề</string>
+    <string name="enter_title">Nhập tiêu đề của thông báo</string>
+    <string name="content">Nội dung</string>
+    <string name="enter_content_notification">Nhập nội dung thông báo</string>
+    <string name="newest">Mới nhất</string>
 
 </resources>

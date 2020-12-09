@@ -10,7 +10,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/main_color"
-        android:padding="20dp">
+        android:padding="30dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/signika_semibold"
+        android:text="@string/profile"
+        android:textColor="@color/white"
+        android:textSize="42sp" />
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -32,7 +40,7 @@
                 app:layout_constraintStart_toEndOf="@+id/img_image_profile"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="10dp"
-                android:textSize="22sp"
+                android:textSize="23sp"
                 android:fontFamily="@font/signika_bold"
                 android:textColor="@color/white"
                 android:maxLength="18" />
@@ -52,17 +60,17 @@
                 android:textColor="@color/white" />
 
         <TextView
-                android:id="@+id/tv_phone_number_profile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/img_image_profile"
-                app:layout_constraintTop_toBottomOf="@id/tv_email_profile"
-                android:layout_marginStart="10dp"
-                android:textSize="16sp"
-                android:maxLines="1"
-                android:fontFamily="@font/signika"
-                android:textColor="@color/white" />
+            android:id="@+id/tv_phone_number_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/signika"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_image_profile"
+            app:layout_constraintTop_toBottomOf="@id/tv_email_profile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -147,7 +155,7 @@
             android:fontFamily="@font/signika_semibold"
             android:text="@string/log_out"
             android:textAllCaps="false"
-            android:textColor="@color/main_color"
+            android:textColor="@color/black"
             android:textSize="18sp" />
 
     <LinearLayout

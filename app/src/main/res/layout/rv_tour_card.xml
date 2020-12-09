@@ -5,15 +5,15 @@
     android:id="@+id/tour_card_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="0dp"
     android:layout_marginBottom="5dp"
     android:background="@drawable/bg_second_color">
 
     <ImageView
         android:id="@+id/img_tour_image"
-        android:layout_width="133dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/card_content_descriptor"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,34 +29,26 @@
         android:paddingBottom="10dp"
         android:text="Tour Name"
         android:textColor="@color/main_color"
-        android:textSize="14sp"
+        android:textSize="18sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_tour_rating"
+        android:id="@+id/tv_tour_cost_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:fontFamily="@font/signika"
         android:maxLines="1"
-        android:paddingEnd="2dp"
         android:textColor="@color/main_color"
-        android:textSize="10sp"
+        android:textSize="12sp"
+        android:text="@string/price"
+        android:layout_marginEnd="5dp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
-        app:layout_constraintRight_toLeftOf="@id/img_star"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
-        tools:ignore="RtlSymmetry,SmallSp" />
-
-    <ImageView
-        android:id="@+id/img_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_stars_8"
-        app:layout_constraintLeft_toRightOf="@id/tv_tour_rating"
         app:layout_constraintRight_toLeftOf="@id/tv_tour_cost"
-        app:layout_constraintTop_toBottomOf="@id/tv_tour_name" />
+        tools:ignore="SmallSp" />
 
 
     <TextView
@@ -67,8 +59,8 @@
         android:fontFamily="@font/signika"
         android:maxLines="1"
         android:textColor="@color/main_color"
-        android:textSize="10sp"
-        app:layout_constraintLeft_toRightOf="@id/img_star"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@id/tv_tour_cost_text"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
         tools:ignore="SmallSp" />
 
@@ -80,9 +72,9 @@
         android:fontFamily="@font/signika"
         android:maxLines="1"
         android:textColor="@color/main_color"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_tour_rating"
+        app:layout_constraintTop_toBottomOf="@id/tv_tour_cost"
         tools:ignore="SmallSp" />
 
 
@@ -96,7 +88,7 @@
         android:paddingRight="5dp"
         android:text="@string/tour_guide"
         android:textColor="@color/main_color"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
         app:layout_constraintRight_toLeftOf="@id/tv_tour_guide_name"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_duration" />
@@ -108,7 +100,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/signika_light"
         android:textColor="@color/main_color"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/tv_tour_guide"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_tour_duration" />
