@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/tour_dashboard_activity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/main_color"
         android:orientation="vertical"
         android:padding="20dp">
@@ -25,19 +25,19 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="10dp"
-                android:theme="@style/Theme.AppCompat.NoActionBar"
-                android:navigationIcon="@drawable/ic_baseline_arrow_back_24" />
+                android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                android:theme="@style/Theme.AppCompat.NoActionBar" />
 
             <TextView
                 android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/signika"
-                android:text="Tour Dashboard"
-                android:textAlignment="center"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/signika"
+                android:text="@string/tour_dashboard"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="22sp" />
 
@@ -53,9 +53,9 @@
 
         <TextView
             android:id="@+id/tour_name"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/signika"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -80,7 +80,8 @@
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_create_noti"
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_call"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/imgbtn_call"
@@ -91,7 +92,8 @@
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_library"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgbtn_locate"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/imgbtn_create_noti"
@@ -102,7 +104,8 @@
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos"
                 app:layout_constraintEnd_toStartOf="@id/imgbtn_library"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgbtn_locate" />
+                app:layout_constraintTop_toBottomOf="@id/imgbtn_locate"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/imgbtn_library"
@@ -113,7 +116,8 @@
                 app:layout_constraintBottom_toTopOf="@id/imgbtn_add_photos"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgbtn_create_noti"
-                app:layout_constraintTop_toBottomOf="@id/imgbtn_call" />
+                app:layout_constraintTop_toBottomOf="@id/imgbtn_call"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:id="@+id/imgbtn_add_photos"
@@ -121,11 +125,12 @@
                 android:layout_height="100dp"
                 android:layout_marginBottom="96dp"
                 android:background="@drawable/bg_button"
+                android:src="@drawable/ic_baseline_add_a_photo_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.21"
                 app:layout_constraintStart_toStartOf="parent"
-                android:src="@drawable/ic_baseline_add_a_photo_24" />
+                tools:ignore="ContentDescription" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

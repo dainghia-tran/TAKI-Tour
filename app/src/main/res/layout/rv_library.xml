@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginBottom="20dp"
         android:gravity="bottom"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/picture_item_layout">
+        android:id="@+id/picture_item_layout"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
     <ImageView
-            android:layout_gravity="bottom"
             android:id="@+id/img_picture"
-            android:scaleType="centerCrop"
             android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/tour_upload_image"
+            android:scaleType="centerCrop" />
 
 </LinearLayout>

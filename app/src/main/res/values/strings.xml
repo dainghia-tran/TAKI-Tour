@@ -85,7 +85,7 @@
     <string name="no_introduction_yet">Chưa có tiểu sử</string>
     <string name="phone_number">Số điện thoại:</string>
     <string name="no_phone_yet">Chưa có số điện thoại</string>
-    <string name="Save">Lưu những thay đổi</string>
+    <string name="Save"> Lưu </string>
     <string name="current_password">Mật khẩu hiện tại</string>
     <string name="retype_password">Xác nhận mật khẩu</string>
     <string name="new_password">Mật khẩu mới</string>
@@ -103,5 +103,8 @@
     <string name="content">Nội dung</string>
     <string name="enter_content_notification">Nhập nội dung thông báo</string>
     <string name="newest">Mới nhất</string>
+    <string name="tour_dashboard">Tour Dashboard</string>
+    <string name="send_notification">Gửi thông báo</string>
+    <string name="send_notification_to_all_member">Gửi thông báo cho du khách trong tour</string>
 
 </resources>

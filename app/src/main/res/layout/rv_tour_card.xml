@@ -28,7 +28,7 @@
         android:fontFamily="@font/signika_bold"
         android:maxLines="2"
         android:paddingBottom="10dp"
-        android:text="Tour Name"
+        android:text="@string/tour_name"
         android:textColor="@color/main_color"
         android:textSize="18sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
@@ -39,15 +39,15 @@
         android:id="@+id/tv_tour_cost_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/signika_semibold"
         android:maxLines="1"
+        android:text="@string/price"
         android:textColor="@color/main_color"
         android:textSize="14sp"
-        android:text="@string/price"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
-        app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
         app:layout_constraintRight_toLeftOf="@id/tv_tour_cost"
+        app:layout_constraintTop_toBottomOf="@id/tv_tour_name"
         tools:ignore="SmallSp" />
 
 
@@ -55,7 +55,7 @@
         android:id="@+id/tv_tour_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
+        android:layout_marginStart="3dp"
         android:fontFamily="@font/signika"
         android:maxLines="1"
         android:textColor="@color/main_color"
@@ -82,16 +82,17 @@
         android:id="@+id/tv_tour_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/signika_semibold"
-        android:paddingRight="5dp"
+        android:paddingEnd="5dp"
         android:text="@string/tour_guide"
         android:textColor="@color/main_color"
         android:textSize="14sp"
         app:layout_constraintLeft_toRightOf="@id/img_tour_image"
         app:layout_constraintRight_toLeftOf="@id/tv_tour_guide_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_tour_duration" />
+        app:layout_constraintTop_toBottomOf="@id/tv_tour_duration"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/tv_tour_guide_name"
