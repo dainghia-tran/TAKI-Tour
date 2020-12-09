@@ -93,16 +93,13 @@ public class ToursFragment extends Fragment {
                                             tourList.clear();
                                             for (DataSnapshot data : snapshot.getChildren()) {
                                                 Tour temp = new Tour();
-                                                temp.setAvailable(data.child("available").getValue(Boolean.class));
                                                 temp.setName(data.child("name").getValue(String.class));
                                                 temp.setId(data.child("id").getValue(String.class));
                                                 temp.setDescription(data.child("description").getValue(String.class));
                                                 temp.setTourGuide(data.child("tourGuide").getValue(String.class));
                                                 temp.setStartDate(data.child("startDate").getValue(String.class));
-                                                temp.setHost(data.child("host").getValue(String.class));
                                                 temp.setPrice(data.child("price").getValue(String.class));
                                                 temp.setEndDate(data.child("endDate").getValue(String.class));
-                                                temp.setOverallRating(data.child("overallRating").getValue(Float.class));
 
                                                 List<String> coverImage = new ArrayList<>();
                                                 for (DataSnapshot dataCoverImage : data.child("coverImage").getChildren()) {
@@ -110,17 +107,6 @@ public class ToursFragment extends Fragment {
                                                 }
                                                 temp.setCoverImage(coverImage);
 
-                                                List<Participant> participants = new ArrayList<>();
-                                                for (DataSnapshot dataParticipants : data.child("participants").getChildren()) {
-                                                    participants.add(dataParticipants.getValue(Participant.class));
-                                                }
-                                                temp.setParticipants(participants);
-
-                                                List<UserReview> userReviews = new ArrayList<>();
-                                                for (DataSnapshot dataUserReviews : data.child("userReviewList").getChildren()) {
-                                                    userReviews.add(dataUserReviews.getValue(UserReview.class));
-                                                }
-                                                temp.setUserReviewList(userReviews);
                                                 tourList.add(temp);
                                             }
                                             List<Tour> attendedTour = new ArrayList<>();

@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
+import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
 import com.aws.takitour.utilities.RandomString;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -136,15 +138,18 @@ public class TourCreate extends AppCompatActivity {
                                 if (coverImage.isEmpty()) {
                                     coverImage.add(imageLink);
                                 }
+                                Participant tourGuide = new Participant(tourGuideEmail, "Hướng dẫn viên");
+
                                 Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
                                 myDBReference.child("tours").child(tourId).setValue(newTour);
+                                myDBReference.child("tours").child(tourId).child("participants").child(tourGuideEmail.replace(".", ",")).setValue(tourGuide);
                                 progressDialog.dismiss();
                                 myDBReference.child("users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                                         .child("tourList")
                                         .child(newTour.getId())
                                         .setValue(newTour.getId());
-                                Snackbar.make(findViewById(R.id.tour_create_activity), "Đã tải lên.", Snackbar.LENGTH_SHORT).show();
+                                Toast.makeText(TourCreate.this, "Đã tạo tour thành công.", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         })

@@ -3,25 +3,15 @@ package com.aws.takitour.views;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Toolbar;
 
 import com.aws.takitour.R;
 import com.aws.takitour.adapters.LibraryRVAdapter;
-import com.aws.takitour.adapters.TourRVAdapter;
-import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Picture;
-import com.aws.takitour.models.Tour;
-import com.aws.takitour.models.UserReview;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -33,7 +23,7 @@ import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class Library extends AppCompatActivity {
     private RecyclerView pictureRV;
-    private List<Picture> pictureList;
+    private List<Picture> photoList;
     private LibraryRVAdapter adapter;
     private final Handler handler = new Handler();
 
@@ -59,24 +49,24 @@ public class Library extends AppCompatActivity {
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            pictureList = new ArrayList<>();
-                            pictureList.clear();
+                            photoList = new ArrayList<>();
+                            photoList.clear();
                             for (DataSnapshot data : snapshot.getChildren()) {
                                 String name = data.child("name").getValue(String.class);
-                                for (DataSnapshot image : data.child("photos").getChildren())
+                                for (DataSnapshot photos : data.child("photos").getChildren())
                                 {
-                                    List<String> picture = new ArrayList<>();
-                                    picture.add(image.getValue(String.class));
+                                    List<String> userPhotos = new ArrayList<>();
+                                    userPhotos.add(photos.getValue(String.class));
 
                                     Picture pic = new Picture();
-                                    pic.setOwner(name );
-                                    pic.setPic(picture);
+                                    pic.setOwner(name);
+                                    pic.setPic(userPhotos);
 
-                                    pictureList.add(pic);
+                                    photoList.add(pic);
                                 }
                             }
                             handler.post(() -> {
-                                adapter = new LibraryRVAdapter(Library.this, pictureList);
+                                adapter = new LibraryRVAdapter(Library.this, photoList);
                                 pictureRV.setAdapter(adapter);
 
                                 pictureRV.setLayoutManager(new GridLayoutManager(getBaseContext(),3));

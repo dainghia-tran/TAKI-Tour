@@ -1,5 +1,9 @@
 package com.aws.takitour.fragments;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
@@ -7,6 +11,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.aws.takitour.R;
 import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
 import com.aws.takitour.models.UserReview;
@@ -14,6 +19,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -36,6 +43,29 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         getMapAsync(this);
     }
 
+    private BitmapDescriptor getBitmapDescriptor(int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if(getActivity()!=null) {
+                @SuppressLint("UseCompatLoadingForDrawables") VectorDrawable vectorDrawable = (VectorDrawable) getActivity().getDrawable(id);
+
+                int h = vectorDrawable.getIntrinsicHeight();
+                int w = vectorDrawable.getIntrinsicWidth();
+
+                vectorDrawable.setBounds(0, 0, w, h);
+
+                Bitmap bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bm);
+                vectorDrawable.draw(canvas);
+
+                return BitmapDescriptorFactory.fromBitmap(bm);
+            }else{
+                return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+            }
+        } else {
+            return BitmapDescriptorFactory.fromResource(id);
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -49,22 +79,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                             tourList.clear();
                             for (DataSnapshot data : snapshot.getChildren()) {
                                 Tour temp = new Tour();
-                                temp.setAvailable(data.child("available").getValue(Boolean.class));
-                                temp.setName(data.child("name").getValue(String.class));
-                                temp.setId(data.child("id").getValue(String.class));
-                                temp.setDescription(data.child("description").getValue(String.class));
                                 temp.setTourGuide(data.child("tourGuide").getValue(String.class));
-                                temp.setStartDate(data.child("startDate").getValue(String.class));
-                                temp.setHost(data.child("host").getValue(String.class));
-                                temp.setPrice(data.child("price").getValue(String.class));
-                                temp.setEndDate(data.child("endDate").getValue(String.class));
-                                temp.setOverallRating(data.child("overallRating").getValue(Float.class));
-
-                                List<String> coverImage = new ArrayList<>();
-                                for (DataSnapshot dataCoverImage : data.child("coverImage").getChildren()) {
-                                    coverImage.add(dataCoverImage.getValue(String.class));
-                                }
-                                temp.setCoverImage(coverImage);
+                                temp.setId(data.child("id").getValue(String.class));
 
                                 List<Participant> participants = new ArrayList<>();
                                 for (DataSnapshot dataParticipants : data.child("participants").getChildren()) {
@@ -72,11 +88,6 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                                 }
                                 temp.setParticipants(participants);
 
-                                List<UserReview> userReviews = new ArrayList<>();
-                                for (DataSnapshot dataUserReviews : data.child("userReviewList").getChildren()) {
-                                    userReviews.add(dataUserReviews.getValue(UserReview.class));
-                                }
-                                temp.setUserReviewList(userReviews);
                                 tourList.add(temp);
                             }
                             Tour currentTour = new Tour();
@@ -87,9 +98,14 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                                 }
                             }
                             List<Participant> participantList = currentTour.getParticipants();
+                            Tour finalCurrentTour = currentTour;
                             handler.post(() -> {
                                 for (Participant participant : participantList) {
-                                    map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(participant.getLatitude()), Float.parseFloat(participant.getLongitude()))).title(participant.getName()));
+                                    if (participant.getEmail().equals(finalCurrentTour.getTourGuide())){
+                                        map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(participant.getLatitude()), Float.parseFloat(participant.getLongitude()))).title(participant.getName()));
+                                    } else {
+                                        map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(participant.getLatitude()), Float.parseFloat(participant.getLongitude()))).title(participant.getName()));
+                                    }
                                 }
                                 float zoomLevel = 16.0f; //This goes up to 21
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Float.parseFloat(participantList.get(0).getLatitude()), Float.parseFloat(participantList.get(0).getLongitude())), zoomLevel));

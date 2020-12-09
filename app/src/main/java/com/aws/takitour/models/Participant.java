@@ -8,7 +8,7 @@ public class Participant implements Serializable {
     private String longitude;
     private String latitude;
     private String name;
-    private List<String> uploadImageLink;
+    private List<String> photos;
 
     public Participant(){}
 
@@ -50,11 +50,11 @@ public class Participant implements Serializable {
         this.latitude = latitude;
     }
 
-    public List<String> getUploadImageLink() {
-        return uploadImageLink;
-    }
+//    public List<String> getPhotos() {
+//        return photos;
+//    }
 
-    public void setUploadImageLink(List<String> uploadImageLink) {
-        this.uploadImageLink = uploadImageLink;
-    }
+//    public void setPhotos(List<String> photos) {
+//        this.photos = photos;
+//    }
 }

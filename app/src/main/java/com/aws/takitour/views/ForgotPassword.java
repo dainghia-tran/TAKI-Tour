@@ -2,10 +2,12 @@ package com.aws.takitour.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.aws.takitour.R;
@@ -41,7 +43,8 @@ public class ForgotPassword extends AppCompatActivity {
             auth.sendPasswordResetEmail(userEmail)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Snackbar.make(findViewById(R.id.forgot_password_activity), "Chúng tôi đã gửi hướng dẫn đặt lại mật khẩu vào email của bạn.", Snackbar.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotPassword.this, "Chúng tôi đã gửi hướng dẫn đặt lại mật khẩu vào email của bạn.", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
                         } else {
                             Snackbar.make(findViewById(R.id.forgot_password_activity), "Có lỗi xảy ra, vui lòng thử lại.", Snackbar.LENGTH_SHORT).show();
                         }

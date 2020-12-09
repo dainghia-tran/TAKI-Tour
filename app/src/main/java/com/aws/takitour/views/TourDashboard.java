@@ -35,6 +35,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -70,7 +71,7 @@ public class TourDashboard extends AppCompatActivity {
 
     private final Handler handler = new Handler();
 
-    public void linkElements(){
+    public void linkElements() {
         imgBtnLocate = findViewById(R.id.imgbtn_locate);
         imgBtnCall = findViewById(R.id.imgbtn_call);
 //        ingBtnAnnouncement = findViewById(R.id.imgbtn_annoucement);
@@ -105,7 +106,7 @@ public class TourDashboard extends AppCompatActivity {
             finish();
         });
 
-        tbEditTour.setNavigationOnClickListener(v->{
+        tbEditTour.setNavigationOnClickListener(v -> {
             myDBReference.child("tours")
                     .child(tourId)
                     .child("tourGuide")
@@ -114,13 +115,13 @@ public class TourDashboard extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             String tourGuideEmail = snapshot.getValue(String.class);
                             assert tourGuideEmail != null;
-                            if(tourGuideEmail.equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())){
+                            if (tourGuideEmail.equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
                                 Intent intentEdit = new Intent(TourDashboard.this, TourEdit.class);
                                 intentEdit.putExtra("TOUR_ID", tourId);
                                 startActivity(intentEdit);
-                            }else{
-                                handler.post(()->{
-                                   Toast.makeText(TourDashboard.this, "Bạn không có quyền chỉnh sửa tour này.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                handler.post(() -> {
+                                    Toast.makeText(TourDashboard.this, "Bạn không có quyền chỉnh sửa tour này.", Toast.LENGTH_SHORT).show();
                                 });
                             }
                         }
@@ -196,7 +197,7 @@ public class TourDashboard extends AppCompatActivity {
             }
         });
 
-        imgBtnCreateNoti.setOnClickListener(v->{
+        imgBtnCreateNoti.setOnClickListener(v -> {
             Intent intentCreateNoti = new Intent(TourDashboard.this, CreateNotification.class);
             intentCreateNoti.putExtra("TOUR_ID", tourId);
             startActivity(intentCreateNoti);
@@ -213,9 +214,10 @@ public class TourDashboard extends AppCompatActivity {
                             try {
                                 if (snapshot.getValue(Boolean.class)) {
                                     getLastLocation();
-                                }else{
-                                    handler.post(()->{
-                                       Toast.makeText(TourDashboard.this, "Tour đã kết thúc.", Toast.LENGTH_SHORT).show();
+                                    Log.d("Test", "----------");
+                                } else {
+                                    handler.post(() -> {
+                                        Toast.makeText(TourDashboard.this, "Tour đã kết thúc.", Toast.LENGTH_SHORT).show();
                                     });
                                 }
                             } catch (NullPointerException e) {
@@ -273,6 +275,7 @@ public class TourDashboard extends AppCompatActivity {
                             });
                 }
                 Snackbar.make(findViewById(R.id.tour_dashboard_activity), "Hình ảnh đã được tải lên.", Snackbar.LENGTH_SHORT).show();
+                return;
             } else {
                 Toast.makeText(this, "Bạn chưa chọn hình.", Toast.LENGTH_LONG).show();
             }
@@ -299,15 +302,13 @@ public class TourDashboard extends AppCompatActivity {
                                             .child(tourId)
                                             .child("participants")
                                             .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()).replace(".", ","))
-                                            .child("latitude")
-                                            .setValue(String.valueOf(location.getLatitude()));
+                                            .child("latitude").setValue(String.valueOf(location.getLatitude()));
 
                                     myDBReference.child("tours")
                                             .child(tourId)
                                             .child("participants")
                                             .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()).replace(".", ","))
-                                            .child("longitude")
-                                            .setValue(String.valueOf(location.getLongitude()));
+                                            .child("longitude").setValue(String.valueOf(location.getLongitude()));
                                 }).start();
                             }
                         });
