@@ -78,7 +78,8 @@
                     android:fontFamily="@font/signika"
                     android:background="@drawable/bg_second_color"
                     android:textColor="@color/main_color"
-                    android:hint="" />
+                android:gravity="top|left"
+                    android:hint="@string/tour_short_description_hint" />
         </LinearLayout>
 
         <LinearLayout

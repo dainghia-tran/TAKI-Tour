@@ -1,112 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-<LinearLayout
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/main_color"
-        android:padding="30dp">
-    <ImageView
-        android:id="@+id/img_image_profile"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:scaleType="centerCrop" />
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp">
+
+        <ImageView
+            android:id="@+id/img_image_profile"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/tv_name_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="15dp"
-            android:textSize="28sp"
-            android:maxLength="20"
+            android:layout_marginBottom="5dp"
             android:fontFamily="@font/signika_bold"
-            android:textColor="@color/white"/>
-    <TextView
-        android:id="@+id/tv_introduction_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginBottom="15dp"
-        android:textSize="15sp"
-        android:maxLines="3"
-        android:fontFamily="@font/signika_light"
-        android:textColor="@color/white" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/signika"
-        android:maxLines="1"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:text="@string/email"
-        />
+            android:gravity="center"
+            android:maxLength="20"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
+
         <TextView
+            android:id="@+id/tv_introduction_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/signika_light"
+            android:gravity="center"
+            android:maxLines="3"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/signika"
+                android:maxLines="1"
+                android:text="@string/email_with_colon"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/tv_email_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15sp"
+                android:fontFamily="@font/signika_light"
                 android:maxLines="2"
-                android:fontFamily="@font/signika"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/signika"
-        android:maxLines="1"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="5dp"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:text="@string/phone_number"
-        />
-    <TextView
-        android:id="@+id/tv_phone_number_profile"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/signika"
-        android:maxLines="1"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/white"
-        tools:layout_editor_absoluteX="50dp" />
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/signika"
+            android:maxLines="1"
+            android:text="@string/phone_number"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
-    <TextView
+        <TextView
+            android:id="@+id/tv_phone_number_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/signika_light"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            tools:layout_editor_absoluteX="50dp" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
             android:fontFamily="@font/signika_light"
+            android:text="@string/account_setting"
             android:textColor="@color/second_color"
-            android:text="@string/account_setting" />
+            android:textSize="18sp" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_information_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:fontFamily="@font/signika_light"
+            android:text="@string/profile_information"
             android:textColor="@color/white"
-            android:text="@string/profile_information" />
+            android:textSize="18sp" />
 
-    <View
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
@@ -114,25 +126,25 @@
             android:background="@color/white"
             tools:layout_editor_absoluteX="50dp" />
 
-    <TextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textSize="18sp"
             android:fontFamily="@font/signika_light"
+            android:text="@string/for_tour_guide"
             android:textColor="@color/second_color"
-            android:text="@string/for_tour_guide" />
+            android:textSize="18sp" />
 
-    <TextView
+        <TextView
             android:id="@+id/tv_add_tour_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
             android:fontFamily="@font/signika_light"
+            android:text="@string/tour_create_label"
             android:textColor="@color/white"
-            android:text="@string/tour_create_label" />
+            android:textSize="18sp" />
 
-    <View
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
@@ -140,7 +152,7 @@
             android:background="@color/white"
             tools:layout_editor_absoluteX="50dp" />
 
-    <Button
+        <Button
             android:id="@+id/btn_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -153,36 +165,36 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
-        <TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/signika_light"
-                android:textColor="@color/white"
                 android:text="@string/version"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 tools:ignore="SmallSp" />
 
-        <TextView
+            <TextView
                 android:id="@+id/tv_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/signika_light"
-                android:textColor="@color/white"
                 android:text="@string/build_number"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 tools:ignore="SmallSp" />
 
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
 
 </ScrollView>

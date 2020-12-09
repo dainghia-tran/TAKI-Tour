@@ -65,7 +65,7 @@ public class CreateNotification extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         String token = snapshot.getValue(String.class);
-                                        Notification notificationHandler = new Notification("TourGuide", userTitle, userBody);
+                                        Notification notificationHandler = new Notification(tourId, userTitle, userBody);
                                         notificationHandler.sendNotification(token);
                                     }
 

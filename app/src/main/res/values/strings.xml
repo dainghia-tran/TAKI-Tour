@@ -6,14 +6,16 @@
     <string name="forgot_password"><u>Quên mật khẩu?</u></string>
     <string name="action_sign_in_short">Đăng ký</string>
     <string name="email">Email</string>
+    <string name="email_with_colon">Email:</string>
     <string name="password">Mật khẩu</string>
     <string name="re_password">Xác nhận mật khẩu</string>
     <string name="name">Tên của bạn</string>
-    <string name="max_length_20">tối đa 20 kí tự</string>
+    <string name="max_length_20">Tối đa 20 kí tự</string>
     <string name="or">Hoặc</string>
     <string name="tour_create_label">Tạo tour mới</string>
     <string name="tour_name">Tên tour</string>
     <string name="tour_short_description">Mô tả ngắn</string>
+    <string name="tour_short_description_hint">Giới thiệu về tour du lịch</string>
     <string name="tour_price">Giá tiền (VNĐ)</string>
     <string name="tour_duration">Độ dài tour</string>
     <string name="tour_start">Bắt đầu</string>
@@ -66,7 +68,7 @@
     <string name="tour_guide">Hướng dẫn viên: </string>
 
     <string name="account_setting">CÀI ĐẶT TÀI KHOẢN</string>
-    <string name="profile_information">Thông tin cá nhân</string>
+    <string name="profile_information">Sửa thông tin cá nhân</string>
     <string name="for_tour_guide">DÀNH CHO HƯỚNG DẪN VIÊN</string>
     <string name="log_out">Đăng xuất</string>
     <string name="version">Phiên bản</string>
@@ -81,7 +83,7 @@
 
     <string name="introduction">Tiểu sử</string>
     <string name="no_introduction_yet">Chưa có tiểu sử</string>
-    <string name="phone_number">Số điện thoại</string>
+    <string name="phone_number">Số điện thoại:</string>
     <string name="no_phone_yet">Chưa có số điện thoại</string>
     <string name="Save">Lưu những thay đổi</string>
     <string name="current_password">Mật khẩu hiện tại</string>
@@ -91,7 +93,7 @@
     <string name="cover_image">Ảnh bìa</string>
     <string name="rating">Đánh giá</string>
     <string name="duration">Thời gian</string>
-    <string name="price">Giá</string>
+    <string name="price">Giá:</string>
     <string name="edit_tour">Chỉnh sửa tour</string>
     <string name="ended">Đã kết thúc</string>
 

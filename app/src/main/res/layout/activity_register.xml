@@ -8,13 +8,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_color"
+    android:padding="20dp"
     android:orientation="vertical">
+
+
     <Toolbar
         android:id="@+id/tb_return"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"/>
+        android:layout_marginLeft="20dp"
+        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,9 +42,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="50dp"
-        android:paddingTop="15dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="15dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,9 +68,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="15dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="15dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,8 +95,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="15dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingHorizontal="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,8 +121,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="15dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingHorizontal="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

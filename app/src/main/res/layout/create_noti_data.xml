@@ -3,17 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
 >
 <LinearLayout android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     android:background="@color/main_color">
     <Toolbar
         android:id="@+id/tb_return_tour_dashboard"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"/>
+        android:layout_marginLeft="20dp"
+        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +34,7 @@
         android:text="Gửi thông báo cho du khách trong tour"
         android:fontFamily="@font/signika"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:layout_gravity="center_horizontal"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,12 +42,12 @@
         android:orientation="vertical"
         android:layout_marginTop="50dp"
         android:paddingTop="15dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingHorizontal="30dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:paddingBottom="5dp"
             android:textColor="@color/white"
             android:fontFamily="@font/signika"
             android:text="@string/title"
@@ -64,12 +69,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="15dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp">
+        android:paddingHorizontal="30dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
+            android:paddingBottom="5dp"
             android:textColor="@color/white"
             android:fontFamily="@font/signika"
             android:text="@string/content"
