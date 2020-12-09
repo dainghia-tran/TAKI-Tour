@@ -100,7 +100,7 @@ public class TourDashboard extends AppCompatActivity {
 
         linkElements();
 
-        ((TextView) (findViewById(R.id.tour_name))).setText(tourName);
+        ((TextView) (findViewById(R.id.tour_name))).setText(tourId + " - "  + tourName);
 
         tbReturn.setNavigationOnClickListener(v -> {
             finish();
