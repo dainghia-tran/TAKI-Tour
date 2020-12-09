@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="130dp"
     android:gravity="center">
 
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="bottom"
-    android:layout_gravity="center_horizontal"
-    android:id="@+id/picture_item_layout">
+    <LinearLayout
+        android:id="@+id/picture_item_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
 
-    <ImageView
-        android:layout_gravity="bottom"
-        android:id="@+id/img_picture"
-        android:scaleType="centerCrop"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        />
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/img_picture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/tour_upload_image"
+            android:scaleType="centerCrop" />
+
+    </LinearLayout>
 </LinearLayout>

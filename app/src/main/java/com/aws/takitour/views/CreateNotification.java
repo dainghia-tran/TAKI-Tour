@@ -2,7 +2,6 @@ package com.aws.takitour.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toolbar;
@@ -14,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.aws.takitour.R;
 import com.aws.takitour.models.Notification;
 import com.aws.takitour.models.Participant;
-import com.aws.takitour.notifications.Token;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -35,7 +33,7 @@ public class CreateNotification extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_noti_data);
+        setContentView(R.layout.activity_create_notification);
         tbReturn = findViewById(R.id.tb_return_tour_dashboard);
         edtTitle = findViewById(R.id.edt_noti_title);
         edtBody = findViewById(R.id.edt_noti_body);

@@ -1,154 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/main_color">
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.ChangeInformation"
-    android:orientation="vertical"
-    android:padding="30dp">
-    <Toolbar
-        android:id="@+id/tb_return_change_information"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="10dp"
-
-        android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-        android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-    <ImageView
-        android:id="@+id/iv_profile_image_change_information"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center_horizontal"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/signika"
-            android:layout_marginBottom="5dp"
-            android:text="@string/name"
-            />
-
-        <EditText
-            android:id="@+id/edt_name_change_information"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_second_color"
-            android:fontFamily="@font/signika"
-            android:hint="@string/hint_name"
-            android:singleLine="true"
-            android:maxLength="20"
-            android:textColor="@color/main_color"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:paddingEnd="10dp"
-            android:textSize="14sp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/signika_light"
-            android:textAlignment="textEnd"
-            android:text="@string/max_length_20"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginBottom="5dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/signika"
-            android:text="@string/introduction"
-            />
+        android:padding="30dp"
+        tools:context=".views.ChangeInformation">
 
-        <EditText
-            android:id="@+id/edt_description_change_information"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:fontFamily="@font/signika"
-            android:background="@drawable/bg_second_color"
-            android:hint="@string/no_introduction_yet"
-            android:gravity="top|left"
-            android:textColor="@color/main_color"
-            />
+        <Toolbar
+            android:id="@+id/tb_return_change_information"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginBottom="5dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/signika"
-            android:text="@string/phone_number"
-            />
+            android:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <EditText
-            android:id="@+id/edt_phone_change_information"
+        <ImageView
+            android:id="@+id/iv_profile_image_change_information"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/profile_image" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/signika"
-            android:background="@drawable/bg_second_color"
-            android:singleLine="true"
-            android:inputType="phone"
-            android:hint="@string/no_phone_yet"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/name"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edt_name_change_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:hint="@string/hint_name"
+                android:maxLength="20"
+                android:singleLine="true"
+                android:textColor="@color/main_color"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/signika_light"
+                android:paddingEnd="10dp"
+                android:text="@string/max_length_20"
+                android:textAlignment="textEnd"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/introduction"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edt_description_change_information"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:gravity="top|left"
+                android:hint="@string/no_introduction_yet"
+                android:textColor="@color/main_color"
+                tools:ignore="RtlHardcoded"
+                android:inputType="text"
+                android:importantForAutofill="no" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/signika"
+                android:text="@string/phone_number"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/edt_phone_change_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_second_color"
+                android:fontFamily="@font/signika"
+                android:hint="@string/no_phone_yet"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textColor="@color/main_color"
+                android:autofillHints="" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_change_password_change_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/signika_semibold"
+            android:text="@string/change_password"
+            android:textAllCaps="false"
             android:textColor="@color/main_color"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_save_change_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/signika_semibold"
+            android:text="@string/Save"
+            android:textAllCaps="false"
+            android:textColor="@color/main_color"
+            android:textSize="18sp" />
+
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_change_password_change_information"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/bg_button"
-        android:fontFamily="@font/signika_semibold"
-        android:text="@string/change_password"
-        android:textAllCaps="false"
-        android:textColor="@color/main_color"
-        android:textSize="18sp" />
-    <Button
-        android:id="@+id/btn_save_change_information"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_gravity="center"
-        android:background="@drawable/bg_button"
-        android:fontFamily="@font/signika_semibold"
-        android:text="@string/Save"
-        android:textAllCaps="false"
-        android:textColor="@color/main_color"
-        android:textSize="18sp" />
-
-
-
-</LinearLayout>
 </ScrollView>

@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="30dp"
-        android:background="@color/main_color">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="30dp">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/signika_semibold"
-            android:text="@string/tours"
-            android:textColor="@color/white"
-            android:textSize="42sp" />
+        android:fontFamily="@font/signika_semibold"
+        android:text="@string/tours"
+        android:textColor="@color/white"
+        android:textSize="42sp" />
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:id="@+id/tv_attended"
-            android:fontFamily="@font/signika"
-            android:text="@string/attended"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+        android:id="@+id/tv_attended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/signika"
+        android:text="@string/attended"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
     <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white"
-            android:layout_marginBottom="10dp" />
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_list_tours"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-        android:background="@color/main_color"/>
+        android:id="@+id/rv_list_tours"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_color" />
 
 </LinearLayout>
