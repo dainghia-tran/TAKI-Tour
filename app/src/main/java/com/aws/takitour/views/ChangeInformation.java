@@ -98,7 +98,7 @@ public class ChangeInformation extends AppCompatActivity {
                         currentUser.setType(snapshot.child("type").getValue(Integer.class));
                         currentUser.setProfileImage(snapshot.child("profileImage").getValue(String.class));
 
-                        if(currentUser.getType() == 2){
+                        if(currentUser.getType() == 2 || currentUser.getType() == 3){
                             btnChangePassword.setVisibility(View.INVISIBLE);
                         }
 

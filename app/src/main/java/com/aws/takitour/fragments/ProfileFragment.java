@@ -102,7 +102,8 @@ public class ProfileFragment extends Fragment {
                 .child("type").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.getValue(Integer.class) == 1) {
+                        int userType = snapshot.getValue(Integer.class);
+                        if (userType == 1 || userType == 3) {
                             startActivity(new Intent(getContext(), TourCreate.class));
                         } else
                             handler.post(() -> {
