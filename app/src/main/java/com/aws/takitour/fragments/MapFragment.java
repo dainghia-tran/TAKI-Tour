@@ -108,12 +108,12 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                                     String latitude = participant.getLatitude();
                                     String name = participant.getName();
                                     if (latitude != null && longitude != null && name != null && participant.getEmail() != null) {
-                                        if (participant.getEmail().equals(finalCurrentTour.getTourGuide())) {
-                                            map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
-                                        }else if(participant.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                        if(participant.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                                             map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24_lime)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
                                             float zoomLevel = 16.0f; //This goes up to 21
                                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude)), zoomLevel));
+                                        }else if (participant.getEmail().equals(finalCurrentTour.getTourGuide())) {
+                                            map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
                                         }
                                         else {
                                             map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
