@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -98,7 +100,7 @@ public class ChangeInformation extends AppCompatActivity {
                         currentUser.setType(snapshot.child("type").getValue(Integer.class));
                         currentUser.setProfileImage(snapshot.child("profileImage").getValue(String.class));
 
-                        if(currentUser.getType() == 2){
+                        if(currentUser.getType() == 2 || currentUser.getType() == 3){
                             btnChangePassword.setVisibility(View.INVISIBLE);
                         }
 
@@ -132,6 +134,7 @@ public class ChangeInformation extends AppCompatActivity {
         btnChangePassword.setOnClickListener(v -> {
             Dialog dialog = new Dialog(this);
             dialog.setContentView(R.layout.dialog_change_password);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             EditText currentPassword = dialog.findViewById(R.id.edt_current_password);
             EditText newPassword = dialog.findViewById(R.id.edt_new_password);
