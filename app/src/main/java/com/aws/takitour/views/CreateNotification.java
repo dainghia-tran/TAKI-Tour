@@ -3,6 +3,7 @@ package com.aws.takitour.views;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.aws.takitour.R;
 import com.aws.takitour.models.Notification;
 import com.aws.takitour.models.Participant;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -65,7 +67,7 @@ public class CreateNotification extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String token = snapshot.getValue(String.class);
-                                            Notification notificationHandler = new Notification(tourId, userTitle, userBody);
+                                            Notification notificationHandler = new Notification("Tour: " + tourId, userTitle, userBody);
                                             notificationHandler.sendNotification(token);
                                         }
 
@@ -77,6 +79,7 @@ public class CreateNotification extends AppCompatActivity {
                             }
                             sendingCompleted = true;
                             if (sendingCompleted) {
+                                Toast.makeText(CreateNotification.this, "Đã gửi thông báo thành công", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         }

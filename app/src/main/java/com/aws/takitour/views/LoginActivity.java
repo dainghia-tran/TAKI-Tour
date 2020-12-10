@@ -1,5 +1,6 @@
 package com.aws.takitour.views;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
@@ -33,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
 
     private TextView signUp;
     private TextView forgotPassword;
@@ -81,14 +86,14 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
 
         signUp.setOnClickListener(v -> {
-           startActivity(new Intent(this, RegisterActivity.class));
+            startActivity(new Intent(this, RegisterActivity.class));
         });
 
-        forgotPassword.setOnClickListener(v->{
+        forgotPassword.setOnClickListener(v -> {
             startActivity(new Intent(this, ForgotPassword.class));
         });
 
-        signIn.setOnClickListener(v->{
+        signIn.setOnClickListener(v -> {
             String email = userEmail.getText().toString();
             String password = userPassword.getText().toString();
             if (TextUtils.isEmpty(email)) {
@@ -130,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void linkElements(){
+    private void linkElements() {
         signUp = findViewById(R.id.tv_sign_up);
         forgotPassword = findViewById(R.id.tv_forgot_password);
 
@@ -142,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -154,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
         try {
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
             FirebaseGoogleAuth(acc);
+
         } catch (ApiException e) {
             FirebaseGoogleAuth(null);
         }
@@ -166,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(this, task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(getBaseContext(), "Đăng nhập với Google thành công.", Toast.LENGTH_SHORT).show();
-                    new Thread(()->{
+                    new Thread(() -> {
                         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                         String userEmail = currentUser.getEmail();
                         String userPhoneNumber = currentUser.getPhoneNumber();

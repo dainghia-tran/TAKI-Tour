@@ -73,7 +73,9 @@ public class MyMessagingService extends FirebaseMessagingService {
         super.onNewToken(newToken);
         Token token = new Token(newToken);
         // save new FCM token to "users" collection
-        ref.child(currentUser.getEmail().replace(".", ",")).child("token").setValue(token.getToken());
+        if(currentUser != null){
+            ref.child(currentUser.getEmail().replace(".", ",")).child("token").setValue(token.getToken());
+        }
     }
 
     public void showNotification(String title, String message) {
