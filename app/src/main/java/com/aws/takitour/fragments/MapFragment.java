@@ -1,6 +1,8 @@
 package com.aws.takitour.fragments;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.VectorDrawable;
@@ -10,11 +12,11 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
-import com.aws.takitour.models.UserReview;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,6 +25,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -45,7 +48,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
     private BitmapDescriptor getBitmapDescriptor(int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if(getActivity()!=null) {
+            if (getActivity() != null) {
                 @SuppressLint("UseCompatLoadingForDrawables") VectorDrawable vectorDrawable = (VectorDrawable) getActivity().getDrawable(id);
 
                 int h = vectorDrawable.getIntrinsicHeight();
@@ -58,7 +61,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 vectorDrawable.draw(canvas);
 
                 return BitmapDescriptorFactory.fromBitmap(bm);
-            }else{
+            } else {
                 return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
             }
         } else {
@@ -101,14 +104,22 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                             Tour finalCurrentTour = currentTour;
                             handler.post(() -> {
                                 for (Participant participant : participantList) {
-                                    if (participant.getEmail().equals(finalCurrentTour.getTourGuide())){
-                                        map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(participant.getLatitude()), Float.parseFloat(participant.getLongitude()))).title(participant.getName()));
-                                    } else {
-                                        map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(participant.getLatitude()), Float.parseFloat(participant.getLongitude()))).title(participant.getName()));
+                                    String longitude = participant.getLongitude();
+                                    String latitude = participant.getLatitude();
+                                    String name = participant.getName();
+                                    if (latitude != null && longitude != null && name != null && participant.getEmail() != null) {
+                                        if (participant.getEmail().equals(finalCurrentTour.getTourGuide())) {
+                                            map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
+                                        }else if(participant.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                            map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24_lime)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
+                                            float zoomLevel = 16.0f; //This goes up to 21
+                                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude)), zoomLevel));
+                                        }
+                                        else {
+                                            map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
+                                        }
                                     }
                                 }
-                                float zoomLevel = 16.0f; //This goes up to 21
-                                map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Float.parseFloat(participantList.get(0).getLatitude()), Float.parseFloat(participantList.get(0).getLongitude())), zoomLevel));
                             });
 
                         }

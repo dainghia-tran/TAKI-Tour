@@ -109,7 +109,6 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                 for (DataSnapshot data : snapshot.child("participants").getChildren()) {
                                     participants.add(data.getValue(Participant.class));
                                 }
-                                boolean attended = false;
                                 String tourGuide = snapshot.child("tourGuide").getValue(String.class);
                                 String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
@@ -137,13 +136,9 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
                                                 intent.putExtra("TOUR_NAME", tour.getName());
                                                 context.startActivity(intent);
                                             });
-                                            attended = true;
-                                            break;
+                                            return;
                                         }
                                     }
-                                }
-                                if (attended) {
-                                    return;
                                 }
                                 Dialog dialog = new Dialog(context);
                                 dialog.setContentView(R.layout.dialog_tour_details);
@@ -188,14 +183,14 @@ public class TourRVAdapter extends RecyclerView.Adapter<TourRVAdapter.ViewHolder
 
                                 confirm.setOnClickListener(v1 -> {
                                     if (code.getText().toString().equals(tour.getId())) {
-                                        Intent tourDashboard = new Intent(context, TourDashboard.class);
-                                        tourDashboard.putExtra("TOUR_ID", tour.getId());
-                                        tourDashboard.putExtra("TOUR_NAME", tour.getName());
-                                        tourDashboard.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                        tourDashboard.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                        Intent intentTourDashboard = new Intent(context, TourDashboard.class);
+                                        intentTourDashboard.putExtra("TOUR_ID", tour.getId());
+                                        intentTourDashboard.putExtra("TOUR_NAME", tour.getName());
+                                        intentTourDashboard.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                        intentTourDashboard.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
                                         handler.post(() -> {
                                             dialog.dismiss();
-                                            context.startActivity(tourDashboard);
+                                            context.startActivity(intentTourDashboard);
                                             updateUserTourList(tour.getId());
                                         });
                                     } else {

@@ -21,7 +21,6 @@ import com.aws.takitour.R;
 import com.aws.takitour.adapters.TourRVAdapter;
 import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
-import com.aws.takitour.models.UserReview;
 import com.aws.takitour.views.TourDashboard;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -45,11 +44,12 @@ public class ExploreFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_explore, container,false);
+        View view = inflater.inflate(R.layout.fragment_explore, container, false);
         tourRV = view.findViewById(R.id.rv_list_explore);
         edtCode = view.findViewById(R.id.edt_code);
-        edtCode.setOnEditorActionListener((v, actionId, event)->{
+        edtCode.setOnEditorActionListener((v, actionId, event) -> {
             String userInputCode = edtCode.getText().toString();
+            edtCode.setText("");
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 myDBReference.child("tours")
                         .child(userInputCode)
@@ -61,17 +61,8 @@ public class ExploreFragment extends Fragment {
                                     participants.add(data.getValue(Participant.class));
                                 }
                                 String tourName = snapshot.child("name").getValue(String.class);
-                                boolean attended = false;
-                                String tourGuideEmail = snapshot.child("tourGuide").getValue(String.class);
-                                String currentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-
-                                if(tourGuideEmail == null){
-                                    handler.post(()->{
-                                       Toast.makeText(getActivity(), "Không tồn tại mã tour này.", Toast.LENGTH_SHORT).show();
-                                    });
-                                    return;
-                                }
-                                if (tourGuideEmail.equals(currentUserEmail)) {
+                                String tourId = snapshot.child("id").getValue(String.class);
+                                if (userInputCode.equals(tourId)) {
                                     handler.post(() -> {
                                         Intent intent = new Intent(getActivity(), TourDashboard.class);
                                         intent.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -80,34 +71,10 @@ public class ExploreFragment extends Fragment {
                                         intent.putExtra("TOUR_NAME", tourName);
                                         Objects.requireNonNull(getActivity()).startActivity(intent);
                                     });
-                                    return;
+                                } else {
+                                    Toast.makeText(getActivity(), "Không tồn tại mã tour này.", Toast.LENGTH_SHORT).show();
                                 }
-
-                                if (participants.size() != 0) {
-                                    for (Participant participant : participants) {
-                                        String participantEmail = participant.getEmail();
-                                        if (participantEmail != null && participantEmail.equals(currentUserEmail)) {
-                                            handler.post(() -> {
-                                                Intent intent = new Intent(getActivity(), TourDashboard.class);
-                                                intent.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                                intent.putExtra("TOUR_ID", userInputCode);
-                                                intent.putExtra("TOUR_NAME", tourName);
-                                                Objects.requireNonNull(getActivity()).startActivity(intent);
-                                            });
-                                            return;
-                                        }
-                                    }
-                                }
-                                Intent tourDashboard = new Intent(getActivity(), TourDashboard.class);
-                                tourDashboard.putExtra("TOUR_ID", userInputCode);
-                                tourDashboard.putExtra("TOUR_NAME", tourName);
-                                tourDashboard.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                                tourDashboard.addFlags(FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                handler.post(() -> {
-                                    Objects.requireNonNull(getActivity()).startActivity(tourDashboard);
-                                    updateUserTourList(userInputCode);
-                                });                            }
+                            }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
@@ -137,14 +104,14 @@ public class ExploreFragment extends Fragment {
                                 temp.setEndDate(data.child("endDate").getValue(String.class));
 
                                 List<String> coverImage = new ArrayList<>();
-                                for(DataSnapshot dataCoverImage: data.child("coverImage").getChildren()){
+                                for (DataSnapshot dataCoverImage : data.child("coverImage").getChildren()) {
                                     coverImage.add(dataCoverImage.getValue(String.class));
                                 }
                                 temp.setCoverImage(coverImage);
 
                                 tourList.add(temp);
                             }
-                            handler.post(()->{
+                            handler.post(() -> {
                                 adapter = new TourRVAdapter(getContext(), tourList);
                                 tourRV.setAdapter(adapter);
                                 tourRV.setLayoutManager(new LinearLayoutManager(getContext()));
