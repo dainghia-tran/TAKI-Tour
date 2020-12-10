@@ -29,6 +29,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -114,8 +115,8 @@ public class TourEdit extends AppCompatActivity {
                         String endDate = snapshot.child("endDate").getValue(String.class);
                         currentCoverImage[0] = snapshot.child("coverImage").child("0").getValue(String.class);
 
-                        if (currentCoverImage[0] != null && getBaseContext() != null) {
-                            Glide.with(TourEdit.this).load(currentCoverImage[0]).into(ivTourCoverImage);
+                        if (currentCoverImage[0] != null && getApplicationContext() != null) {
+                            Glide.with(getApplicationContext()).load(currentCoverImage[0]).into(ivTourCoverImage);
                         }
 
                         edtTourName.setText(tourName);
@@ -191,8 +192,14 @@ public class TourEdit extends AppCompatActivity {
                             if (coverImage.isEmpty()) {
                                 coverImage.add(imageLink);
                             }
-                            Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
-                            myDBReference.child("tours").child(tourId).setValue(newTour);
+                            DatabaseReference currentTourRef = myDBReference.child("tours").child(tourId);
+                            currentTourRef.child("name").setValue(tourName);
+                            currentTourRef.child("description").setValue(tourShortDescription);
+                            currentTourRef.child("coverImage").setValue(coverImage);
+                            currentTourRef.child("price").setValue(tourPrice);
+                            currentTourRef.child("startDate").setValue(tourStartDate);
+                            currentTourRef.child("endDate").setValue(tourEndDate);
+
                             progressDialog.dismiss();
                             Toast.makeText(TourEdit.this, "Đã cập nhật thay đổi.", Toast.LENGTH_SHORT).show();
                             finish();

@@ -40,7 +40,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -100,7 +103,7 @@ public class TourDashboard extends AppCompatActivity {
 
         linkElements();
 
-        ((TextView) (findViewById(R.id.tour_name))).setText(tourId + " - "  + tourName);
+        ((TextView) (findViewById(R.id.tour_name))).setText(tourId + " - " + tourName);
 
         tbReturn.setNavigationOnClickListener(v -> {
             finish();
@@ -214,7 +217,6 @@ public class TourDashboard extends AppCompatActivity {
                             try {
                                 if (snapshot.getValue(Boolean.class)) {
                                     getLastLocation();
-                                    Log.d("Test", "----------");
                                 } else {
                                     handler.post(() -> {
                                         Toast.makeText(TourDashboard.this, "Tour đã kết thúc.", Toast.LENGTH_SHORT).show();
@@ -230,6 +232,39 @@ public class TourDashboard extends AppCompatActivity {
 
                         }
                     });
+        }).start();
+        //Check if tour is out of date
+        new Thread(() -> {
+            myDBReference.child("tours")
+                    .child(tourId)
+                    .child("endDate")
+                    .addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Calendar today = Calendar.getInstance();
+                    Calendar endDate = Calendar.getInstance();
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy");
+                    try {
+                        endDate.setTime(format.parse(snapshot.getValue(String.class)));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    endDate.add(Calendar.DATE, 1);
+                    if(today.after(endDate)){
+                        myDBReference.child("tours")
+                                .child(tourId)
+                                .child("available")
+                                .setValue(false);
+                    }else{
+                        Log.d("Tour", "is not expired");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }).start();
     }
 
@@ -298,17 +333,13 @@ public class TourDashboard extends AppCompatActivity {
                                 requestNewLocationData();
                             } else {
                                 new Thread(() -> {
-                                    myDBReference.child("tours")
+                                    DatabaseReference currentParticipantRef = myDBReference.child("tours")
                                             .child(tourId)
                                             .child("participants")
-                                            .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()).replace(".", ","))
-                                            .child("latitude").setValue(String.valueOf(location.getLatitude()));
+                                            .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()).replace(".", ","));
 
-                                    myDBReference.child("tours")
-                                            .child(tourId)
-                                            .child("participants")
-                                            .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()).replace(".", ","))
-                                            .child("longitude").setValue(String.valueOf(location.getLongitude()));
+                                    currentParticipantRef.child("latitude").setValue(String.valueOf(location.getLatitude()));
+                                    currentParticipantRef.child("longitude").setValue(String.valueOf(location.getLongitude()));
                                 }).start();
                             }
                         });

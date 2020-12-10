@@ -1,6 +1,5 @@
 package com.aws.takitour.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.aws.takitour.R;
 import com.aws.takitour.models.Notification;
 import com.aws.takitour.models.Participant;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -30,6 +30,7 @@ public class CreateNotification extends AppCompatActivity {
     private Button btnSendNotification;
     public static String tourId;
     private List<Participant> participantList;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +44,10 @@ public class CreateNotification extends AppCompatActivity {
         tbReturn.setNavigationOnClickListener(v -> {
             finish();
         });
-        btnSendNotification.setOnClickListener(v->{
+        btnSendNotification.setOnClickListener(v -> {
             String userTitle = edtTitle.getText().toString().trim();
             String userBody = edtBody.getText().toString().trim();
-            new Thread(()->{
+            new Thread(() -> {
                 ValueEventListener participantListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -59,24 +60,23 @@ public class CreateNotification extends AppCompatActivity {
                         if (participants.size() != 0) {
                             for (Participant participant : participants) {
                                 String participantEmail = participant.getEmail();
-                                myDBReference.child("users").child(participantEmail.replace(".", ",")).child("token").addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        String token = snapshot.getValue(String.class);
-                                        Notification notificationHandler = new Notification(tourId, userTitle, userBody);
-                                        notificationHandler.sendNotification(token);
-                                    }
+                                if (!participantEmail.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                                    myDBReference.child("users").child(participantEmail.replace(".", ",")).child("token").addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            String token = snapshot.getValue(String.class);
+                                            Notification notificationHandler = new Notification(tourId, userTitle, userBody);
+                                            notificationHandler.sendNotification(token);
+                                        }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                    }
-                                });
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
+                                }
                             }
                             sendingCompleted = true;
-                            if(sendingCompleted){
-                                Intent intentTourDashboard = new Intent(CreateNotification.this, TourDashboard.class);
-                                intentTourDashboard.putExtra("TOUR_ID", tourId);
-                                startActivity(intentTourDashboard);
+                            if (sendingCompleted) {
                                 finish();
                             }
                         }
