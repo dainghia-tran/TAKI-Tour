@@ -31,14 +31,14 @@ import java.util.List;
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class ProfileFragment extends Fragment {
-    private ImageView imageView;
-    private TextView name;
-    private TextView email;
-    private TextView phoneNumber;
-    private TextView introduction;
-    private TextView infoProfile;
-    private TextView addTour;
-    private Button logout;
+    private ImageView ivProfileImage;
+    private TextView tvName;
+    private TextView tvEmail;
+    private TextView tvPhoneNumber;
+    private TextView tvDescription;
+    private TextView tvEditProfile;
+    private TextView tvAddTour;
+    private Button btnLogout;
 
     private List<String> pendingMessage;
 
@@ -50,14 +50,14 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        imageView = view.findViewById(R.id.img_image_profile);
-        name = view.findViewById(R.id.tv_name_profile);
-        email = view.findViewById(R.id.tv_email_profile);
-        phoneNumber = view.findViewById(R.id.tv_phone_number_profile);
-        introduction = view.findViewById(R.id.tv_introduction_profile);
-        infoProfile = view.findViewById(R.id.tv_information_profile);
-        addTour = view.findViewById(R.id.tv_add_tour_profile);
-        logout = view.findViewById(R.id.btn_logout);
+        ivProfileImage = view.findViewById(R.id.img_image_profile);
+        tvName = view.findViewById(R.id.tv_name_profile);
+        tvEmail = view.findViewById(R.id.tv_email_profile);
+        tvPhoneNumber = view.findViewById(R.id.tv_phone_number_profile);
+        tvDescription = view.findViewById(R.id.tv_introduction_profile);
+        tvEditProfile = view.findViewById(R.id.tv_information_profile);
+        tvAddTour = view.findViewById(R.id.tv_add_tour_profile);
+        btnLogout = view.findViewById(R.id.btn_logout);
 
 
         myDBReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
@@ -76,13 +76,12 @@ public class ProfileFragment extends Fragment {
                         } else {
                             currentUser.setType(snapshot.child("type").getValue(Integer.class));
                         }
-                        if(getActivity() != null) {
-                            Glide.with(getContext()).load(currentUser.getProfileImage()).into(imageView);
-                            name.setText(currentUser.getName());
-                            email.setText(currentUser.getEmail());
-                            phoneNumber.setText(currentUser.getTelephone());
-                            introduction.setText(currentUser.getDescription());
-                            //introduction.setText("Xin chào, tôi yêu du lịch và gặp gỡ mọi người từ nhiều vùng miền của đất nước Việt Nam này. Tôi tin sự chăm chỉ và nhiệt tình của tôi sẽ khiến bạn hài lòng.");
+                        if (getActivity() != null) {
+                            Glide.with(getContext()).load(currentUser.getProfileImage()).into(ivProfileImage);
+                            tvName.setText(currentUser.getName());
+                            tvEmail.setText(currentUser.getEmail());
+                            tvPhoneNumber.setText(currentUser.getTelephone());
+                            tvDescription.setText(currentUser.getDescription());
                         }
                     }
 
@@ -93,18 +92,20 @@ public class ProfileFragment extends Fragment {
                 });
 
 
-        infoProfile.setOnClickListener(v -> {
+        tvEditProfile.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), ChangeInformation.class));
         });
 
-        addTour.setOnClickListener(v -> myDBReference.child("users")
+        tvAddTour.setOnClickListener(v -> myDBReference.child("users")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                 .child("type").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int userType = snapshot.getValue(Integer.class);
                         if (userType == 1 || userType == 3) {
-                            startActivity(new Intent(getContext(), TourCreate.class));
+                            if (getActivity() != null) {
+                                startActivity(new Intent(getActivity(), TourCreate.class));
+                            }
                         } else
                             handler.post(() -> {
                                 Toast.makeText(getContext(), "Bạn không phải hướng dẫn viên", Toast.LENGTH_SHORT).show();
@@ -117,7 +118,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }));
 
-        logout.setOnClickListener(v -> {
+        btnLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getContext(), LoginActivity.class));
             getActivity().finish();
