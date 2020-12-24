@@ -65,7 +65,7 @@ public class TourCreate extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    public void getDate(EditText edtDate) {
+    private void getDate(EditText edtDate) {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TourCreate.this, new DatePickerDialog.OnDateSetListener() {
             @Override

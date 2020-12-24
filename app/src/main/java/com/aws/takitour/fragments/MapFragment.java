@@ -113,10 +113,10 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                                             float zoomLevel = 16.0f; //This goes up to 21
                                             map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude)), zoomLevel));
                                         }else if (participant.getEmail().equals(finalCurrentTour.getTourGuide())) {
-                                            map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
+                                            map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
                                         }
                                         else {
-                                            map.addMarker(new MarkerOptions().position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
+                                            map.addMarker(new MarkerOptions().icon(getBitmapDescriptor(R.drawable.ic_baseline_location_on_24)).position(new LatLng(Float.parseFloat(latitude), Float.parseFloat(longitude))).title(name));
                                         }
                                     }
                                 }

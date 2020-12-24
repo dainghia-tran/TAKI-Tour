@@ -69,7 +69,6 @@ public class TourDashboard extends AppCompatActivity {
     private ImageButton imgBtnAddPhotos;
     private ImageButton imgBtnCreateNoti;
 
-    private FirebaseStorage storage;
     private StorageReference storageReference;
 
     private final Handler handler = new Handler();
@@ -92,7 +91,7 @@ public class TourDashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_dashboard);
 
-        storage = FirebaseStorage.getInstance();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);

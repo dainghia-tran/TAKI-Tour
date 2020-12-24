@@ -20,10 +20,7 @@ import android.widget.Toast;
 
 import com.aws.takitour.R;
 import com.aws.takitour.models.Tour;
-import com.aws.takitour.utilities.RandomString;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,12 +29,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,13 +40,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import io.reactivex.annotations.NonNull;
-
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class TourEdit extends AppCompatActivity {
     private String tourId;
-    private ImageButton ibtnTourFinnish;
+    private ImageButton imgBtnTourFinnish;
 
     private EditText edtTourName;
     private EditText edtTourDescription;
@@ -74,7 +66,7 @@ public class TourEdit extends AppCompatActivity {
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    public void getDate(EditText edtDate) {
+    private void getDate(EditText edtDate) {
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(TourEdit.this, (view, year, monthOfYear, dayOfMonth) -> {
             Calendar calendar = Calendar.getInstance();
@@ -132,7 +124,7 @@ public class TourEdit extends AppCompatActivity {
                     }
                 });
 
-        ibtnTourFinnish.setOnClickListener(v->{
+        imgBtnTourFinnish.setOnClickListener(v->{
             myDBReference.child("tours")
                     .child(tourId)
                     .child("available")
@@ -223,8 +215,8 @@ public class TourEdit extends AppCompatActivity {
 
     }
 
-    public void linkElements(){
-        ibtnTourFinnish = findViewById(R.id.img_btn_tour_end);
+    private void linkElements(){
+        imgBtnTourFinnish = findViewById(R.id.img_btn_tour_end);
 
         edtTourName = findViewById(R.id.edt_edit_tour_name);
         edtTourDescription = findViewById(R.id.edt_edit_tour_short_description);

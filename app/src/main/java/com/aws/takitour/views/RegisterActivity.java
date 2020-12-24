@@ -24,13 +24,13 @@ import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText email;
-    private EditText password;
-    private EditText rePassword;
-    private EditText fullName;
-    private Button register;
-    private Toolbar toolbarReturn;
-    private TextView signIn;
+    private EditText edtEmail;
+    private EditText edtPassword;
+    private EditText edtRePassword;
+    private EditText edtFullName;
+    private Button btnRegister;
+    private Toolbar tbReturn;
+    private TextView tvSignIn;
 
     private final Handler handler = new Handler();
 
@@ -44,23 +44,23 @@ public class RegisterActivity extends AppCompatActivity {
         linkElements();
 
 
-        toolbarReturn.setNavigationOnClickListener(v -> {
+        tbReturn.setNavigationOnClickListener(v -> {
             finish();
         });
 
-        register.setClickable(true);
+        btnRegister.setClickable(true);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        signIn.setOnClickListener(v->{
+        tvSignIn.setOnClickListener(v->{
             finish();
         });
 
-        register.setOnClickListener(v -> {
-            String userEmail = email.getText().toString().trim();
-            String userPassword = password.getText().toString().trim();
-            String userRePassword = rePassword.getText().toString().trim();
-            String userFullName = fullName.getText().toString().trim();
+        btnRegister.setOnClickListener(v -> {
+            String userEmail = edtEmail.getText().toString().trim();
+            String userPassword = edtPassword.getText().toString().trim();
+            String userRePassword = edtRePassword.getText().toString().trim();
+            String userFullName = edtFullName.getText().toString().trim();
 
             final String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
 
@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Snackbar.make(findViewById(R.id.register_activity), "Hãy điền tên của bạn.", Snackbar.LENGTH_SHORT).show();
                 return;
             }
-            register.setClickable(false);
+            btnRegister.setClickable(false);
             String defaultProfileImage = "https://firebasestorage.googleapis.com/v0/b/taki-tour.appspot.com/o/avatar.png?alt=media&token=591a850e-d704-4820-8b2d-a933fbb31b14";
             User newUser = new User(userFullName, 0, userEmail, "", defaultProfileImage, "");
 
@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (!task.isSuccessful()) {
                                 handler.post(() -> {
                                     Toast.makeText(getBaseContext(), "Xác thực thất bại.", Toast.LENGTH_SHORT).show();
-                                    register.setClickable(true);
+                                    btnRegister.setClickable(true);
                                 });
                             } else {
                                 firebaseAuth.getCurrentUser().sendEmailVerification()
@@ -112,7 +112,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 finish();
                                             } else {
                                                 Toast.makeText(getBaseContext(), "Không thể gửi email xác thực, vui lòng thử lại.", Toast.LENGTH_SHORT).show();
-                                                register.setClickable(true);
+                                                btnRegister.setClickable(true);
                                             }
                                         });
                             }
@@ -122,12 +122,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void linkElements() {
-        fullName = findViewById(R.id.edt_name);
-        email = findViewById(R.id.edt_email);
-        password = findViewById(R.id.edt_password);
-        rePassword = findViewById((R.id.edt_re_password));
-        register = findViewById(R.id.btn_signup);
-        toolbarReturn = findViewById(R.id.tb_return);
-        signIn = findViewById(R.id.tv_sign_in);
+        edtFullName = findViewById(R.id.edt_name);
+        edtEmail = findViewById(R.id.edt_email);
+        edtPassword = findViewById(R.id.edt_password);
+        edtRePassword = findViewById((R.id.edt_re_password));
+        btnRegister = findViewById(R.id.btn_signup);
+        tbReturn = findViewById(R.id.tb_return);
+        tvSignIn = findViewById(R.id.tv_sign_in);
     }
 }
