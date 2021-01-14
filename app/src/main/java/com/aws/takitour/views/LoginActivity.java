@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
         int LOGIN_CODE = getIntent().getIntExtra("LOGIN_CODE", 1);
         String currentUserEmail = getIntent().getStringExtra("USER_EMAIL");
+
         if (firebaseAuth.getCurrentUser() != null && LOGIN_CODE != 0) {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
@@ -96,37 +97,7 @@ public class LoginActivity extends AppCompatActivity {
         signIn.setOnClickListener(v -> {
             String email = userEmail.getText().toString();
             String password = userPassword.getText().toString();
-            if (TextUtils.isEmpty(email)) {
-                Snackbar.make(findViewById(R.id.login_activity), "Vui lòng nhập email.", Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-
-            if (TextUtils.isEmpty(password)) {
-                Snackbar.make(findViewById(R.id.login_activity), "Vui lòng nhập mật khẩu.", Snackbar.LENGTH_SHORT).show();
-                return;
-            }
-            signIn.setClickable(false);
-            firebaseAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(LoginActivity.this, task -> {
-                        if (!task.isSuccessful()) {
-                            if (password.length() < 6) {
-                                userPassword.setError(getString(R.string.minimum_password));
-                            } else {
-                                signIn.setClickable(true);
-                                Snackbar.make(findViewById(R.id.login_activity), getString(R.string.auth_failed), Snackbar.LENGTH_LONG).show();
-                            }
-                            signIn.setClickable(true);
-                        } else {
-                            if (!firebaseAuth.getCurrentUser().isEmailVerified()) {
-                                Snackbar.make(findViewById(R.id.login_activity), "Vui lòng xác nhận email trước khi đăng nhập.", Snackbar.LENGTH_SHORT).show();
-                                signIn.setClickable(true);
-                                return;
-                            }
-                            Toast.makeText(getBaseContext(), "Đăng nhập thành công.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
-                        }
-                    });
+            loginWithEmail(email, password);
         });
 
         signInGoogle.setOnClickListener(v -> {
@@ -144,6 +115,35 @@ public class LoginActivity extends AppCompatActivity {
 
         signIn = findViewById(R.id.btn_signin);
         signInGoogle = findViewById(R.id.btn_signin_with_google);
+    }
+
+    private void loginWithEmail(String email, String password){
+        if (TextUtils.isEmpty(email)) {
+            Snackbar.make(findViewById(R.id.login_activity), "Vui lòng nhập email.", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            Snackbar.make(findViewById(R.id.login_activity), "Vui lòng nhập mật khẩu.", Snackbar.LENGTH_SHORT).show();
+            return;
+        }
+        signIn.setClickable(false);
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(LoginActivity.this, task -> {
+                    if (!task.isSuccessful()) {
+                        if (password.length() < 6) {
+                            userPassword.setError(getString(R.string.minimum_password));
+                        } else {
+                            signIn.setClickable(true);
+                            Snackbar.make(findViewById(R.id.login_activity), getString(R.string.auth_failed), Snackbar.LENGTH_LONG).show();
+                        }
+                        signIn.setClickable(true);
+                    } else {
+                        Toast.makeText(getBaseContext(), "Đăng nhập thành công.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
+                    }
+                });
     }
 
     @Override

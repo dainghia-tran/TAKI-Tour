@@ -86,7 +86,7 @@ public class ChangeInformation extends AppCompatActivity {
         storageReference = storage.getReference();
 
 
-
+        //get user information
         myDBReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
                 .addValueEventListener(new ValueEventListener() {
                     @Override
