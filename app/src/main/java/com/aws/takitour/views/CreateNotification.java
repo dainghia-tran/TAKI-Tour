@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
@@ -62,7 +63,7 @@ public class CreateNotification extends AppCompatActivity {
                         if (participants.size() != 0) {
                             for (Participant participant : participants) {
                                 String participantEmail = participant.getEmail();
-                                if (!participantEmail.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                                if (!participantEmail.equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
                                     myDBReference.child("users").child(participantEmail.replace(".", ",")).child("token").addValueEventListener(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
