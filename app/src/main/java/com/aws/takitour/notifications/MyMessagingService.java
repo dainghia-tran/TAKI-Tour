@@ -4,11 +4,20 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.PowerManager;
+import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -33,10 +42,12 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static android.os.VibrationEffect.EFFECT_TICK;
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class MyMessagingService extends FirebaseMessagingService {
@@ -54,7 +65,7 @@ public class MyMessagingService extends FirebaseMessagingService {
         String notiBody = null;
         String notiFrom = null;
         String notiImage = null;
-        int notiType = -1;
+        String icon = null;
         String noTiReceiveToken = null;
         if (remoteMessage.getData().size() > 0) {
             notiTitle = remoteMessage.getData().get("title");
@@ -62,7 +73,6 @@ public class MyMessagingService extends FirebaseMessagingService {
             notiFrom = remoteMessage.getData().get("user");
             noTiReceiveToken = remoteMessage.getData().get("receiveToken");
             notiImage = remoteMessage.getData().get("imageLink");
-            notiType = Integer.parseInt(remoteMessage.getData().get("type"));
 
             if(notiImage!=null){
                 newNoti = new Data(notiFrom, notiTitle, notiBody, noTiReceiveToken, notiImage);
@@ -88,6 +98,7 @@ public class MyMessagingService extends FirebaseMessagingService {
     }
 
     public void showNotification(Data currentNoti) {
+        // Set up Pending Intent after clicking the push notification
         Intent intent = new Intent(this, TourDashboard.class);
         intent.putExtra("TOUR_ID", currentNoti.getUser().substring(6,12));
         intent.putExtra("TOUR_NAME", "");
@@ -95,36 +106,49 @@ public class MyMessagingService extends FirebaseMessagingService {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
-        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                .setContentTitle(currentNoti.getTitle())
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setAutoCancel(true)
-                .setSound(soundUri)
-                .setVibrate(new long[]{0, 500, 1000})
-                .setContentText(currentNoti.getBody())
-                .setContentIntent(pendingIntent)
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setPriority(NotificationManager.IMPORTANCE_HIGH);
+        Vibrator viberateManager = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
 
-        // Create channel to shoe Notifications
+        // Declare SOS sound and vibratimeTime
+        MediaPlayer mPlayer = null;
+        int viberateTime = 0;
+        if(currentNoti.getType() == 1) {
+            mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.sos);
+            viberateTime = 1000;
+        }
+        else{
+            mPlayer = MediaPlayer.create(getApplicationContext(), R.raw.pristine);
+        }
+
+        // Init notification manager
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        // Create channel to show Notifications
+        String channelName = "MyNotifications";
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String channelName = "MyNotifications";
-            NotificationChannel channel =
+
+            NotificationChannel mChannel =
                     new NotificationChannel(CHANNEL_ID, channelName,
                             NotificationManager.IMPORTANCE_HIGH);
+            mChannel.setLightColor(Color.GRAY);
+            mChannel.enableLights(true);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+        // Set up notification builder
+        NotificationCompat.Builder mNotiBuilder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+        mNotiBuilder
+                .setContentTitle(currentNoti.getTitle())
+                .setContentText(currentNoti.getBody())
+                .setSmallIcon(R.drawable.ic_outline_notifications_24)
+                .setAutoCancel(true)
+                .setColor(Color.YELLOW)
+                .setContentIntent(pendingIntent);
 
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                    .build();
-            channel.setSound(soundUri, audioAttributes);
-
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-
-            notificationManager.notify(0 /*ID of notification */, notificationBuilder.build());
+        if (notificationManager != null) {
+            notificationManager.notify(notificationID, mNotiBuilder.build());
+            viberateManager.vibrate(viberateTime);
+            mPlayer.start();
         }
     }
 
