@@ -1,10 +1,14 @@
 package com.aws.takitour.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.aws.takitour.R;
 import com.aws.takitour.models.Notification;
 import com.aws.takitour.notifications.Data;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -44,6 +49,20 @@ public class NotificationRVAdapter extends RecyclerView.Adapter<NotificationRVAd
             holder.tvTitle.setText(notification.getTitle());
             holder.tvBody.setText(notification.getBody());
         }
+        holder.layoutNotificationCard.setOnClickListener(v->{
+            if(notification.getType() == 0){
+                //TODO start activity
+            }else{
+                Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.dialog_picture_item);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                ImageView imageView = dialog.findViewById(R.id.img_picture_dialog);
+
+                Glide.with(context).load(notification.getImageLink()).into(imageView);
+                dialog.show();
+            }
+        });
     }
 
     @Override

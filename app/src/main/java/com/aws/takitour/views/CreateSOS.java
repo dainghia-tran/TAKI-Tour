@@ -1,7 +1,5 @@
 package com.aws.takitour.views;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,15 +8,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.aws.takitour.R;
+import com.aws.takitour.models.Notification;
 import com.aws.takitour.models.Participant;
 import com.aws.takitour.models.Tour;
 import com.aws.takitour.utilities.RandomString;
@@ -27,16 +26,16 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
-import java.security.SecureRandom;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,89 +43,53 @@ import io.reactivex.annotations.NonNull;
 
 import static com.aws.takitour.views.LoginActivity.myDBReference;
 
-public class TourCreate extends AppCompatActivity {
-
-    private EditText edtTourName;
-    private EditText edtTourShortDescription;
-    private EditText edtTourPrice;
-    private EditText edtTourStartDate;
-    private EditText edtTourEndDate;
-    private ImageView ivTourBackground;
+public class CreateSOS extends AppCompatActivity {
+    private static final String TAG = "CreateSOS";
+    private Toolbar tbReturn;
+    private EditText edtSOSBody;
     private Button btnUploadImage;
-    private Button btnCreateTour;
+    private ImageView ivSOSImage;
+    private Button btnSendSOS;
+    public static String tourId;
+    private List<Participant> participantList;
     // Uri indicates, where the image will be picked from
     private Uri filePath;
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
-
-    private FirebaseAuth firebaseAuth;
-
     // instance for firebase storage and StorageReference
     private FirebaseStorage storage;
     private StorageReference storageReference;
 
-    private void getDate(EditText edtDate) {
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(TourCreate.this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, monthOfYear);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                edtDate.setText(simpleDateFormat.format(calendar.getTime()));
-            }
-        }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_tour);
-
-        linkElements();
-        List<String> coverImage = new ArrayList<>();
-
+        setContentView(R.layout.activity_create_sos_notification);
+        tourId = getIntent().getStringExtra("TOUR_ID");
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
 
+        // Link UI with code
+        linkElements();
+        // Exit current intent
+        tbReturn.setNavigationOnClickListener(v -> {
+            finish();
+        });
         // Upload image SOS from user's device
         btnUploadImage.setOnClickListener(v -> {
             chooseImage();
         });
-
-        // Pick the date
-        edtTourStartDate.setKeyListener(null);
-        edtTourStartDate.setOnClickListener(v->{
-            getDate(edtTourStartDate);
-        });
-        edtTourEndDate.setKeyListener(null);
-        edtTourEndDate.setOnClickListener(v->{
-            getDate(edtTourEndDate);
-        });
-
         // Submit the form
-        btnCreateTour.setOnClickListener(v -> {
-            String tourName = edtTourName.getText().toString();
-            String tourShortDescription = edtTourShortDescription.getText().toString();
-            String tourPrice = edtTourPrice.getText().toString();
-            String tourEndDate = edtTourEndDate.getText().toString();
-            String tourStartDate = edtTourStartDate.getText().toString();
-
-            RandomString generator = new RandomString(6, new SecureRandom());
-            String tourId = generator.nextString();
-
-            firebaseAuth = FirebaseAuth.getInstance();
-
-            String tourGuideEmail = firebaseAuth.getCurrentUser().getEmail();
+        btnSendSOS.setOnClickListener(v -> {
+            String sosBody = edtSOSBody.getText().toString().trim();
 
             // Upload image to FireStore and add imageLink to ArrayList, then upload Tour to firebase RealTime
             if (filePath != null) {
                 final ProgressDialog progressDialog = new ProgressDialog(this);
                 progressDialog.setTitle("Đang tải lên...");
                 progressDialog.show();
-                StorageReference ref = storageReference.child("images/tours/" + tourId + "/" + UUID.randomUUID().toString());
+                StorageReference ref = storageReference.child("images/sos/" + tourId + "/" + UUID.randomUUID().toString());
                 ref.putFile(filePath)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
@@ -139,21 +102,10 @@ public class TourCreate extends AppCompatActivity {
                                 assert url != null;
                                 String imageLink = url.toString();
 
-                                if (coverImage.isEmpty()) {
-                                    coverImage.add(imageLink);
-                                }
-                                Participant tourGuide = new Participant(tourGuideEmail, "Hướng dẫn viên");
+                                // Send SOS to all user in tour
+                                sendSOSMessage(sosBody, imageLink);
 
-                                Tour newTour = new Tour(tourName, tourId, tourShortDescription, coverImage, tourGuideEmail, tourPrice, tourStartDate, tourEndDate);
-                                myDBReference.child("tours").child(tourId).setValue(newTour);
-                                myDBReference.child("tours").child(tourId).child("participants").child(tourGuideEmail.replace(".", ",")).setValue(tourGuide);
-                                progressDialog.dismiss();
-                                myDBReference.child("users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".", ","))
-                                        .child("tourList")
-                                        .child(newTour.getId())
-                                        .setValue(newTour.getId());
-                                Toast.makeText(TourCreate.this, "Đã tạo tour thành công.", Toast.LENGTH_SHORT).show();
+                                // Exit intent
                                 finish();
                             }
                         })
@@ -173,9 +125,59 @@ public class TourCreate extends AppCompatActivity {
                             }
                         });
             }
+            else{
+                sendSOSMessage(sosBody, "");
+                // Exit intent
+                finish();
+            }
         });
 
     }
+
+    private void sendSOSMessage(String sosBody, String imageUrl){
+        new Thread(()->{
+            ValueEventListener participantListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
+                    List<Participant> participants = new ArrayList<>();
+                    // Save participants to List
+                    for (DataSnapshot data : snapshot.getChildren()) {
+                        participants.add(data.getValue(Participant.class));
+                    }
+                    Boolean sentSOS = false;
+                    if (participants.size() != 0) {
+                        for (Participant participant : participants) {
+                            String participantEmail = participant.getEmail();
+                            if (!participantEmail.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                                myDBReference.child("users").child(participantEmail.replace(".", ",")).child("token").addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
+                                        String token = snapshot.getValue(String.class);
+                                        Notification notificationHandler = new Notification("Tour: " + tourId, "TIN KHẨN CẤP!", sosBody, imageUrl);
+                                        notificationHandler.sendNotification(token);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+                                    }
+                                });
+                            }
+                        }
+                        sentSOS = true;
+                        if (sentSOS) {
+                            Toast.makeText(CreateSOS.this, "Thông báo khẩn của bạn đã được gửi", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                }
+                @Override
+                public void onCancelled(@androidx.annotation.NonNull DatabaseError error) {
+                }
+            };
+            myDBReference.child("tours").child(tourId).child("participants").addValueEventListener(participantListener);
+        }).start();
+    }
+
 
     private void chooseImage() {
         // Defining Implicit Intent to mobile gallery
@@ -186,18 +188,13 @@ public class TourCreate extends AppCompatActivity {
                 Intent.createChooser(intent, "Chọn hình ảnh"),
                 PICK_IMAGE_REQUEST);
     }
-
     private void linkElements() {
-        edtTourName = findViewById(R.id.edt_tour_name);
-        edtTourShortDescription = findViewById(R.id.edt_tour_short_description);
-        edtTourPrice = findViewById(R.id.edt_tour_price);
-        edtTourStartDate = findViewById(R.id.edt_tour_start_date);
-        edtTourEndDate = findViewById(R.id.edt_tour_end_date);
-        ivTourBackground = findViewById(R.id.iv_tour_background);
+        tbReturn = findViewById(R.id.tb_return_tour_dashboard);
+        edtSOSBody = findViewById(R.id.edt_sos_body);
+        ivSOSImage = findViewById(R.id.iv_sos_image);
         btnUploadImage = findViewById(R.id.btn_upload_image);
-        btnCreateTour = findViewById(R.id.btn_create_tour);
+        btnSendSOS = findViewById(R.id.btn_send_sos);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -213,7 +210,7 @@ public class TourCreate extends AppCompatActivity {
                         .getBitmap(
                                 getContentResolver(),
                                 filePath);
-                ivTourBackground.setImageBitmap(bitmap);
+                ivSOSImage.setImageBitmap(bitmap);
             } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();

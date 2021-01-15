@@ -107,4 +107,11 @@
     <string name="send_notification">Gửi thông báo</string>
     <string name="send_notification_to_all_member">Gửi thông báo cho du khách trong tour</string>
 
+    <string name="send_sos">Yêu cầu khẩn cấp SOS</string>
+    <string name="title_sos">Tiêu đề khẩn</string>
+    <string name="message_sos">Thông điệp khẩn (Không bắt buộc)</string>
+    <string name="enter_content_sos">Nhập thông điệp khẩn cấp bạn muốn gửi tới mọi người...</string>
+    <string name="sub_title_sos_commit">Chỉ dùng tính năng này khi thực sự khẩn cấp</string>
+    <string name="sos_upload_image">Tải ảnh lên (Không bắt buộc)</string>
+    <string name="send_now">Gửi ngay</string>
 </resources>

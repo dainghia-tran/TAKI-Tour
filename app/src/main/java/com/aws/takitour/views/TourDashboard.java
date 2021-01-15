@@ -68,6 +68,7 @@ public class TourDashboard extends AppCompatActivity {
     private ImageButton imgBtnLibrary;
     private ImageButton imgBtnAddPhotos;
     private ImageButton imgBtnCreateNoti;
+    private ImageButton imgBtnCreateSOS;
 
     private StorageReference storageReference;
 
@@ -80,7 +81,7 @@ public class TourDashboard extends AppCompatActivity {
         imgBtnLibrary = findViewById(R.id.imgbtn_library);
         imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
         imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);
-
+        imgBtnCreateSOS = findViewById(R.id.imgbtn_create_sos);
         tbReturn = findViewById(R.id.tb_return_dashboard);
         tbEditTour = findViewById(R.id.tb_edit_tour);
     }
@@ -100,6 +101,7 @@ public class TourDashboard extends AppCompatActivity {
         tourId = intent.getStringExtra("TOUR_ID");
         String tourName = getIntent().getStringExtra("TOUR_NAME");
 
+        // Link UI with code
         linkElements();
 
         ((TextView) (findViewById(R.id.tour_name))).setText(tourId + " - " + tourName);
@@ -203,6 +205,12 @@ public class TourDashboard extends AppCompatActivity {
             Intent intentCreateNoti = new Intent(TourDashboard.this, CreateNotification.class);
             intentCreateNoti.putExtra("TOUR_ID", tourId);
             startActivity(intentCreateNoti);
+        });
+
+        imgBtnCreateSOS.setOnClickListener(v->{
+            Intent intentCreateSOS = new Intent(TourDashboard.this, CreateSOS.class);
+            intentCreateSOS.putExtra("TOUR_ID", tourId);
+            startActivity(intentCreateSOS);
         });
 
         //Check if tour is available and get location from user

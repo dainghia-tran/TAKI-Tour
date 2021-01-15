@@ -132,6 +132,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="ContentDescription" />
 
+            <ImageButton
+                android:id="@+id/imgbtn_create_sos"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="96dp"
+                android:background="@drawable/bg_button"
+                android:src="@drawable/ic_baseline_warning_75"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.789"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

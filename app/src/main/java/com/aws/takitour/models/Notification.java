@@ -18,6 +18,8 @@ public class Notification implements Serializable {
     private String sender;
     private String body;
     private String title;
+    private int type;
+    private String imageLink;
     APIService apiService;
 
     public Notification(){
@@ -27,11 +29,25 @@ public class Notification implements Serializable {
         this.sender = sender;
         this.body = body;
         this.title = title;
+        this.type = 0;
         this.apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
-
+    }
+    public Notification(String sender, String title, String body, String imageLink) {
+        this.sender = sender;
+        this.body = body;
+        this.title = title;
+        this.type = 1;
+        this.imageLink = imageLink;
+        this.apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
     }
     public void sendNotification(String targetToken){
-        Data data = new Data(this.sender, this.title, this.body, targetToken );
+        Data data = null;
+        if(this.type == 0){
+            data = new Data(this.sender, this.title, this.body, targetToken );
+        } else {
+            data = new Data(this.sender, this.title, this.body, targetToken, this.imageLink );
+        }
+
         Sender sendWorker = new Sender(data, targetToken);
         apiService.sendNotification(sendWorker).enqueue(new Callback<MyResponse>() {
             @Override
