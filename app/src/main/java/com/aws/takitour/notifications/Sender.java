@@ -3,7 +3,6 @@ package com.aws.takitour.notifications;
 public class Sender {
     private Data data;
     private String to;
-
     public Sender() {
     }
 

@@ -64,7 +64,6 @@ public class TourDashboard extends AppCompatActivity {
 
     private ImageButton imgBtnLocate;
     private ImageButton imgBtnCall;
-    private ImageButton ingBtnAnnouncement;
     private ImageButton imgBtnLibrary;
     private ImageButton imgBtnAddPhotos;
     private ImageButton imgBtnCreateNoti;
@@ -77,7 +76,6 @@ public class TourDashboard extends AppCompatActivity {
     public void linkElements() {
         imgBtnLocate = findViewById(R.id.imgbtn_locate);
         imgBtnCall = findViewById(R.id.imgbtn_call);
-//        ingBtnAnnouncement = findViewById(R.id.imgbtn_annoucement);
         imgBtnLibrary = findViewById(R.id.imgbtn_library);
         imgBtnAddPhotos = findViewById(R.id.imgbtn_add_photos);
         imgBtnCreateNoti = findViewById(R.id.imgbtn_create_noti);

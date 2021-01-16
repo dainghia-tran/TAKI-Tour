@@ -1,7 +1,8 @@
 package com.aws.takitour.notifications;
 
 public class Data {
-    private String user;
+    private String tourId;
+    private String sender;
     private String title;
     private String body;
     private String receiveToken;
@@ -11,15 +12,17 @@ public class Data {
     public Data() {
     }
 
-    public Data(String user, String title, String body, String receiveToken) {
-        this.user = user;
+    public Data(String tourId, String sender, String title, String body, String receiveToken) {
+        this.tourId = tourId;
+        this.sender = sender;
         this.title = title;
         this.body = body;
         this.type = 0;
         this.receiveToken = receiveToken;
     }
-    public Data(String user, String title, String body, String receiveToken, String imageLink) {
-        this.user = user;
+    public Data(String tourId, String sender, String title, String body, String receiveToken, String imageLink) {
+        this.tourId = tourId;
+        this.sender = sender;
         this.title = title;
         this.body = body;
         this.type = 1;
@@ -35,12 +38,20 @@ public class Data {
         this.receiveToken = receiveToken;
     }
 
-    public String getUser() {
-        return user;
+    public String getTourId() {
+        return tourId;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setTourId(String tourId) {
+        this.tourId = tourId;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
     public String getTitle() {

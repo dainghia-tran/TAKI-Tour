@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_main_color"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/tv_sos_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/signika"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="THÔNG BÁO KHẨN!"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/tv_sos_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/signika"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginHorizontal="40dp"
+
+            android:text="Từ: Nguyễn Hoàng Long"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/tv_sos_body"
+            android:layout_marginHorizontal="40dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/signika"
+            android:gravity="center"
+            android:text="Message goes here"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/img_sos"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginVertical="10dp"
+            android:contentDescription="@string/tour_upload_image" />
+        <Button
+            android:id="@+id/btn_check_sender_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:background="@drawable/bg_button"
+            android:fontFamily="@font/signika_semibold"
+            android:text="Xem vị trí người gửi">
+        </Button>
+
+    </LinearLayout>
+</ScrollView>

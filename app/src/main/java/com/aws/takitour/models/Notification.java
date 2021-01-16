@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 public class Notification implements Serializable {
+    private String tourId;
     private String sender;
     private String body;
     private String title;
@@ -25,14 +26,16 @@ public class Notification implements Serializable {
     public Notification(){
     }
 
-    public Notification(String sender, String title, String body) {
+    public Notification(String tourId, String sender, String title, String body) {
+        this.tourId = tourId;
         this.sender = sender;
         this.body = body;
         this.title = title;
         this.type = 0;
         this.apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
     }
-    public Notification(String sender, String title, String body, String imageLink) {
+    public Notification(String tourId, String sender, String title, String body, String imageLink) {
+        this.tourId = tourId;
         this.sender = sender;
         this.body = body;
         this.title = title;
@@ -43,9 +46,9 @@ public class Notification implements Serializable {
     public void sendNotification(String targetToken){
         Data data = null;
         if(this.type == 0){
-            data = new Data(this.sender, this.title, this.body, targetToken );
+            data = new Data(this.tourId, this.sender, this.title, this.body, targetToken );
         } else {
-            data = new Data(this.sender, this.title, this.body, targetToken, this.imageLink );
+            data = new Data(this.tourId, this.sender, this.title, this.body, targetToken, this.imageLink );
         }
 
         Sender sendWorker = new Sender(data, targetToken);

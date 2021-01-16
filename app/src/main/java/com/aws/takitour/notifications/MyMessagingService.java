@@ -1,54 +1,27 @@
 package com.aws.takitour.notifications;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ContentResolver;
-import android.content.ContentValues;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
-import android.os.PowerManager;
 import android.os.Vibrator;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.aws.takitour.R;
-import com.aws.takitour.models.User;
-import com.aws.takitour.views.MainActivity;
 import com.aws.takitour.views.TourDashboard;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import static android.os.VibrationEffect.EFFECT_TICK;
-import static com.aws.takitour.views.LoginActivity.myDBReference;
 
 public class MyMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyMessagingService";
@@ -61,23 +34,23 @@ public class MyMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
+        String notiTourId = null;
         String notiTitle = null;
         String notiBody = null;
-        String notiFrom = null;
+        String notiSender = null;
         String notiImage = null;
-        String icon = null;
         String noTiReceiveToken = null;
         if (remoteMessage.getData().size() > 0) {
+            notiTourId = remoteMessage.getData().get("tourId");
+            notiSender = remoteMessage.getData().get("sender");
             notiTitle = remoteMessage.getData().get("title");
             notiBody = remoteMessage.getData().get("body");
-            notiFrom = remoteMessage.getData().get("user");
             noTiReceiveToken = remoteMessage.getData().get("receiveToken");
             notiImage = remoteMessage.getData().get("imageLink");
-
             if(notiImage!=null){
-                newNoti = new Data(notiFrom, notiTitle, notiBody, noTiReceiveToken, notiImage);
+                newNoti = new Data(notiTourId, notiSender, notiTitle, notiBody, noTiReceiveToken, notiImage);
             }else{
-                newNoti = new Data(notiFrom, notiTitle, notiBody, noTiReceiveToken);
+                newNoti = new Data(notiTourId, notiSender, notiTitle, notiBody, noTiReceiveToken);
             }
 
             ref.child(currentUser.getEmail().replace(".", ",")).child("notifications").child(remoteMessage.getMessageId()).setValue(newNoti);
@@ -100,12 +73,11 @@ public class MyMessagingService extends FirebaseMessagingService {
     public void showNotification(Data currentNoti) {
         // Set up Pending Intent after clicking the push notification
         Intent intent = new Intent(this, TourDashboard.class);
-        intent.putExtra("TOUR_ID", currentNoti.getUser().substring(6,12));
+        intent.putExtra("TOUR_ID", currentNoti.getTourId());
         intent.putExtra("TOUR_NAME", "");
         int notificationID = 5 + (int) (Math.random() * ((1000 - 0) + 1));
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-
 
         Vibrator viberateManager = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
 

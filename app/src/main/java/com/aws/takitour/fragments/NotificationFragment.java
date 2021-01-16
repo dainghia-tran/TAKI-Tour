@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,30 +42,10 @@ public class NotificationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-//        btnCreateNoti = view.findViewById(R.id.btn_create_noti);
-
         View view = inflater.inflate(R.layout.fragment_notification, container,false);
         notificationRV = view.findViewById(R.id.rv_list_notification);
         firebaseAuth = FirebaseAuth.getInstance();
-//        btnCreateNoti.setOnClickListener(v -> {
-//            String tourId;
-//            ValueEventListener userListener = new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    String user = snapshot.getValue(String.class);
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            };
-//            myDBReference.child("users")
-//                    .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
-//                    .addValueEventListener(userListener)
-//
-//            Notification notiHandler = new Notification("hoanglong", "This is body", "This is title", )
-//        });
+
         new Thread(() -> {
             myDBReference.child("users")
                     .child(Objects.requireNonNull(firebaseAuth.getCurrentUser().getEmail()).replace(".", ","))
@@ -74,11 +55,10 @@ public class NotificationFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             notificationList = new ArrayList<>();
                             notificationList.clear();
-
                             for(DataSnapshot data : snapshot.getChildren()){
                                 notificationList.add(data.getValue(Data.class));                            }
 
-                            Log.d(TAG, String.valueOf(notificationList));
+                            Collections.reverse(notificationList);
                             handler.post(() -> {
                                 adapter = new NotificationRVAdapter(getContext(), notificationList);
                                 notificationRV.setAdapter(adapter);

@@ -48,8 +48,9 @@ public class CreateNotification extends AppCompatActivity {
             finish();
         });
         btnSendNotification.setOnClickListener(v -> {
-            String userTitle = edtTitle.getText().toString().trim();
-            String userBody = edtBody.getText().toString().trim();
+            String currentUserEmail = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
+            String notiTitle = edtTitle.getText().toString().trim();
+            String notiBody = edtBody.getText().toString().trim();
             new Thread(() -> {
                 ValueEventListener participantListener = new ValueEventListener() {
                     @Override
@@ -68,7 +69,8 @@ public class CreateNotification extends AppCompatActivity {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             String token = snapshot.getValue(String.class);
-                                            Notification notificationHandler = new Notification("Tour: " + tourId, userTitle, userBody);
+
+                                            Notification notificationHandler = new Notification(tourId, currentUserEmail, notiTitle, notiBody);
                                             notificationHandler.sendNotification(token);
                                         }
 

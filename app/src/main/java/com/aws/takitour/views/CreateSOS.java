@@ -37,6 +37,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import io.reactivex.annotations.NonNull;
@@ -148,12 +149,13 @@ public class CreateSOS extends AppCompatActivity {
                     if (participants.size() != 0) {
                         for (Participant participant : participants) {
                             String participantEmail = participant.getEmail();
-                            if (!participantEmail.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                            if (!participantEmail.equals(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())) {
                                 myDBReference.child("users").child(participantEmail.replace(".", ",")).child("token").addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@androidx.annotation.NonNull DataSnapshot snapshot) {
+
                                         String token = snapshot.getValue(String.class);
-                                        Notification notificationHandler = new Notification("Tour: " + tourId, "TIN KHẨN CẤP!", sosBody, imageUrl);
+                                        Notification notificationHandler = new Notification(tourId, Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail(),"TIN KHẨN CẤP!", sosBody, imageUrl);
                                         notificationHandler.sendNotification(token);
                                     }
 
